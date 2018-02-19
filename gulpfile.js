@@ -38,3 +38,7 @@ gulp.task('docs:api', function () {
   return gulp.src(['README.md', './index.js', './tpl/*.tpl.js'], {read: false})
     .pipe(jsdoc(require('./jsdoc.config.json')))
 })
+
+gulp.task('docs:all', ['docs:kss', 'docs:api'])
+
+gulp.task('build', ['lessc:each', 'docs:all'])

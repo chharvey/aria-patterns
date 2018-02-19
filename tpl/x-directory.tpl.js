@@ -5,7 +5,7 @@ const xjs = {
 }
 
 /**
- * @summary xDirectory display.
+ * @summary xDirectory renderer.
  * @param   {DocumentFragment} frag the template content with which to render
  * @param   {Array<sdo.WebPage>} data array of subpages of a webpage
  */

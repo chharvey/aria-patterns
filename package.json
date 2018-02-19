@@ -4,6 +4,8 @@
   "description": "Common patterns of elements with ARIA attributes.",
   "main": "index.js",
   "scripts": {
+    "build": "gulp build",
+    "unbuild": "rm docs/{styleguide,api}",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
