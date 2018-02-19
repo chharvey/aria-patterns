@@ -59,6 +59,7 @@ typings/
 
 # Generated build files
 css/dist
+js/dist
 
 # Generated documentation & style guides
 docs/api

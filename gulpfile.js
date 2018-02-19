@@ -5,12 +5,14 @@ const autoprefixer = require('gulp-autoprefixer')
 const clean_css    = require('gulp-clean-css')
 const sourcemaps   = require('gulp-sourcemaps')
 
+const uglify = require('gulp-uglify-es').default
+
 const kss          = require('kss')
 const jsdoc        = require('gulp-jsdoc3')
 
 
 gulp.task('lessc:each', function () {
-  return gulp.src(['css/src/*.less', '!css/src/styleguide.less'])
+  return gulp.src(['./css/src/*.less', '!./css/src/styleguide.less'])
     .pipe(less())
     .pipe(autoprefixer({
       grid: true,
@@ -29,6 +31,14 @@ gulp.task('lessc:each', function () {
     .pipe(gulp.dest('./css/dist/'))
 })
 
+gulp.task('uglify:js', function () {
+  return gulp.src('./js/src/*.js')
+    .pipe(sourcemaps.init())
+    .pipe(uglify())
+    .pipe(sourcemaps.write('./')) // writes to an external .map file
+    .pipe(gulp.dest('./js/dist/'))
+})
+
 gulp.task('docs:kss', function () {
   return kss(require('./config/kss.json'))
 })
@@ -41,4 +51,4 @@ gulp.task('docs:api', function () {
 
 gulp.task('docs:all', ['docs:kss', 'docs:api'])
 
-gulp.task('build', ['lessc:each', 'docs:all'])
+gulp.task('build', ['lessc:each', 'uglify:js', 'docs:all'])

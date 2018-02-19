@@ -9,6 +9,6 @@
     "../../css/dist/h-Hidden.css"
   ],
   "js": [
-    "../../js/src/o-Tablist.js"
+    "../../js/dist/o-Tablist.js"
   ]
 }

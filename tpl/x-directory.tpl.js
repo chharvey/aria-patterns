@@ -10,13 +10,14 @@ const xjs = require('extrajs-dom')
 function xDirectory(frag, data) {
   let container = frag.querySelector('ol')
   let itemrenderer = new xjs.HTMLTemplateElement(container.querySelector('template')).setRenderer(function (f, d) {
-    f.querySelector('[itemprop="url" ]').href        = d.url
+    f.querySelector('[itemprop="url"]' ).href        = d.url
     f.querySelector('[itemprop="name"]').textContent = d.name
 
     let subsitemap = d.sitemap && d.sitemap.itemListElement
     if (subsitemap) {
       f.querySelector('[itemprop="itemlistElement"]').append(
-        xjs.HTMLTemplateElement.fromFileSync(path.join(__dirname, './x-directory.tpl.html'))
+        xjs.HTMLTemplateElement
+          .fromFileSync(path.join(__dirname, './x-directory.tpl.html'))
           .setRenderer(xDirectory)
           .render((Array.isArray(subsitemap)) ? subsitemap : [subsitemap])
       )
