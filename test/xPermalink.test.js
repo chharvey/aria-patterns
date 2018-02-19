@@ -1,17 +1,9 @@
-const AriaPatterns = require('../index.js')
+const ARIAPatterns = require('../index.js')
 
-try {
-  console.log(AriaPatterns.xPermalink.render({ id: 'my_id' }).querySelector('a').outerHTML)
-} catch (e) {
-  console.log('An Error was caught:\t', e)
-}
+  console.log(ARIAPatterns.xPermalink.render({ id: 'my_id' }).querySelector('a').outerHTML)
 
-try {
-  console.log(AriaPatterns.xPermalink.render({
+  console.log(ARIAPatterns.xPermalink.render({
     id   : 'my_id',
     text : 'custom text',
     label: 'custom label',
   }).querySelector('a').outerHTML)
-} catch (e) {
-  console.log('An Error was caught:\t', e)
-}

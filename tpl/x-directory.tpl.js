@@ -1,8 +1,6 @@
 const path = require('path')
 
-const xjs = {
-  HTMLTemplateElement: require('../class/HTMLTemplateElement.class.js'),
-}
+const xjs = require('extrajs-dom')
 
 /**
  * @summary xDirectory renderer.
@@ -17,7 +15,7 @@ function xDirectory(frag, data) {
 
     let subsitemap = d.sitemap && d.sitemap.itemListElement
     if (subsitemap) {
-      f.querySelector('[role="directory"]').append(
+      f.querySelector('[itemprop="itemlistElement"]').append(
         xjs.HTMLTemplateElement.fromFileSync(path.join(__dirname, './x-directory.tpl.html'))
           .setRenderer(xDirectory)
           .render((Array.isArray(subsitemap)) ? subsitemap : [subsitemap])

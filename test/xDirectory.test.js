@@ -1,4 +1,4 @@
-const AriaPatterns = require('../index.js')
+const ARIAPatterns = require('../index.js')
 
 let website = {
   "@context": "http://schema.org/",
@@ -31,8 +31,4 @@ let website = {
   }
 }
 
-try {
-  console.log(AriaPatterns.xDirectory.render(website['sitemap'].itemListElement).querySelector('ol').outerHTML)
-} catch (e) {
-  console.log('An Error was caught:\t', e)
-}
+  console.log(ARIAPatterns.xDirectory.render(website['sitemap'].itemListElement).querySelector('ol').outerHTML)

@@ -1,3 +1,5 @@
+const path = require('path')
+
 const xjs = require('extrajs-dom')
 
 /**
