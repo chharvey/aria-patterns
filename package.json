@@ -1,0 +1,25 @@
+{
+  "name": "aria-patterns",
+  "version": "0.1.0",
+  "description": "Common patterns of elements with ARIA attributes.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chharvey/aria-patterns.git"
+  },
+  "keywords": [
+    "aria",
+    "a11y",
+    "accessibility",
+    "components"
+  ],
+  "author": "Chris Harvey <chrisharvey2pi@gmail.com> (https://chharvey.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chharvey/aria-patterns/issues"
+  },
+  "homepage": "https://github.com/chharvey/aria-patterns#readme"
+}

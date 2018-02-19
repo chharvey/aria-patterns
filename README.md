@@ -1,2 +1,2 @@
 # aria-patterns
-Common patterns of elements using ARIA attributes.
+Common patterns of elements with ARIA attributes.
