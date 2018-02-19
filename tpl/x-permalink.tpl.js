@@ -1,7 +1,7 @@
 const xjs = require('extrajs-dom')
 
 /**
- * @summary xPermalink display.
+ * @summary xPermalink renderer.
  * @param   {DocumentFragment} frag the template content with which to render
  * @param   {!Object} data the job data to display
  * @param   {string} data.id the fragment identifier to link to
