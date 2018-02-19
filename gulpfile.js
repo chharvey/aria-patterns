@@ -10,7 +10,7 @@ const jsdoc        = require('gulp-jsdoc3')
 
 
 gulp.task('lessc:each', function () {
-  return gulp.src('css/src/*.less')
+  return gulp.src(['css/src/*.less', '!css/src/styleguide.less'])
     .pipe(less())
     .pipe(autoprefixer({
       grid: true,
@@ -30,13 +30,13 @@ gulp.task('lessc:each', function () {
 })
 
 gulp.task('docs:kss', function () {
-  return kss(require('./kss.config.json'))
+  return kss(require('./config/kss.json'))
 })
 
 // HOW-TO: https://github.com/mlucool/gulp-jsdoc3#usage
 gulp.task('docs:api', function () {
   return gulp.src(['README.md', './index.js', './tpl/*.tpl.js'], {read: false})
-    .pipe(jsdoc(require('./jsdoc.config.json')))
+    .pipe(jsdoc(require('./config/jsdoc.json')))
 })
 
 gulp.task('docs:all', ['docs:kss', 'docs:api'])
