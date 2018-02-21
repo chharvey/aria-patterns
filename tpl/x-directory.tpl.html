@@ -1,7 +1,7 @@
 <template>
-  <ol role="directory" itemprop="sitemap" itemscope="" itemtype="http://schema.org/ItemList">
+  <ol role="directory">
     <template>
-      <li itemprop="itemlistElement" itemscope="" itemtype="http://schema.org/WebPage">
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
         <a href="{{ url }}" itemprop="url">
           <slot itemprop="name">{{ name }}</slot>
         </a>

@@ -24,9 +24,7 @@ const ARIAPatterns = {
    *   "@type": "WebPage",
    *   "name": "A 2016 Event",
    *   "url": "https://2016.asce-event.org/",
-   *   "sitemap": {
-   *     "@type": "ItemList",
-   *     "itemListElement": [
+   *     "hasPart": [
    *   { "@type": "WebPage", "name": "Registration | A 2016 Event", "url": "https://2016.asce-event.org/registration/" },
    *   { "@type": "WebPage", "name": "Program | A 2016 Event"     , "url": "https://2016.asce-event.org/program/"      },
    *   { "@type": "WebPage", "name": "Location | A 2016 Event"    , "url": "https://2016.asce-event.org/location/"     },
@@ -38,16 +36,12 @@ const ARIAPatterns = {
    *     "@type": "WebPage",
    *     "name": "Contact | A 2016 Event",
    *     "url": "https://2016.asce-event.org/contact/",
-   *     "sitemap": {
-   *       "@type": "ItemList",
-   *       "itemListElement": [
+   *       "hasPart": [
    *         { "@type": "WebPage", "name": "Submit Feedback | Contact | A 2016 Event"         , "url": "https://2016.asce-event.org/contact/submit-feedback"     },
    *         { "@type": "WebPage", "name": "Talk to a Representative | Contact | A 2016 Event", "url": "https://2016.asce-event.org/contact/talk-representative" }
    *       ]
-   *     }
    *   }
    * ]
-   *   }
    * }
    * document.querySelector('header').append(
    *   ARIAPatterns.xDirectory.render(webpage)
