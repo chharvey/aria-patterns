@@ -1,3 +1,5 @@
+const path = require('path')
+
 const xjs = require('extrajs-dom')
 
 /**
@@ -15,4 +17,6 @@ function xPermalink(frag, data) {
     .textContent(data.text || '§') // &sect;
 }
 
-module.exports = xPermalink
+module.exports = xjs.HTMLTemplateElement
+  .fromFileSync(path.join(__dirname, './x-permalink.tpl.html'))
+  .setRenderer(xPermalink)

@@ -26,4 +26,6 @@ function xDirectory(frag, data) {
   container.append(...data.map((subpage) => itemrenderer.render(subpage)))
 }
 
-module.exports = xDirectory
+module.exports = xjs.HTMLTemplateElement
+  .fromFileSync(path.join(__dirname, './x-directory.tpl.html'))
+  .setRenderer(xDirectory)
