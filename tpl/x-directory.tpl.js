@@ -5,7 +5,9 @@ const xjs = require('extrajs-dom')
 /**
  * @summary xDirectory renderer.
  * @param   {DocumentFragment} frag the template content with which to render
- * @param   {Array<sdo.WebPage>} data array of subpages of a webpage
+ * @param   {sdo.WebPage} data a http://schema.org/WebPage object
+ * @param   {sdo.ItemList} data.sitemap a http://schema.org/ItemList object
+ * @param   {(sdo.WebPage|Array<sdo.WebPage>)} data.sitemap.itemListElement a subpage or an array of subpages (each a http://schema.org/WebPage object)
  */
 function xDirectory_renderer(frag, data) {
   let container = frag.querySelector('ol')
@@ -13,14 +15,14 @@ function xDirectory_renderer(frag, data) {
     f.querySelector('[itemprop="url"]' ).href        = d.url
     f.querySelector('[itemprop="name"]').textContent = d.name
 
-    let subsitemap = d.sitemap && d.sitemap.itemListElement
-    if (subsitemap) {
+    if (d.sitemap && d.sitemap.itemListElement) {
       f.querySelector('[itemprop="itemlistElement"]').append(
-        require(__filename).render((Array.isArray(subsitemap)) ? subsitemap : [subsitemap])
+        require(__filename).render(d)
       )
     }
   })
-  container.append(...data.map((subpage) => itemrenderer.render(subpage)))
+  let subpages = (Array.isArray(data.sitemap.itemListElement)) ? data.sitemap.itemListElement : [data.sitemap.itemListElement]
+  container.append(...subpages.map((subpage) => itemrenderer.render(subpage)))
 }
 
 module.exports = xjs.HTMLTemplateElement

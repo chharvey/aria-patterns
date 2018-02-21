@@ -20,7 +20,13 @@ const ARIAPatterns = {
    * @description An `<ol role="directory">` with link list items to subpages. Best inside a `<nav>`.
    * @example
    * const ARIAPatterns = require('aria-pattrens')
-   * let subpages = [
+   * let webpage = {
+   *   "@type": "WebPage",
+   *   "name": "A 2016 Event",
+   *   "url": "https://2016.asce-event.org/",
+   *   "sitemap": {
+   *     "@type": "ItemList",
+   *     "itemListElement": [
    *   { "@type": "WebPage", "name": "Registration | A 2016 Event", "url": "https://2016.asce-event.org/registration/" },
    *   { "@type": "WebPage", "name": "Program | A 2016 Event"     , "url": "https://2016.asce-event.org/program/"      },
    *   { "@type": "WebPage", "name": "Location | A 2016 Event"    , "url": "https://2016.asce-event.org/location/"     },
@@ -41,8 +47,10 @@ const ARIAPatterns = {
    *     }
    *   }
    * ]
+   *   }
+   * }
    * document.querySelector('header').append(
-   *   ARIAPatterns.xDirectory.render(subpages)
+   *   ARIAPatterns.xDirectory.render(webpage)
    * )
    * @see xDirectory_renderer
    * @type {xjs.HTMLTemplateElement}

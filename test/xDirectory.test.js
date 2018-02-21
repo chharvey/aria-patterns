@@ -1,6 +1,6 @@
 const ARIAPatterns = require('../index.js')
 
-let website = {
+let webpage = {
   "@context": "http://schema.org/",
   "@type": "WebPage",
   "name": "A 2016 Event",
@@ -31,4 +31,4 @@ let website = {
   }
 }
 
-  console.log(ARIAPatterns.xDirectory.render(website['sitemap'].itemListElement).querySelector('ol').outerHTML)
+  console.log(ARIAPatterns.xDirectory.render(webpage).querySelector('ol').outerHTML)
