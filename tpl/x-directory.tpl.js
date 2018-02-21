@@ -7,7 +7,7 @@ const xjs = require('extrajs-dom')
  * @param   {DocumentFragment} frag the template content with which to render
  * @param   {Array<sdo.WebPage>} data array of subpages of a webpage
  */
-function xDirectory(frag, data) {
+function xDirectory_renderer(frag, data) {
   let container = frag.querySelector('ol')
   let itemrenderer = new xjs.HTMLTemplateElement(container.querySelector('template')).setRenderer(function (f, d) {
     f.querySelector('[itemprop="url"]' ).href        = d.url
@@ -16,10 +16,7 @@ function xDirectory(frag, data) {
     let subsitemap = d.sitemap && d.sitemap.itemListElement
     if (subsitemap) {
       f.querySelector('[itemprop="itemlistElement"]').append(
-        xjs.HTMLTemplateElement
-          .fromFileSync(path.join(__dirname, './x-directory.tpl.html'))
-          .setRenderer(xDirectory)
-          .render((Array.isArray(subsitemap)) ? subsitemap : [subsitemap])
+        require(__filename).render((Array.isArray(subsitemap)) ? subsitemap : [subsitemap])
       )
     }
   })
@@ -28,4 +25,4 @@ function xDirectory(frag, data) {
 
 module.exports = xjs.HTMLTemplateElement
   .fromFileSync(path.join(__dirname, './x-directory.tpl.html'))
-  .setRenderer(xDirectory)
+  .setRenderer(xDirectory_renderer)

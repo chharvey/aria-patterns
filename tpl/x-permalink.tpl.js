@@ -10,7 +10,7 @@ const xjs = require('extrajs-dom')
  * @param   {string=} data.label human-readable text for `[aria-label]`
  * @param   {string=} data.text the textContent of the link
  */
-function xPermalink(frag, data) {
+function xPermalink_renderer(frag, data) {
   new xjs.HTMLAnchorElement(frag.querySelector('a'))
     .href(`#${data.id}`)
     .attr('aria-label', data.label || 'permalink')
@@ -19,4 +19,4 @@ function xPermalink(frag, data) {
 
 module.exports = xjs.HTMLTemplateElement
   .fromFileSync(path.join(__dirname, './x-permalink.tpl.html'))
-  .setRenderer(xPermalink)
+  .setRenderer(xPermalink_renderer)
