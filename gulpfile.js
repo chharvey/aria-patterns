@@ -13,12 +13,12 @@ const jsdoc        = require('gulp-jsdoc3')
 
 gulp.task('lessc:each', function () {
   return gulp.src(['./css/src/*.less', '!./css/src/styleguide.less'])
+    .pipe(sourcemaps.init())
     .pipe(less())
     .pipe(autoprefixer({
       grid: true,
     }))
     .pipe(gulp.dest('./css/dist/'))
-    .pipe(sourcemaps.init())
     .pipe(clean_css({
       level: {
         2: {
