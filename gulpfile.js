@@ -52,3 +52,8 @@ gulp.task('docs:api', function () {
 gulp.task('docs:all', ['docs:kss', 'docs:api'])
 
 gulp.task('build', ['lessc:each', 'uglify:js', 'docs:all'])
+
+gulp.task('test', function () {
+  require('./test/xPermalink.test.js');
+  require('./test/xDirectory.test.js');
+})

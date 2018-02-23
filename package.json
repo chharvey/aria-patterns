@@ -6,7 +6,7 @@
   "scripts": {
     "build": "gulp build",
     "unbuild": "rm -r docs/{styleguide,api}/ {css,js}/dist/",
-    "test": "node test/index.js"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
