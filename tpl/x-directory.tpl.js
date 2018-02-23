@@ -9,19 +9,16 @@ const xjs = require('extrajs-dom')
  * @param   {(sdo.WebPage|Array<sdo.WebPage>)} data.hasPart a subpage or an array of subpages (each a http://schema.org/WebPage object)
  */
 function xDirectory_renderer(frag, data) {
-  let container = frag.querySelector('ol')
-  let itemrenderer = new xjs.HTMLTemplateElement(container.querySelector('template')).setRenderer(function (f, d) {
+  let subpages = (Array.isArray(data.hasPart)) ? data.hasPart : [data.hasPart]
+  new xjs.HTMLOListElement(frag.querySelector('ol')).populate(subpages, function (f, d) {
     f.querySelector('[itemprop="url"]' ).href        = d.url
     f.querySelector('[itemprop="name"]').textContent = d.name
-
     if (d.hasPart) {
       f.querySelector('[itemprop="hasPart"]').append(
         require(__filename).render(d)
       )
     }
   })
-  let subpages = (Array.isArray(data.hasPart)) ? data.hasPart : [data.hasPart]
-  container.append(...subpages.map((subpage) => itemrenderer.render(subpage)))
 }
 
 module.exports = xjs.HTMLTemplateElement
