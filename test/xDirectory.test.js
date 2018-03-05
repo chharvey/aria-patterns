@@ -25,4 +25,4 @@ let webpage = {
   ]
 }
 
-console.log(ARIAPatterns.xDirectory.render(webpage).querySelector('ol').outerHTML)
+console.log(ARIAPatterns.xDirectory.render({ ...webpage, $depth: 0 }).querySelector('ol').outerHTML)

@@ -35,6 +35,7 @@
     "kss": "^3.0.0-beta.18"
   },
   "dependencies": {
+    "extrajs": "^0.11.0",
     "extrajs-dom": "^4.1.0-beta.1"
   }
 }
