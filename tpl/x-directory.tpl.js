@@ -13,9 +13,9 @@ const xjs = {
  * @param   {integer=} [data.$depth=Infinity] number of nested directory levels
  */
 function xDirectory_renderer(frag, data) {
-  let subpages = (Array.isArray(data.hasPart)) ? data.hasPart : [data.hasPart]
-  let depth = (xjs.Object.typeOf(data.$depth) === 'number') ? data.$depth : Infinity
-  new xjs.HTMLOListElement(frag.querySelector('ol')).populate(subpages, function (f, d) {
+  let subpages = (xjs.Object.typeOf(data.hasPart) === 'array' ) ? data.hasPart : [data.hasPart]
+  let depth    = (xjs.Object.typeOf(data.$depth)  === 'number') ? data.$depth  : Infinity
+  new xjs.HTMLOListElement(frag.querySelector('[role="directory"]')).populate(subpages, function (f, d) {
     f.querySelector('[itemprop="url"]' ).href        = d.url
     f.querySelector('[itemprop="name"]').textContent = d.name
     if (d.hasPart && depth > 0) {
