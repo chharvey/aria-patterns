@@ -56,4 +56,5 @@ gulp.task('build', ['lessc:each', 'uglify:js', 'docs:all'])
 gulp.task('test', function () {
   require('./test/xPermalink.test.js');
   require('./test/xDirectory.test.js');
+  require('./test/xPersonFullname.test.js');
 })
