@@ -1,3 +1,5 @@
+const fs = require('fs')
+
 const gulp         = require('gulp')
 
 const less         = require('gulp-less')
@@ -39,7 +41,7 @@ gulp.task('uglify:js', function () {
     .pipe(gulp.dest('./js/dist/'))
 })
 
-gulp.task('docs:kss', function () {
+gulp.task('docs:kss', ['test'], function () {
   return kss(require('./config/kss.json'))
 })
 
@@ -53,7 +55,8 @@ gulp.task('docs:all', ['docs:kss', 'docs:api'])
 
 gulp.task('build', ['lessc:each', 'uglify:js', 'docs:all'])
 
-gulp.task('test', function () {
+gulp.task('test', async function () {
+  try { fs.mkdirSync('./docs/test/') } catch (e) {}
   require('./test/xPermalink.test.js');
   require('./test/xDirectory.test.js');
   require('./test/xPersonFullname.test.js');
