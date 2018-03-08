@@ -49,7 +49,7 @@ const ARIAPatterns = {
    *         { "@type": "WebPage", "name": "Partnering Orgs"  , "url": "https://2016.asce-event.org/sponsor/partnering-orgs/"  },
    *         { "@type": "WebPage", "name": "Cooperating Orgs" , "url": "https://2016.asce-event.org/sponsor/cooperating-orgs/" }
    *       ]
-   *     },
+   *     }
    *   ]
    * }
    * document.querySelector('header').append(
