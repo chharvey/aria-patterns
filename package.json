@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp build",
-    "unbuild": "rm -r docs/{styleguide,api}/ {css,js}/dist/",
+    "unbuild": "rm -r docs/{styleguide,api,test}/ {css,js}/dist/",
     "test": "gulp test"
   },
   "repository": {

@@ -1,3 +1,6 @@
+const fs = require('fs')
+const path = require('path')
+
 const ARIAPatterns = require('../index.js')
 
 let webpage = {
@@ -75,5 +78,6 @@ let webpage = {
   ]
 }
 
-let output = ARIAPatterns.xDirectory.render({ ...webpage, $depth: 2 }).querySelector('[role="directory"]').outerHTML
-console.log(output)
+let output = ARIAPatterns.xDirectory.render(webpage).querySelector('[role="directory"]').outerHTML
+
+fs.writeFileSync(path.resolve(__dirname, '../docs/test/xDirectory.test.html'), output, 'utf8')
