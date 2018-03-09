@@ -60,7 +60,7 @@ const ARIAPatterns = {
    */
   xDirectory: require('./tpl/x-directory.tpl.js'),
   /**
-   * @summary A person’s name in "Px. First Middle Last, Sx." format.
+   * @summary A person’s name in "Px. First M. Last, Sx." format.
    * @description A series of inline elements, best nested inside an `[itemtype="Person"]` element.
    * @example
    * const ARIAPatterns = require('aria-patterns')
