@@ -1,3 +1,5 @@
+const fs = require('fs')
+
 const gulp         = require('gulp')
 
 const less         = require('gulp-less')
@@ -13,12 +15,12 @@ const jsdoc        = require('gulp-jsdoc3')
 
 gulp.task('lessc:each', function () {
   return gulp.src(['./css/src/*.less', '!./css/src/styleguide.less'])
+    .pipe(sourcemaps.init())
     .pipe(less())
     .pipe(autoprefixer({
       grid: true,
     }))
     .pipe(gulp.dest('./css/dist/'))
-    .pipe(sourcemaps.init())
     .pipe(clean_css({
       level: {
         2: {
@@ -39,7 +41,7 @@ gulp.task('uglify:js', function () {
     .pipe(gulp.dest('./js/dist/'))
 })
 
-gulp.task('docs:kss', function () {
+gulp.task('docs:kss', ['test'], function () {
   return kss(require('./config/kss.json'))
 })
 
@@ -52,3 +54,10 @@ gulp.task('docs:api', function () {
 gulp.task('docs:all', ['docs:kss', 'docs:api'])
 
 gulp.task('build', ['lessc:each', 'uglify:js', 'docs:all'])
+
+gulp.task('test', async function () {
+  try { fs.mkdirSync('./docs/test/') } catch (e) {}
+  require('./test/xPermalink.test.js');
+  require('./test/xDirectory.test.js');
+  require('./test/xPersonFullname.test.js');
+})

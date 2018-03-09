@@ -1,0 +1,9 @@
+<template>
+  <slot name="honorificPrefix" itemprop="honorificPrefix">{{ honorificPrefix }}</slot>
+  <slot name="givenName" itemprop="givenName">{{ givenName }}</slot>
+  <abbr title="{{ additionalName }}" itemprop="additionalName">
+    <slot name="additionalName">{{ additionalName[0] }}.</slot>
+  </abbr>
+  <slot name="familyName" itemprop="familyName">{{ familyName }}</slot><slot name="comma">,</slot>
+  <slot name="honorificSuffix" itemprop="honorificSuffix"> {{ honorificSuffix }}</slot>
+</template>
