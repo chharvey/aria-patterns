@@ -42,7 +42,6 @@ function xAddress_renderer(frag, data) {
     } else slot.remove()
   })
 
-
   // unabbreviate the region name
   if (data.addressRegion) {
     frag.querySelector('data[itemprop="addressRegion"]').value = data.addressRegion
@@ -67,6 +66,14 @@ function xAddress_renderer(frag, data) {
     }
   } else {
     frag.querySelector('data[itemprop="addressRegion"]').remove()
+  }
+
+  let linebreaks = Array.from(frag.querySelectorAll('br'))
+  if (!data.streetAddress || !data.addressLocality) {
+    linebreaks[0].remove()
+  }
+  if (!data.addressLocality || !data.addressCountry) {
+    linebreaks[1].remove()
   }
 }
 
