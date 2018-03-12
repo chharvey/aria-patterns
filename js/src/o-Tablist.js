@@ -51,8 +51,21 @@ document.querySelectorAll('.o-Tablist[role="tablist"]').forEach(function (tablis
     // Expand the first panel if this tab list contains all collapsed panels.
     let no_panels_open = this.panels()[0] && !this.panels().find((el) => el.open)
     if (no_panels_open) {
-      switchTabs(null, this.panels()[0])
+      switchTabs(null, this.tabs()[0])
     }
+  }
+
+
+  /**
+   * Switch to a new tab.
+   * @static
+   * @param   {?HTMLElement} tab_old the tab currently expanded, or `null` if no tab is expanded (or it doesn’t matter which tab is expanded)
+   * @param   {HTMLElement} tab_new the tab to expand
+   */
+  function switchTabs(tab_old, tab_new) {
+    tab_new.focus()
+    tab_new.panel().open = true
+    tab_new.panel().attributeChangedCallback('open', null, '')
   }
 
 
@@ -136,7 +149,7 @@ document.querySelectorAll('.o-Tablist[role="tablist"]').forEach(function (tablis
       //   this.querySelector('button[value="close"]').addEventListener('click', function (e) {
       //     this._panel.remove()
       //     this.remove()
-      //     tablist._updateRendering()
+      //     tablist.updateRendering()
       //   })
       // }
     }).call(tab)
@@ -151,17 +164,6 @@ document.querySelectorAll('.o-Tablist[role="tablist"]').forEach(function (tablis
     }
 
 
-    /**
-     * Switch to a new tab.
-     * @static
-     * @param   {?HTMLElement} tab_old the tab currently expanded, or `null` if no tab is expanded (or it doesn’t matter which tab is expanded)
-     * @param   {HTMLElement} tab_new the tab to expand
-     */
-    function switchTabs(tab_old, tab_new) {
-      tab_new.focus()
-      tab_new.panel().open = true
-      tab_new.panel().attributeChangedCallback('open', null, '')
-    }
   })
 
 
