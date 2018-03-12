@@ -27,5 +27,5 @@ function xDirectory_renderer(frag, data) {
 }
 
 module.exports = xjs.HTMLTemplateElement
-  .fromFileSync(path.join(__dirname, './x-directory.tpl.html'))
+  .fromFileSync(path.resolve(__dirname, './x-directory.tpl.html'))
   .setRenderer(xDirectory_renderer)

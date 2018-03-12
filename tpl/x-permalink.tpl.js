@@ -18,5 +18,5 @@ function xPermalink_renderer(frag, data) {
 }
 
 module.exports = xjs.HTMLTemplateElement
-  .fromFileSync(path.join(__dirname, './x-permalink.tpl.html'))
+  .fromFileSync(path.resolve(__dirname, './x-permalink.tpl.html'))
   .setRenderer(xPermalink_renderer)
