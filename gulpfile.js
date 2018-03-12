@@ -60,4 +60,5 @@ gulp.task('test', async function () {
   require('./test/xPermalink.test.js');
   require('./test/xDirectory.test.js');
   require('./test/xPersonFullname.test.js');
+  require('./test/xAddress.test.js');
 })

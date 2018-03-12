@@ -1,0 +1,11 @@
+<template>
+  <span class="h-Clearfix" itemprop="{{ itemprop }}" itemscope="" itemtype="http://schema.org/PostalAddress">
+    <slot class="h-Clearfix" name="streetAddress" itemprop="streetAddress">{{ streetAddress }}</slot>
+    <slot name="addressLocality" itemprop="addressLocality">{{ addressLocality }}</slot>,
+    <data value="{{ addressRegion }}" itemprop="addressRegion">
+      <slot name="addressRegion">{{ addressRegion }}</slot>
+    </data>
+    <slot class="h-Clearfix" name="postalCode" itemprop="postalCode">{{ postalCode }}</slot>
+    <slot name="addressCountry" itemprop="addressCountry">{{ addressCountry }}</slot>
+  </span>
+</template>

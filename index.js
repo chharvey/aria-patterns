@@ -78,6 +78,34 @@ const ARIAPatterns = {
    * @type {xjs.HTMLTemplateElement}
    */
   xPersonFullname: require('./tpl/x-person-fullname.tpl.js'),
+  /**
+   * @summary An address in the format:
+   * <pre>
+   * 1600 Pennsylvania Avenue NW
+   * Washington, DC 20006
+   * </pre>
+   * @description A `<span itemtype="PostalAddress">`, best with an `[itemprop]` of `address` or `location`,
+   * inside an element of type Person, Place, Organization, Event, or Action.
+   *
+   * Note that this pattern does not use an `<address>` element,
+   * as that is specifically reserved for contact information of the authoring person or organization of a website.
+   * @example
+   * const ARIAPatterns = require('aria-patterns')
+   * document.querySelector('div[itemtype="http://schema.org/Organization"]').append(
+   *   ARIAPatterns.xAddress.render({
+   *     "@type": "PostalAddress",
+   *     "streetAddress"  : "1600 Pennsylvania Avenue NW",
+   *     "addressLocality": "Washington",
+   *     "addressRegion"  : "DC",
+   *     "postalCode"     : "20006",
+   *     "$itemprop"      : "location",
+   *     "$regionName"    : true,
+   *   })
+   * )
+   * @see xAddress_renderer
+   * @type {xjs.HTMLTemplateElement}
+   */
+  xAddress: require('./tpl/x-address.tpl.js'),
 }
 
 module.exports = ARIAPatterns
