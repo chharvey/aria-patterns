@@ -11,6 +11,8 @@
 // there is no timed automatic progression.
 //
 // Note: Enable Javascript to view effects.
+// Ensure the `[defer]` attribute is set on the `<script>`
+// (or else move the `<script>` to the bottom of the `<body>`).
 //
 // Your markup should include a series of `<details>` elements, each with a single `<summary>` first child.
 // Add the `[open]` attribute to one and only one `<details>` element, representing the panel to be initially opened on load.
@@ -25,7 +27,7 @@
 //
 // Markup:
 // <link rel="stylesheet" href="/node_modules/aria-patterns/css/dist/o-Tablist.css"/>
-// <script src="/node_modules/aria-patterns/js/dist/o-Tablist.js"></script>
+// <script src="/node_modules/aria-patterns/js/dist/o-Tablist.js" defer=""></script>
 // <div class="o-Tablist" role="tablist">
 //   <details class="o-Tablist__Panel" role="tabpanel" id="panel1">
 //     <summary class="o-Tablist__Tab" role="tab">Tab 1</summary>
