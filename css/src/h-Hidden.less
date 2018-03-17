@@ -15,7 +15,7 @@
 // </dl></header>
 //
 // Markup:
-// <link href="/node_modules/aria-patterns/css/dist/h-Hidden.css" rel="stylesheet"/>
+// <link rel="stylesheet" href="/node_modules/aria-patterns/css/dist/h-Hidden.css"/>
 // <a class="h-Hidden {{ modifier_class }}" href="#0">skip to main content</a>
 //
 // :focus - On focus, the element returns to static position.
@@ -25,6 +25,7 @@
 // Styleguide Helpers.Hidden
 .h-Hidden {
   &:not(:focus) {
+    display: block; // override elements with `display: contents;`
     position: absolute;
   }
   left: -999999px;
