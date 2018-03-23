@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "extrajs": "^0.11.0",
-    "extrajs-dom": "^4.1.0"
+    "extrajs-dom": "^4.1.0",
+    "extrajs-geo": "^0.1.0"
   }
 }
