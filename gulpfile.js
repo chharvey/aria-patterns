@@ -12,6 +12,8 @@ const uglify = require('gulp-uglify-es').default
 const kss          = require('kss')
 const jsdoc        = require('gulp-jsdoc3')
 
+const createDir = require('./lib/createDir.js')
+
 
 gulp.task('lessc:each', function () {
   return gulp.src(['./css/src/*.less', '!./css/src/styleguide.less'])
@@ -56,7 +58,7 @@ gulp.task('docs:all', ['docs:kss', 'docs:api'])
 gulp.task('build', ['lessc:each', 'uglify:js', 'docs:all'])
 
 gulp.task('test', async function () {
-  try { fs.mkdirSync('./docs/test/') } catch (e) {}
+  await createDir('./docs/test/')
   require('./test/xPermalink.test.js');
   require('./test/xDirectory.test.js');
   require('./test/xPersonFullname.test.js');
