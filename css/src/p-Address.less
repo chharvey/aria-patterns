@@ -7,22 +7,35 @@
 // Address
 //
 // Markup for a postal address, in the format:
-// <pre>
+// ```
 // 1600 Pennsylvania Avenue NW
 // Washington, DC 20006
-// </pre>
+// ```
 // Note that this pattern does not use an `<address>` element,
 // as that is specifically reserved for contact information of the authoring person or organization of a website.
+// <footer><p>See the [xAddress rendering function](../api/global.html#xAddress_renderer) for usage.</p></footer>
 // <header><dl>
 //   <dt>author</dt>  <dd>Chris Harvey</dd>
 //   <dt>updated</dt> <dd><time>2018-03-12</time></dd>
 // </dl></header>
 //
 // DOM:
-// See [ARIAPatterns#xAddress](../api/ARIAPatterns.html#.xAddress) API example.
+// <pre>
+// const ARIAPatterns = require('aria-patterns')
+// document.querySelector('div[itemtype="http://schema.org/Organization"]').append(
+//   ARIAPatterns.xAddress.render({
+//     "@type": "PostalAddress",
+//     "streetAddress"  : "1600 Pennsylvania Avenue NW",
+//     "addressLocality": "Washington",
+//     "addressRegion"  : "DC",
+//     "postalCode"     : "20006",
+//     "$itemprop"      : "location",
+//     "$regionName"    : true,
+//   })
+// )
+// </pre>
 //
 // Markup: ../../docs/test/xAddress.test.html
-//
 //
 // Weight: 3
 //
