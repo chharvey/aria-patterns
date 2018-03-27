@@ -6,14 +6,15 @@
     "./x-person-fullname/css/src/",
     "./x-address/css/src/",
     "./x-tablist/css/src/",
-    "./x-permalink/css/src/"
+    "./x-permalink/css/src/",
+    "./x-hidden/css/src/"
   ],
   "destination": "docs/styleguide/",
   "css": [
     "https://cdn.rawgit.com/chharvey/xmeter/v6.2.0/css/xmeter.css",
     "../../x-tablist/css/dist/o-Tablist.css",
     "../../x-permalink/css/dist/c-Permalink.css",
-    "../../css/dist/h-Hidden.css"
+    "../../x-hidden/css/dist/h-Hidden.css"
   ],
   "js": [
     "../../x-tablist/js/dist/o-Tablist.js"
