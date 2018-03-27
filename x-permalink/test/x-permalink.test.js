@@ -1,4 +1,4 @@
-const ARIAPatterns = require('../index.js')
+const ARIAPatterns = require('../../index.js')
 
 console.log(ARIAPatterns.xPermalink.render({ id: 'my_id' }).querySelector('a').outerHTML)
 

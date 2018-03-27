@@ -58,7 +58,6 @@ typings/
 .env
 
 # Generated test files
-docs/test
 x-*/test/out/
 
 # Generated build files

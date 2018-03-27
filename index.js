@@ -4,12 +4,6 @@
  */
 const ARIAPatterns = {
   /**
-   * @summary A permalink for sections of a webpage.
-   * @see xPermalink_renderer
-   * @type {xjs.HTMLTemplateElement}
-   */
-  xPermalink: require('./tpl/x-permalink.tpl.js'),
-  /**
    * @summary A website directory, in the form of a document outline.
    * @see xDirectory_renderer
    * @type {xjs.HTMLTemplateElement}
@@ -27,6 +21,12 @@ const ARIAPatterns = {
    * @type {xjs.HTMLTemplateElement}
    */
   xAddress: require('./x-address/tpl/x-address.tpl.js'),
+  /**
+   * @summary A permalink for sections of a webpage.
+   * @see xPermalink_renderer
+   * @type {xjs.HTMLTemplateElement}
+   */
+  xPermalink: require('./x-permalink/tpl/x-permalink.tpl.js'),
 }
 
 module.exports = ARIAPatterns

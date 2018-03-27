@@ -4,13 +4,14 @@
     "./css/src/",
     "./x-directory/css/src/",
     "./x-person-fullname/css/src/",
-    "./x-address/css/src/"
+    "./x-address/css/src/",
+    "./x-permalink/css/src/"
   ],
   "destination": "docs/styleguide/",
   "css": [
     "https://cdn.rawgit.com/chharvey/xmeter/v6.2.0/css/xmeter.css",
     "../../css/dist/o-Tablist.css",
-    "../../css/dist/c-Permalink.css",
+    "../../x-permalink/css/dist/c-Permalink.css",
     "../../css/dist/h-Hidden.css"
   ],
   "js": [
