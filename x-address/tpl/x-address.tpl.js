@@ -21,8 +21,8 @@ STATE_DATA.push(...[
  * @param {string=} data.postalCode The postal code.
  * @param {string=} data.addressCountry The country.
  * @param {string=} data.$itemprop the value of the `[itemprop]` attribute to write, if any
- * @param {(boolean|string)=} data.$regionName `true` if you want the region code programmatically expanded to its full name
- *                                             (e.g., expand "VA" to "Virginia");
+ * @param {(boolean|string)=} data.$regionName should the region code programmatically expanded to its full name
+ *                                             (e.g., expand "VA" to "Virginia")?
  *                                             or enter a string to name the region manually
  */
 function xAddress_renderer(frag, data) {

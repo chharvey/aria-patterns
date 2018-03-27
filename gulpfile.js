@@ -43,13 +43,14 @@ gulp.task('uglify:js', function () {
     .pipe(gulp.dest('./js/dist/'))
 })
 
+// HOW-TO: https://github.com/kss-node/kss-node/issues/161#issuecomment-222292620
 gulp.task('docs:kss', ['test'], function () {
   return kss(require('./config/kss.json'))
 })
 
 // HOW-TO: https://github.com/mlucool/gulp-jsdoc3#usage
 gulp.task('docs:api', function () {
-  return gulp.src(['README.md', './index.js', './tpl/*.tpl.js'], {read: false})
+  return gulp.src(['README.md', './index.js', './x-address/tpl/*.tpl.js', './tpl/*.tpl.js'], {read: false})
     .pipe(jsdoc(require('./config/jsdoc.json')))
 })
 
@@ -62,5 +63,6 @@ gulp.task('test', async function () {
   require('./test/xPermalink.test.js');
   require('./test/xDirectory.test.js');
   require('./test/xPersonFullname.test.js');
-  require('./test/xAddress.test.js');
+
+  require('./x-address/test/x-address.test.js');
 })

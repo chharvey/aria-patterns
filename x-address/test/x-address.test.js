@@ -3,7 +3,8 @@ const path = require('path')
 
 const xjs = require('extrajs-dom')
 
-const ARIAPatterns = require('../index.js')
+const createDir = require('../../lib/createDir.js')
+const ARIAPatterns = require('../../index.js')
 
 
 let output = new xjs.DocumentFragment(ARIAPatterns.xAddress.render({
@@ -18,4 +19,6 @@ let output = new xjs.DocumentFragment(ARIAPatterns.xAddress.render({
 
 output = `<p itemscope="" itemtype="http://schema.org/Organization">${output}</p>`
 
-fs.writeFileSync(path.resolve(__dirname, '../docs/test/xAddress.test.html'), output, 'utf8')
+createDir('./x-address/test/out/').then(function (v) {
+  fs.writeFileSync(path.resolve(__dirname, './out/x-address.test.html'), output, 'utf8')
+})

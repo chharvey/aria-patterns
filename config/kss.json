@@ -1,6 +1,9 @@
 {
   "title": "ARIA Patterns",
-  "source": "css/src/",
+  "source": [
+    "./css/src/",
+    "./x-address/css/src/"
+  ],
   "destination": "docs/styleguide/",
   "css": [
     "https://cdn.rawgit.com/chharvey/xmeter/v6.2.0/css/xmeter.css",

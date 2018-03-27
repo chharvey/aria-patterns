@@ -26,7 +26,7 @@ const ARIAPatterns = {
    * @see xAddress_renderer
    * @type {xjs.HTMLTemplateElement}
    */
-  xAddress: require('./tpl/x-address.tpl.js'),
+  xAddress: require('./x-address/tpl/x-address.tpl.js'),
 }
 
 module.exports = ARIAPatterns
