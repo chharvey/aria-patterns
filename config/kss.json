@@ -5,16 +5,17 @@
     "./x-directory/css/src/",
     "./x-person-fullname/css/src/",
     "./x-address/css/src/",
+    "./x-tablist/css/src/",
     "./x-permalink/css/src/"
   ],
   "destination": "docs/styleguide/",
   "css": [
     "https://cdn.rawgit.com/chharvey/xmeter/v6.2.0/css/xmeter.css",
-    "../../css/dist/o-Tablist.css",
+    "../../x-tablist/css/dist/o-Tablist.css",
     "../../x-permalink/css/dist/c-Permalink.css",
     "../../css/dist/h-Hidden.css"
   ],
   "js": [
-    "../../js/dist/o-Tablist.js"
+    "../../x-tablist/js/dist/o-Tablist.js"
   ]
 }
