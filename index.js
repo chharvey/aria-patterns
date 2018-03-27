@@ -14,7 +14,7 @@ const ARIAPatterns = {
    * @see xDirectory_renderer
    * @type {xjs.HTMLTemplateElement}
    */
-  xDirectory: require('./tpl/x-directory.tpl.js'),
+  xDirectory: require('./x-directory/tpl/x-directory.tpl.js'),
   /**
    * @summary A person’s name in "Px. First M. Last, Sx." format.
    * @see xPersonFullname_renderer

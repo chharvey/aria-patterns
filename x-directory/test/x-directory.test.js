@@ -1,7 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 
-const ARIAPatterns = require('../index.js')
+const createDir = require('../../lib/createDir.js')
+const ARIAPatterns = require('../../index.js')
 
 let webpage = {
   "@context": "http://schema.org/",
@@ -80,4 +81,6 @@ let webpage = {
 
 let output = ARIAPatterns.xDirectory.render(webpage).querySelector('[role="directory"]').outerHTML
 
-fs.writeFileSync(path.resolve(__dirname, '../docs/test/xDirectory.test.html'), output, 'utf8')
+createDir('./x-directory/test/out/').then(function (v) {
+  fs.writeFileSync(path.resolve(__dirname, './out/x-directory.test.html'), output, 'utf8')
+})

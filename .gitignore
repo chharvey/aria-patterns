@@ -59,7 +59,7 @@ typings/
 
 # Generated test files
 docs/test
-x-address/test/out/
+x-*/test/out/
 
 # Generated build files
 css/dist

@@ -2,6 +2,7 @@
   "title": "ARIA Patterns",
   "source": [
     "./css/src/",
+    "./x-directory/css/src/",
     "./x-address/css/src/"
   ],
   "destination": "docs/styleguide/",

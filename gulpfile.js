@@ -43,26 +43,26 @@ gulp.task('uglify:js', function () {
     .pipe(gulp.dest('./js/dist/'))
 })
 
+// HOW-TO: https://github.com/mlucool/gulp-jsdoc3#usage
+gulp.task('docs:api', function () {
+  return gulp.src(['README.md', './index.js', './x-*/tpl/*.tpl.js', './tpl/*.tpl.js'], {read: false})
+    .pipe(jsdoc(require('./config/jsdoc.json')))
+})
+
 // HOW-TO: https://github.com/kss-node/kss-node/issues/161#issuecomment-222292620
 gulp.task('docs:kss', ['test'], function () {
   return kss(require('./config/kss.json'))
 })
 
-// HOW-TO: https://github.com/mlucool/gulp-jsdoc3#usage
-gulp.task('docs:api', function () {
-  return gulp.src(['README.md', './index.js', './x-address/tpl/*.tpl.js', './tpl/*.tpl.js'], {read: false})
-    .pipe(jsdoc(require('./config/jsdoc.json')))
-})
-
-gulp.task('docs:all', ['docs:kss', 'docs:api'])
+gulp.task('docs:all', ['docs:api', 'docs:kss'])
 
 gulp.task('build', ['lessc:each', 'uglify:js', 'docs:all'])
 
 gulp.task('test', async function () {
   await createDir('./docs/test/')
   require('./test/xPermalink.test.js');
-  require('./test/xDirectory.test.js');
   require('./test/xPersonFullname.test.js');
 
   require('./x-address/test/x-address.test.js');
+  require('./x-directory/test/x-directory.test.js');
 })
