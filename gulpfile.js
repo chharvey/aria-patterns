@@ -37,11 +37,14 @@ gulp.task('lessc:each', function () {
 })
 
 gulp.task('uglify:js', function () {
-  return gulp.src('./js/src/*.js')
+  return gulp.src('./x-*/js/src/*.js')
     .pipe(sourcemaps.init())
     .pipe(uglify())
+    .pipe(rename(function (p) {
+      p.dirname = path.resolve(p.dirname, '../dist/')
+    }))
     .pipe(sourcemaps.write('./')) // writes to an external .map file
-    .pipe(gulp.dest('./js/dist/'))
+    .pipe(gulp.dest('/')) // must be absolute due to `path.resolve`
 })
 
 // HOW-TO: https://github.com/mlucool/gulp-jsdoc3#usage
