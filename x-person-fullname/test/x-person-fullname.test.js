@@ -3,7 +3,8 @@ const path = require('path')
 
 const xjs = require('extrajs-dom')
 
-const ARIAPatterns = require('../index.js')
+const createDir = require('../../lib/createDir.js')
+const ARIAPatterns = require('../../index.js')
 
 
 let output = `
@@ -17,4 +18,6 @@ let output = `
 })).innerHTML()}</p>
 `
 
-fs.writeFileSync(path.resolve(__dirname, '../docs/test/xPersonFullname.test.html'), output, 'utf8')
+createDir('./x-person-fullname/test/out/').then(function (v) {
+  fs.writeFileSync(path.resolve(__dirname, './out/x-person-fullname.test.html'), output, 'utf8')
+})

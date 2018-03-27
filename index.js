@@ -20,7 +20,7 @@ const ARIAPatterns = {
    * @see xPersonFullname_renderer
    * @type {xjs.HTMLTemplateElement}
    */
-  xPersonFullname: require('./tpl/x-person-fullname.tpl.js'),
+  xPersonFullname: require('./x-person-fullname/tpl/x-person-fullname.tpl.js'),
   /**
    * @summary A postal address.
    * @see xAddress_renderer

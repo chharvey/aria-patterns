@@ -3,6 +3,7 @@
   "source": [
     "./css/src/",
     "./x-directory/css/src/",
+    "./x-person-fullname/css/src/",
     "./x-address/css/src/"
   ],
   "destination": "docs/styleguide/",

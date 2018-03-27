@@ -61,8 +61,8 @@ gulp.task('build', ['lessc:each', 'uglify:js', 'docs:all'])
 gulp.task('test', async function () {
   await createDir('./docs/test/')
   require('./test/xPermalink.test.js');
-  require('./test/xPersonFullname.test.js');
 
-  require('./x-address/test/x-address.test.js');
   require('./x-directory/test/x-directory.test.js');
+  require('./x-person-fullname/test/x-person-fullname.test.js');
+  require('./x-address/test/x-address.test.js');
 })
