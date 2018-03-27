@@ -61,7 +61,7 @@ typings/
 x-*/test/out/
 
 # Generated build files
-css/dist
+x-*/css/dist
 js/dist
 
 # Generated documentation & style guides

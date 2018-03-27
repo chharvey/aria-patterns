@@ -1,7 +1,8 @@
 const fs = require('fs')
+const path = require('path')
 
 const gulp         = require('gulp')
-
+const rename       = require('gulp-rename')
 const less         = require('gulp-less')
 const autoprefixer = require('gulp-autoprefixer')
 const clean_css    = require('gulp-clean-css')
@@ -14,13 +15,12 @@ const jsdoc        = require('gulp-jsdoc3')
 
 
 gulp.task('lessc:each', function () {
-  return gulp.src(['./css/src/*.less', '!./css/src/styleguide.less'])
+  return gulp.src('./x-*/css/src/*.less')
     .pipe(sourcemaps.init())
     .pipe(less())
     .pipe(autoprefixer({
       grid: true,
     }))
-    .pipe(gulp.dest('./css/dist/'))
     .pipe(clean_css({
       level: {
         2: {
@@ -29,8 +29,11 @@ gulp.task('lessc:each', function () {
         },
       },
     }))
+    .pipe(rename(function (p) {
+      p.dirname = path.resolve(p.dirname, '../dist/')
+    }))
     .pipe(sourcemaps.write('./')) // writes to an external .map file
-    .pipe(gulp.dest('./css/dist/'))
+    .pipe(gulp.dest('/')) // must be absolute due to `path.resolve`
 })
 
 gulp.task('uglify:js', function () {
