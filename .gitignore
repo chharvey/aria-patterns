@@ -57,11 +57,13 @@ typings/
 # dotenv environment variables file
 .env
 
+# Generated test files
+x-*/test/out/
+
 # Generated build files
-css/dist
-js/dist
+x-*/css/dist
+x-*/js/dist
 
 # Generated documentation & style guides
 docs/api
 docs/styleguide
-docs/test
