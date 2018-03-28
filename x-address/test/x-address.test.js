@@ -7,17 +7,21 @@ const createDir = require('../../lib/createDir.js')
 const ARIAPatterns = require('../../index.js')
 
 
-let output = new xjs.DocumentFragment(ARIAPatterns.xAddress.render({
+let data = {
   "@type": "PostalAddress",
   "$itemprop"      : "location",
-  "streetAddress"  : "1600 Amphitheatre Parkway",
-  "addressLocality": "Mountain View",
-  "addressRegion"  : "CA",
-  "postalCode"     : "94043",
+  "streetAddress"  : "1 First St NE",
+  "addressLocality": "Washington",
+  "addressRegion"  : "DC",
+  "postalCode"     : "20543",
   "addressCountry" : "United States",
-})).innerHTML()
+}
 
-output = `<p itemscope="" itemtype="http://schema.org/Organization">${output}</p>`
+let output = `
+<p itemscope="" itemtype="http://schema.org/Place">${
+  new xjs.DocumentFragment(ARIAPatterns.xAddress.render(data)).innerHTML()
+}</p>
+`
 
 createDir('./x-address/test/out/').then(function (v) {
   fs.writeFileSync(path.resolve(__dirname, './out/x-address.test.html'), output, 'utf8')

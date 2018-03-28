@@ -16,9 +16,9 @@
 //
 // DOM:
 // <pre>
-// const ARIAPatterns = require('aria-patterns')
-// document.querySelector('div[itemtype="http://schema.org/Person"] > h1[itemprop="name"]').append(
-//   ARIAPatterns.xPersonFullname.render({
+// const {xPersonFullname} = require('aria-patterns')
+// document.querySelector('article[itemtype="http://schema.org/Person"] > h1[itemprop="name"]').append(
+//   xPersonFullname.render({
 //     "@type": "Person",
 //     "familyName"     : "King",
 //     "givenName"      : "Martin",

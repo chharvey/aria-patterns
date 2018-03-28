@@ -7,15 +7,21 @@ const createDir = require('../../lib/createDir.js')
 const ARIAPatterns = require('../../index.js')
 
 
-let output = `
-<p itemscope="" itemtype="http://schema.org/Person">${new xjs.DocumentFragment(ARIAPatterns.xPersonFullname.render({
+let data = {
   "@type": "Person",
   "familyName"     : "King",
   "givenName"      : "Martin",
   "additionalName" : "Luther",
   "honorificPrefix": "Dr.",
   "honorificSuffix": "Jr."
-})).innerHTML()}</p>
+}
+
+let output = `
+<article itemscope="" itemtype="http://schema.org/Person">
+  <h1 itemprop="name">${
+    new xjs.DocumentFragment(ARIAPatterns.xPersonFullname.render(data)).innerHTML()
+  }</h1>
+</article>
 `
 
 createDir('./x-person-fullname/test/out/').then(function (v) {

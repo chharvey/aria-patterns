@@ -1,10 +1,12 @@
 const fs = require('fs')
 const path = require('path')
 
+const xjs = require('extrajs-dom')
+
 const createDir = require('../../lib/createDir.js')
 const ARIAPatterns = require('../../index.js')
 
-let webpage = {
+let data = {
   "@context": "http://schema.org/",
   "@type": "WebPage",
   "name": "A 2016 Event",
@@ -79,7 +81,9 @@ let webpage = {
   ]
 }
 
-let output = ARIAPatterns.xDirectory.render(webpage).querySelector('[role="directory"]').outerHTML
+let output = `
+<header><nav>${new xjs.DocumentFragment(ARIAPatterns.xDirectory.render(data)).innerHTML()}</nav></header>
+`
 
 createDir('./x-directory/test/out/').then(function (v) {
   fs.writeFileSync(path.resolve(__dirname, './out/x-directory.test.html'), output, 'utf8')
