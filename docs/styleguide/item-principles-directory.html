@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ARIA Patterns</title>
+
+  <meta name="description" content="">
+  <meta name="generator" content="kss-node">
+  <meta name="viewport" content="width=device-width">
+
+  <link rel="stylesheet" href="kss-assets/kss.css">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/chharvey/xmeter/v6.2.0/css/xmeter.css">
+<link rel="stylesheet" href="../../x-tablist/css/dist/o-Tablist.css">
+<link rel="stylesheet" href="../../x-permalink/css/dist/c-Permalink.css">
+<link rel="stylesheet" href="../../x-hidden/css/dist/h-Hidden.css">
+
+</head>
+<body id="kss-node" class="kss-fullscreen-mode">
+
+<div class="kss-sidebar kss-style">
+  <header class="kss-header">
+    <h1 class="kss-doc-title">ARIA Patterns</h1>
+  </header>
+  <nav class="kss-nav">
+    <ul class="kss-nav__menu">
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="./">
+          <span class="kss-nav__ref">0</span
+          ><span class="kss-nav__name">Overview</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-principles.html">
+          <span class="kss-nav__ref">1</span><span class="kss-nav__name">Principles</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-objects.html">
+          <span class="kss-nav__ref">2</span><span class="kss-nav__name">Objects</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-components.html">
+          <span class="kss-nav__ref">3</span><span class="kss-nav__name">Components</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-interfaces.html">
+          <span class="kss-nav__ref">4</span><span class="kss-nav__name">Interfaces</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-helpers.html">
+          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Helpers</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-atoms.html">
+          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Atoms</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-hacks.html">
+          <span class="kss-nav__ref">7</span><span class="kss-nav__name">Hacks</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<article role="main" class="kss-main">
+
+    <div id="kssref-principles-directory" class="kss-section kss-section--depth-2 is-fullscreen">
+
+      <div class="kss-style">
+        <h2 class="kss-title kss-title--level-2">
+          <a class="kss-title__permalink" href="#kssref-principles-directory">
+            <span class="kss-title__ref">
+              1.1
+              <span class="kss-title__permalink-hash">
+                  #Principles.Directory
+              </span>
+            </span>
+            Directory
+          </a>
+        </h2>
+
+          <p class="kss-toolbar">
+            <a href="#kssref-principles-directory" data-kss-guides="true">
+              <span class="kss-toolbar__tooltip">Toggle example guides</span>
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 64 64">
+                <rect class="kss-toolbar__icon-fill" x="5" y="35" width="5" height="9"/>
+                <rect class="kss-toolbar__icon-fill" x="54" y="21" width="5" height="9"/>
+                <rect class="kss-toolbar__icon-fill" x="54" y="35" width="5" height="9"/>
+                <rect class="kss-toolbar__icon-fill" x="5" y="21" width="5" height="9"/>
+                <rect class="kss-toolbar__icon-fill" x="5" y="0" width="5" height="15"/>
+                <rect class="kss-toolbar__icon-fill" x="35" y="5" width="9" height="5"/>
+                <rect class="kss-toolbar__icon-fill" x="20" y="5" width="9" height="5"/>
+                <rect class="kss-toolbar__icon-fill" x="0" y="5" width="15" height="5"/>
+                <rect class="kss-toolbar__icon-fill" x="54" y="0" width="5" height="15"/>
+                <rect class="kss-toolbar__icon-fill" x="49" y="5" width="15" height="5"/>
+                <rect class="kss-toolbar__icon-fill" x="54" y="49" width="5" height="15"/>
+                <rect class="kss-toolbar__icon-fill" x="49" y="54" width="15" height="5"/>
+                <rect class="kss-toolbar__icon-fill" x="5" y="49" width="5" height="15"/>
+                <rect class="kss-toolbar__icon-fill" x="0" y="54" width="15" height="5"/>
+                <rect class="kss-toolbar__icon-fill" x="35" y="54" width="9" height="5"/>
+                <rect class="kss-toolbar__icon-fill" x="20" y="54" width="9" height="5"/>
+              </svg>
+            </a>
+            <a href="#kssref-principles-directory" data-kss-markup="true">
+              <span class="kss-toolbar__tooltip">Toggle HTML markup</span>
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 64 64">
+                <path class="kss-toolbar__icon-fill" d="M37.555,46.239l6.103,6.103l20.342,-20.342l-20.342,-20.342l-6.103,6.103l14.24,14.239l-14.24,14.239Z"/>
+                <path class="kss-toolbar__icon-fill" d="M26.445,17.761l-6.103,-6.103l-20.342,20.342l20.342,20.342l6.103,-6.103l-14.24,-14.239l14.24,-14.239Z"/>
+              </svg>
+            </a>
+          </p>
+
+          <div class="kss-description">
+            <p>A Directory is a static outlined list of pages on a website.
+It is also commonly known as a “sitemap”.
+This principle does not have any styles, but it provides the
+semantic and accessible structure necessary to convey a sitemap.</p>
+<p><footer><p>See the <a href="../api/global.html#xDirectory_renderer">xDirectory rendering function</a> for usage.</p></footer></p>
+<header><dl>
+  <dt>author</dt>  <dd>Chris Harvey</dd>
+  <dt>updated</dt> <dd><time>2018-03-08</time></dd>
+</dl></header>
+
+<p>DOM:</p>
+<pre>
+const {xDirectory} = require('aria-patterns')
+let data = {
+  "@type": "WebPage",
+  "name": "A 2016 Event",
+  "url": "https://2016.asce-event.org/",
+  "hasPart": [
+    {
+      "@type": "WebPage",
+      "name": "Registration",
+      "url": "https://2016.asce-event.org/registration/",
+      "hasPart": [
+        { "@type": "WebPage", "name": "Why Attend" , "url": "https://2016.asce-event.org/registration/why-attend/" },
+        { "@type": "WebPage", "name": "Volunteer"  , "url": "https://2016.asce-event.org/registration/volunteer/",
+          "hasPart": { "@type": "WebPage", "name": "For Students", "url": "https://2016.asce-event.org/registration/volunteer/for-students/" }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "name": "Location",
+      "url": "https://2016.asce-event.org/location/"
+    },
+    {
+      "@type": "WebPage",
+      "name": "Sponsor",
+      "url": "https://2016.asce-event.org/sponsor/",
+      "hasPart": [
+        { "@type": "WebPage", "name": "Partnering Orgs"  , "url": "https://2016.asce-event.org/sponsor/partnering-orgs/"  },
+        { "@type": "WebPage", "name": "Cooperating Orgs" , "url": "https://2016.asce-event.org/sponsor/cooperating-orgs/" }
+      ]
+    }
+  ]
+}
+document.querySelector('header > nav').append(
+  xDirectory.render(data)
+)
+</pre>
+          </div>
+
+      </div>
+
+        <div class="kss-modifier__wrapper">
+          <div class="kss-modifier__heading kss-style">
+            Example
+          </div>
+
+
+          <div class="kss-modifier__example">
+            
+<header><nav>
+  <ol role="directory">
+    <template>
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="" itemprop="url">
+          <slot itemprop="name"></slot>
+        </a>
+      </li>
+    </template>
+  
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="https://2016.asce-event.org/" itemprop="url">
+          <slot itemprop="name">Home</slot>
+        </a>
+      </li>
+    
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="https://2016.asce-event.org/registration/" itemprop="url">
+          <slot itemprop="name">Registration</slot>
+        </a>
+      
+  <ol role="directory">
+    <template>
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="" itemprop="url">
+          <slot itemprop="name"></slot>
+        </a>
+      </li>
+    </template>
+  
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="https://2016.asce-event.org/registration/why-attend/" itemprop="url">
+          <slot itemprop="name">Why Attend</slot>
+        </a>
+      </li>
+    
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="https://2016.asce-event.org/registration/volunteer/" itemprop="url">
+          <slot itemprop="name">Volunteer</slot>
+        </a>
+      
+  <ol role="directory">
+    <template>
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="" itemprop="url">
+          <slot itemprop="name"></slot>
+        </a>
+      </li>
+    </template>
+  
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="https://2016.asce-event.org/registration/volunteer/for-students/" itemprop="url">
+          <slot itemprop="name">For Students</slot>
+        </a>
+      </li>
+    </ol>
+</li>
+    </ol>
+</li>
+    
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="https://2016.asce-event.org/program/" itemprop="url">
+          <slot itemprop="name">Program</slot>
+        </a>
+      
+  <ol role="directory">
+    <template>
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="" itemprop="url">
+          <slot itemprop="name"></slot>
+        </a>
+      </li>
+    </template>
+  
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="https://2016.asce-event.org/program/short-courses/" itemprop="url">
+          <slot itemprop="name">Short Courses</slot>
+        </a>
+      </li>
+    
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="https://2016.asce-event.org/program/technical-tours/" itemprop="url">
+          <slot itemprop="name">Technical Tours</slot>
+        </a>
+      </li>
+    
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="https://2016.asce-event.org/program/optional-tours/" itemprop="url">
+          <slot itemprop="name">Optional Tours</slot>
+        </a>
+      </li>
+    </ol>
+</li>
+    
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="https://2016.asce-event.org/location/" itemprop="url">
+          <slot itemprop="name">Location</slot>
+        </a>
+      </li>
+    
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="https://2016.asce-event.org/speakers/" itemprop="url">
+          <slot itemprop="name">Speakers</slot>
+        </a>
+      
+  <ol role="directory">
+    <template>
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="" itemprop="url">
+          <slot itemprop="name"></slot>
+        </a>
+      </li>
+    </template>
+  
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="https://2016.asce-event.org/speakers/distinguished-lecturers/" itemprop="url">
+          <slot itemprop="name">Distinguished Lecturers</slot>
+        </a>
+      </li>
+    </ol>
+</li>
+    
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="https://2016.asce-event.org/sponsor/" itemprop="url">
+          <slot itemprop="name">Sponsor</slot>
+        </a>
+      
+  <ol role="directory">
+    <template>
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="" itemprop="url">
+          <slot itemprop="name"></slot>
+        </a>
+      </li>
+    </template>
+  
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="https://2016.asce-event.org/sponsor/partnering-orgs/" itemprop="url">
+          <slot itemprop="name">Partnering Orgs</slot>
+        </a>
+      </li>
+    
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="https://2016.asce-event.org/sponsor/cooperating-orgs/" itemprop="url">
+          <slot itemprop="name">Cooperating Orgs</slot>
+        </a>
+      </li>
+    </ol>
+</li>
+    
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="https://2016.asce-event.org/exhibit/" itemprop="url">
+          <slot itemprop="name">Exhibit</slot>
+        </a>
+      
+  <ol role="directory">
+    <template>
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="" itemprop="url">
+          <slot itemprop="name"></slot>
+        </a>
+      </li>
+    </template>
+  
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="https://2016.asce-event.org/exhibit/exhibitor-list/" itemprop="url">
+          <slot itemprop="name">Exhibitor List</slot>
+        </a>
+      </li>
+    </ol>
+</li>
+    
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="https://2016.asce-event.org/about/" itemprop="url">
+          <slot itemprop="name">About</slot>
+        </a>
+      </li>
+    
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="https://2016.asce-event.org/contact/" itemprop="url">
+          <slot itemprop="name">Contact</slot>
+        </a>
+      
+  <ol role="directory">
+    <template>
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="" itemprop="url">
+          <slot itemprop="name"></slot>
+        </a>
+      </li>
+    </template>
+  
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="https://2016.asce-event.org/contact/submit-feedback" itemprop="url">
+          <slot itemprop="name">Submit Feedback</slot>
+        </a>
+      </li>
+    
+      <li itemprop="hasPart" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="https://2016.asce-event.org/contact/talk-representative" itemprop="url">
+          <slot itemprop="name">Talk to a Representative</slot>
+        </a>
+      </li>
+    </ol>
+</li>
+    </ol>
+</nav></header>
+
+            <div class="kss-modifier__example-footer"></div>
+          </div>
+
+        </div>
+
+          <details class="kss-markup kss-style">
+            <summary>
+                Markup: <code>../../test/out/x-directory.test.html</code>
+            </summary>
+            <pre class="prettyprint linenums lang-html"><code data-language="html">
+&lt;header&gt;&lt;nav&gt;
+  &lt;ol role&#x3D;&quot;directory&quot;&gt;
+    &lt;template&gt;
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/template&gt;
+  
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;https://2016.asce-event.org/&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;Home&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;https://2016.asce-event.org/registration/&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;Registration&lt;/slot&gt;
+        &lt;/a&gt;
+      
+  &lt;ol role&#x3D;&quot;directory&quot;&gt;
+    &lt;template&gt;
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/template&gt;
+  
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;https://2016.asce-event.org/registration/why-attend/&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;Why Attend&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;https://2016.asce-event.org/registration/volunteer/&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;Volunteer&lt;/slot&gt;
+        &lt;/a&gt;
+      
+  &lt;ol role&#x3D;&quot;directory&quot;&gt;
+    &lt;template&gt;
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/template&gt;
+  
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;https://2016.asce-event.org/registration/volunteer/for-students/&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;For Students&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/li&gt;
+    
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;https://2016.asce-event.org/program/&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;Program&lt;/slot&gt;
+        &lt;/a&gt;
+      
+  &lt;ol role&#x3D;&quot;directory&quot;&gt;
+    &lt;template&gt;
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/template&gt;
+  
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;https://2016.asce-event.org/program/short-courses/&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;Short Courses&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;https://2016.asce-event.org/program/technical-tours/&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;Technical Tours&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;https://2016.asce-event.org/program/optional-tours/&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;Optional Tours&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/li&gt;
+    
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;https://2016.asce-event.org/location/&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;Location&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;https://2016.asce-event.org/speakers/&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;Speakers&lt;/slot&gt;
+        &lt;/a&gt;
+      
+  &lt;ol role&#x3D;&quot;directory&quot;&gt;
+    &lt;template&gt;
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/template&gt;
+  
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;https://2016.asce-event.org/speakers/distinguished-lecturers/&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;Distinguished Lecturers&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/li&gt;
+    
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;https://2016.asce-event.org/sponsor/&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;Sponsor&lt;/slot&gt;
+        &lt;/a&gt;
+      
+  &lt;ol role&#x3D;&quot;directory&quot;&gt;
+    &lt;template&gt;
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/template&gt;
+  
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;https://2016.asce-event.org/sponsor/partnering-orgs/&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;Partnering Orgs&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;https://2016.asce-event.org/sponsor/cooperating-orgs/&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;Cooperating Orgs&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/li&gt;
+    
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;https://2016.asce-event.org/exhibit/&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;Exhibit&lt;/slot&gt;
+        &lt;/a&gt;
+      
+  &lt;ol role&#x3D;&quot;directory&quot;&gt;
+    &lt;template&gt;
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/template&gt;
+  
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;https://2016.asce-event.org/exhibit/exhibitor-list/&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;Exhibitor List&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/li&gt;
+    
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;https://2016.asce-event.org/about/&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;About&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;https://2016.asce-event.org/contact/&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;Contact&lt;/slot&gt;
+        &lt;/a&gt;
+      
+  &lt;ol role&#x3D;&quot;directory&quot;&gt;
+    &lt;template&gt;
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/template&gt;
+  
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;https://2016.asce-event.org/contact/submit-feedback&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;Submit Feedback&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    
+      &lt;li itemprop&#x3D;&quot;hasPart&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/WebPage&quot;&gt;
+        &lt;a href&#x3D;&quot;https://2016.asce-event.org/contact/talk-representative&quot; itemprop&#x3D;&quot;url&quot;&gt;
+          &lt;slot itemprop&#x3D;&quot;name&quot;&gt;Talk to a Representative&lt;/slot&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/nav&gt;&lt;/header&gt;
+</code></pre>
+          </details>
+
+        <div class="kss-source kss-style">
+          Source: <code>p-Directory.less</code>, line 7
+        </div>
+
+    </div>
+</article>
+
+<!-- SCRIPTS -->
+<script src="kss-assets/kss.js"></script>
+<script src="kss-assets/scrollspy.js"></script>
+<script src="kss-assets/prettify.js"></script>
+<script src="kss-assets/kss-fullscreen.js"></script>
+<script src="kss-assets/kss-guides.js"></script>
+<script src="kss-assets/kss-markup.js"></script>
+<script>
+  prettyPrint();
+  var spy = new ScrollSpy('#kss-node', {
+    nav: '.kss-nav__menu-child > li > a',
+    className: 'is-in-viewport'
+  });
+  var kssFullScreen = new KssFullScreen({
+    idPrefix: 'kss-fullscreen-',
+    bodyClass: 'kss-fullscreen-mode',
+    elementClass: 'is-fullscreen'
+  });
+  var kssGuides = new KssGuides({
+    bodyClass: 'kss-guides-mode'
+  });
+  var kssMarkup = new KssMarkup({
+    bodyClass: 'kss-markup-mode',
+    detailsClass: 'kss-markup'
+  });
+</script>
+<script src="../../x-tablist/js/dist/o-Tablist.js"></script>
+
+
+
+<!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
+</body>
+</html>

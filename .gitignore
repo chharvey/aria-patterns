@@ -67,3 +67,10 @@ x-*/js/dist
 # Generated documentation & style guides
 docs/api
 docs/styleguide
+
+# Checked-in to `gh-pages`
+!x-*/test/out/
+!x-*/css/dist
+!x-*/js/dist
+!docs/api
+!docs/styleguide
