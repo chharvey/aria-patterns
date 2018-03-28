@@ -6,29 +6,28 @@
 
 // The Permalink
 //
-// The Permalink Component is added to the end of a heading in a documentation system,
-// style guide, or pattern library. This Component is an internal link, and makes sections
-// within a document easy to access.
+// The Permalink Component is added to the end of a heading of a section of a webpage.
+// It is especially helpful in a documentation system, style guide, or pattern library.
+// This Component is an internal link, and makes sections within a document easy to access.
 //
 // Use with this project’s `.h-Hidden` and
-// [Xmeter’s](https://github.com/chharvey/xmeter/) `.h-Inline` Helpers.
-// <footer>Read https://github.com/chharvey/chharvey.github.io/wiki/Accessible-Skip-Links#internal-permalinks for more info.</footer>
+// [Xmeter’s](https://chharvey.github.io/xmeter/) `.h-Inline` Helpers.
+// <footer><p>See the [xPermalink rendering function](../api/global.html#xPermalink_renderer) for usage.</p></footer>
 // <header><dl>
 //   <dt>author</dt>  <dd>Chris Harvey</dd>
 //   <dt>updated</dt> <dd><time>2017-03-26</time></dd>
 // </dl></header>
+// <footer><p>Read https://github.com/chharvey/chharvey.github.io/wiki/Accessible-Skip-Links#internal-permalinks for more info.</p></footer>
 //
 // DOM:
-// See [ARIAPatterns#xDirectory](../api/ARIAPatterns.html#.xPermalink) API example.
+// <pre>
+// const {xPermalink} = require('aria-patterns')
+// document.querySelector('#section-title > h1').append(
+//   xPermalink.render({ id: 'section-title' })
+// )
+// </pre>
 //
-// Markup:
-// <link rel="stylesheet" href="/node_modules/aria-patterns/css/dist/c-Permalink.css"/>
-// <section id="section-title">
-//   <h1>
-//     Section Title
-//     <a class="c-Permalink h-Inline h-Hidden" href="#section-title" aria-label="permalink">&sect;</a>
-//   </h1>
-// </section>
+// Markup: ../../test/out/x-permalink.test.html
 //
 // Weight: 1
 //
@@ -46,6 +45,7 @@
   h4:hover > &,
   h5:hover > &,
   h6:hover > & {
+    display: inline;
     position: static; // HACK fallback for `initial`
     position: initial; // HACK fallback for `unset`
     position: unset; // unset `.h-Hidden`

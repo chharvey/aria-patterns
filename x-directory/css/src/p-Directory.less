@@ -1,0 +1,63 @@
+
+/*################################*\
+    p-Directory.less
+\*################################*/
+
+
+// Directory
+//
+// A Directory is a static outlined list of pages on a website.
+// It is also commonly known as a “sitemap”.
+// This principle does not have any styles, but it provides the
+// semantic and accessible structure necessary to convey a sitemap.
+// <footer><p>See the [xDirectory rendering function](../api/global.html#xDirectory_renderer) for usage.</p></footer>
+// <header><dl>
+//   <dt>author</dt>  <dd>Chris Harvey</dd>
+//   <dt>updated</dt> <dd><time>2018-03-08</time></dd>
+// </dl></header>
+//
+// DOM:
+// <pre>
+// const {xDirectory} = require('aria-patterns')
+// let data = {
+//   "@type": "WebPage",
+//   "name": "A 2016 Event",
+//   "url": "https://2016.asce-event.org/",
+//   "hasPart": [
+//     {
+//       "@type": "WebPage",
+//       "name": "Registration",
+//       "url": "https://2016.asce-event.org/registration/",
+//       "hasPart": [
+//         { "@type": "WebPage", "name": "Why Attend" , "url": "https://2016.asce-event.org/registration/why-attend/" },
+//         { "@type": "WebPage", "name": "Volunteer"  , "url": "https://2016.asce-event.org/registration/volunteer/",
+//           "hasPart": { "@type": "WebPage", "name": "For Students", "url": "https://2016.asce-event.org/registration/volunteer/for-students/" }
+//         }
+//       ]
+//     },
+//     {
+//       "@type": "WebPage",
+//       "name": "Location",
+//       "url": "https://2016.asce-event.org/location/"
+//     },
+//     {
+//       "@type": "WebPage",
+//       "name": "Sponsor",
+//       "url": "https://2016.asce-event.org/sponsor/",
+//       "hasPart": [
+//         { "@type": "WebPage", "name": "Partnering Orgs"  , "url": "https://2016.asce-event.org/sponsor/partnering-orgs/"  },
+//         { "@type": "WebPage", "name": "Cooperating Orgs" , "url": "https://2016.asce-event.org/sponsor/cooperating-orgs/" }
+//       ]
+//     }
+//   ]
+// }
+// document.querySelector('header > nav').append(
+//   xDirectory.render(data)
+// )
+// </pre>
+//
+// Markup: ../../test/out/x-directory.test.html
+//
+// Weight: 1
+//
+// Styleguide Principles.Directory

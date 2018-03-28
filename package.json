@@ -1,11 +1,11 @@
 {
   "name": "aria-patterns",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Common patterns of elements with ARIA attributes.",
   "main": "index.js",
   "scripts": {
     "build": "gulp build",
-    "unbuild": "rm -r docs/{styleguide,api,test}/ {css,js}/dist/",
+    "unbuild": "rm -r ./docs/{styleguide,api,test}/ ./{css,js}/dist/ ./x-address/test/out/",
     "test": "gulp test"
   },
   "repository": {
@@ -30,12 +30,14 @@
     "gulp-clean-css": "^3.9.2",
     "gulp-jsdoc3": "^1.0.1",
     "gulp-less": "^3.5.0",
+    "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify-es": "^1.0.1",
     "kss": "^3.0.0-beta.18"
   },
   "dependencies": {
     "extrajs": "^0.11.0",
-    "extrajs-dom": "^4.1.0"
+    "extrajs-dom": "^4.1.0",
+    "extrajs-geo": "^0.1.0"
   }
 }
