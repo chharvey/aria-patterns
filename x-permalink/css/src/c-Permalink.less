@@ -21,20 +21,13 @@
 //
 // DOM:
 // <pre>
-// const ARIAPatterns = require('aria-patterns')
+// const {xPermalink} = require('aria-patterns')
 // document.querySelector('#section-title > h1').append(
-//   ARIAPatterns.xPermalink.render({ id: 'section-title' })
+//   xPermalink.render({ id: 'section-title' })
 // )
 // </pre>
 //
-// Markup:
-// <link rel="stylesheet" href="/node_modules/aria-patterns/css/dist/c-Permalink.css"/>
-// <section id="section-title">
-//   <h1>
-//     Section Title
-//     <a class="c-Permalink h-Inline h-Hidden" href="#section-title" aria-label="permalink">&sect;</a>
-//   </h1>
-// </section>
+// Markup: ../../test/out/x-permalink.test.html
 //
 // Weight: 1
 //
@@ -52,6 +45,7 @@
   h4:hover > &,
   h5:hover > &,
   h6:hover > & {
+    display: inline;
     position: static; // HACK fallback for `initial`
     position: initial; // HACK fallback for `unset`
     position: unset; // unset `.h-Hidden`
