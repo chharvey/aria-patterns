@@ -22,7 +22,7 @@
 // DOM:
 // <pre>
 // const {xAddress} = require('aria-patterns')
-// document.querySelector('p[itemtype="http://schema.org/Place"]').append(
+// document.querySelector('[itemtype="http://schema.org/PostalAddress"] ').append(
 //   xAddress.render({
 //     "@type": "PostalAddress",
 //     "streetAddress"  : "1 First St NE",
@@ -30,7 +30,6 @@
 //     "addressRegion"  : "DC",
 //     "postalCode"     : "20543",
 //     "addressCountry" : "United States",
-//     "$itemprop"      : "location",
 //     "$regionName"    : true,
 //   })
 // )

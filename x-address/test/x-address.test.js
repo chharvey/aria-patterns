@@ -18,9 +18,11 @@ let data = {
 }
 
 let output = `
-<p itemscope="" itemtype="http://schema.org/Place">${
+<p itemscope="" itemtype="http://schema.org/Place">
+  <span itemprop="location" itemscope="" itemtype="http://schema.org/PostalAddress">${
   new xjs.DocumentFragment(ARIAPatterns.xAddress.render(data)).innerHTML()
-}</p>
+  }</span>
+</p>
 `
 
 createDir('./x-address/test/out/').then(function (v) {

@@ -1,5 +1,4 @@
 <template>
-  <span itemprop="{{ itemprop }}" itemscope="" itemtype="http://schema.org/PostalAddress">
     <slot name="streetAddress" itemprop="streetAddress">{{ streetAddress }}</slot>
     <br/>
     <slot name="addressLocality" itemprop="addressLocality">{{ addressLocality }}</slot>,
@@ -9,5 +8,4 @@
     <slot name="postalCode" itemprop="postalCode">{{ postalCode }}</slot>
     <br/>
     <slot name="addressCountry" itemprop="addressCountry">{{ addressCountry }}</slot>
-  </span>
 </template>

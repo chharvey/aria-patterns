@@ -20,15 +20,11 @@ STATE_DATA.push(...[
  * @param {string=} data.addressRegion The region.
  * @param {string=} data.postalCode The postal code.
  * @param {string=} data.addressCountry The country.
- * @param {string=} data.$itemprop the value of the `[itemprop]` attribute to write, if any
  * @param {(boolean|string)=} data.$regionName should the region code programmatically expanded to its full name
  *                                             (e.g., expand "VA" to "Virginia")?
  *                                             or enter a string to name the region manually
  */
 function xAddress_renderer(frag, data) {
-  new xjs.HTMLElement(frag.querySelector('[itemtype="http://schema.org/PostalAddress"]'))
-    .attr('itemprop', data.$itemprop || null)
-
   ;[
     'streetAddress',
     'addressLocality',
