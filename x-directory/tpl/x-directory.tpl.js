@@ -8,8 +8,8 @@ const xjs = {
 /**
  * @summary xDirectory renderer.
  * @param   {DocumentFragment} frag the template content with which to render
- * @param   {sdo.WebPage} data a web page
- * @param   {(sdo.WebPage|Array<sdo.WebPage>)} data.hasPart a subpage or an array of subpages
+ * @param   {sdo.WebPage} data                              http://schema.org/WebPage
+ * @param   {(sdo.WebPage|Array<sdo.WebPage>)} data.hasPart http://schema.org/hasPart
  * @param   {integer=} [data.$depth=Infinity] number of nested directory levels
  */
 function xDirectory_renderer(frag, data) {
