@@ -13,6 +13,7 @@ const xjs = require('extrajs-dom')
  * @param {string=} data.honorificSuffix http://schema.org/honorificSuffix
  */
 function xPersonFullname_renderer(frag, data) {
+  // REVIEW:INDENTATION
     ;[
       'familyName',
       'givenName',
@@ -34,7 +35,7 @@ function xPersonFullname_renderer(frag, data) {
       frag.querySelector('abbr[itemprop="additionalName"]').remove()
     }
 
-    // comma preceding suffix
+    // remove unnecessary comma preceding suffix
     if (!data.honorificSuffix) {
       frag.querySelector('slot[name="familyName] + span').remove()
     }

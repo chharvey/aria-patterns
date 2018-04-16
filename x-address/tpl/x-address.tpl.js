@@ -64,11 +64,17 @@ function xAddress_renderer(frag, data) {
     frag.querySelector('data[itemprop="addressRegion"]').remove()
   }
 
+  // remove unnecessary comma preceding region
+  if (!data.addressLocality || !data.addressRegion) {
+    frag.querySelector('slot[name="addressLocality"] + span').remove()
+  }
+
+  // remove unnecessary line breaks
   let linebreaks = Array.from(frag.querySelectorAll('br'))
-  if (!data.streetAddress || !data.addressLocality) {
+  if (!data.streetAddress) {
     linebreaks[0].remove()
   }
-  if (!data.addressLocality || !data.addressCountry) {
+  if (!data.addressCountry) {
     linebreaks[1].remove()
   }
 }

@@ -9,7 +9,6 @@ const ARIAPatterns = require('../../index.js')
 
 let data = {
   "@type": "PostalAddress",
-  "$itemprop"      : "location",
   "streetAddress"  : "1 First St NE",
   "addressLocality": "Washington",
   "addressRegion"  : "DC",
