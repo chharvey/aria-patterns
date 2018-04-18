@@ -37,7 +37,7 @@ function xPersonFullname_renderer(frag, data) {
 
     // remove unnecessary comma preceding suffix
     if (!data.honorificSuffix) {
-      frag.querySelector('slot[name="familyName] + span').remove()
+      frag.querySelector('slot[name="familyName"] + span').remove()
     }
 }
 
