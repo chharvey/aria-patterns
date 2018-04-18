@@ -19,7 +19,7 @@ let data = {
 let output = `
 <p itemscope="" itemtype="http://schema.org/Place">
   <span itemprop="location" itemscope="" itemtype="http://schema.org/PostalAddress">${
-  new xjs.DocumentFragment(ARIAPatterns.xAddress.render(data)).innerHTML()
+    new xjs.DocumentFragment(ARIAPatterns.xAddress.render(data)).innerHTML()
   }</span>
 </p>
 `
