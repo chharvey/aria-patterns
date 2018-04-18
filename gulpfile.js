@@ -30,10 +30,10 @@ gulp.task('lessc:each', function () {
       },
     }))
     .pipe(rename(function (p) {
-      p.dirname = path.resolve(p.dirname, '../dist/')
+      p.dirname = path.join(p.dirname, '../dist/')
     }))
     .pipe(sourcemaps.write('./')) // writes to an external .map file
-    .pipe(gulp.dest('/')) // must be absolute due to `path.resolve`
+    .pipe(gulp.dest('./'))
 })
 
 gulp.task('uglify:js', function () {
@@ -41,10 +41,10 @@ gulp.task('uglify:js', function () {
     .pipe(sourcemaps.init())
     .pipe(uglify())
     .pipe(rename(function (p) {
-      p.dirname = path.resolve(p.dirname, '../dist/')
+      p.dirname = path.join(p.dirname, '../dist/')
     }))
     .pipe(sourcemaps.write('./')) // writes to an external .map file
-    .pipe(gulp.dest('/')) // must be absolute due to `path.resolve`
+    .pipe(gulp.dest('./'))
 })
 
 // HOW-TO: https://github.com/mlucool/gulp-jsdoc3#usage
