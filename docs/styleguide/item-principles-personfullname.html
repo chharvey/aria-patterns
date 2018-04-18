@@ -9,10 +9,9 @@
   <meta name="viewport" content="width=device-width">
 
   <link rel="stylesheet" href="kss-assets/kss.css">
-  <link rel="stylesheet" href="https://cdn.rawgit.com/chharvey/xmeter/v6.2.0/css/xmeter.css">
-<link rel="stylesheet" href="../../x-tablist/css/dist/o-Tablist.css">
+  <link rel="stylesheet" href="../../x-hidden/css/dist/h-Hidden.css">
 <link rel="stylesheet" href="../../x-permalink/css/dist/c-Permalink.css">
-<link rel="stylesheet" href="../../x-hidden/css/dist/h-Hidden.css">
+<link rel="stylesheet" href="../../x-tablist/css/dist/o-Tablist.css">
 
 </head>
 <body id="kss-node" class="kss-fullscreen-mode">
@@ -127,7 +126,7 @@ For example: &quot;Dr. Martin L. King, Jr.&quot;</p>
 <p>DOM:</p>
 <pre>
 const {xPersonFullname} = require('aria-patterns')
-document.querySelector('article[itemtype="http://schema.org/Person"] > h1[itemprop="name"]').append(
+document.querySelector('[itemtype="http://schema.org/Person"] > h1[itemprop="name"]').append(
   xPersonFullname.render({
     "@type": "Person",
     "familyName"     : "King",

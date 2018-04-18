@@ -9,10 +9,9 @@
   <meta name="viewport" content="width=device-width">
 
   <link rel="stylesheet" href="kss-assets/kss.css">
-  <link rel="stylesheet" href="https://cdn.rawgit.com/chharvey/xmeter/v6.2.0/css/xmeter.css">
-<link rel="stylesheet" href="../../x-tablist/css/dist/o-Tablist.css">
+  <link rel="stylesheet" href="../../x-hidden/css/dist/h-Hidden.css">
 <link rel="stylesheet" href="../../x-permalink/css/dist/c-Permalink.css">
-<link rel="stylesheet" href="../../x-hidden/css/dist/h-Hidden.css">
+<link rel="stylesheet" href="../../x-tablist/css/dist/o-Tablist.css">
 
 </head>
 <body id="kss-node" class="kss-fullscreen-mode">
@@ -130,7 +129,7 @@ as that is specifically reserved for contact information of the authoring person
 <p>DOM:</p>
 <pre>
 const {xAddress} = require('aria-patterns')
-document.querySelector('p[itemtype="http://schema.org/Place"]').append(
+document.querySelector('[itemtype="http://schema.org/PostalAddress"]').append(
   xAddress.render({
     "@type": "PostalAddress",
     "streetAddress"  : "1 First St NE",
@@ -138,7 +137,6 @@ document.querySelector('p[itemtype="http://schema.org/Place"]').append(
     "addressRegion"  : "DC",
     "postalCode"     : "20543",
     "addressCountry" : "United States",
-    "$itemprop"      : "location",
     "$regionName"    : true,
   })
 )
@@ -157,16 +155,16 @@ document.querySelector('p[itemtype="http://schema.org/Place"]').append(
             
 <p itemscope="" itemtype="http://schema.org/Place">
   <span itemprop="location" itemscope="" itemtype="http://schema.org/PostalAddress">
-    <slot name="streetAddress" itemprop="streetAddress">1 First St NE</slot>
-    <br>
-    <slot name="addressLocality" itemprop="addressLocality">Washington</slot>,
-    <data value="DC" itemprop="addressRegion">
-      <slot name="addressRegion">DC</slot>
-    </data>
-    <slot name="postalCode" itemprop="postalCode">20543</slot>
-    <br>
-    <slot name="addressCountry" itemprop="addressCountry">United States</slot>
-  </span>
+  <slot name="streetAddress" itemprop="streetAddress">1 First St NE</slot>
+  <br>
+  <slot name="addressLocality" itemprop="addressLocality">Washington</slot><span>,</span>
+  <data value="DC" itemprop="addressRegion">
+    <slot name="addressRegion">DC</slot>
+  </data>
+  <slot name="postalCode" itemprop="postalCode">20543</slot>
+  <br>
+  <slot name="addressCountry" itemprop="addressCountry">United States</slot>
+</span>
 </p>
 
             <div class="kss-modifier__example-footer"></div>
@@ -181,16 +179,16 @@ document.querySelector('p[itemtype="http://schema.org/Place"]').append(
             <pre class="prettyprint linenums lang-html"><code data-language="html">
 &lt;p itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/Place&quot;&gt;
   &lt;span itemprop&#x3D;&quot;location&quot; itemscope&#x3D;&quot;&quot; itemtype&#x3D;&quot;http://schema.org/PostalAddress&quot;&gt;
-    &lt;slot name&#x3D;&quot;streetAddress&quot; itemprop&#x3D;&quot;streetAddress&quot;&gt;1 First St NE&lt;/slot&gt;
-    &lt;br&gt;
-    &lt;slot name&#x3D;&quot;addressLocality&quot; itemprop&#x3D;&quot;addressLocality&quot;&gt;Washington&lt;/slot&gt;,
-    &lt;data value&#x3D;&quot;DC&quot; itemprop&#x3D;&quot;addressRegion&quot;&gt;
-      &lt;slot name&#x3D;&quot;addressRegion&quot;&gt;DC&lt;/slot&gt;
-    &lt;/data&gt;
-    &lt;slot name&#x3D;&quot;postalCode&quot; itemprop&#x3D;&quot;postalCode&quot;&gt;20543&lt;/slot&gt;
-    &lt;br&gt;
-    &lt;slot name&#x3D;&quot;addressCountry&quot; itemprop&#x3D;&quot;addressCountry&quot;&gt;United States&lt;/slot&gt;
-  &lt;/span&gt;
+  &lt;slot name&#x3D;&quot;streetAddress&quot; itemprop&#x3D;&quot;streetAddress&quot;&gt;1 First St NE&lt;/slot&gt;
+  &lt;br&gt;
+  &lt;slot name&#x3D;&quot;addressLocality&quot; itemprop&#x3D;&quot;addressLocality&quot;&gt;Washington&lt;/slot&gt;&lt;span&gt;,&lt;/span&gt;
+  &lt;data value&#x3D;&quot;DC&quot; itemprop&#x3D;&quot;addressRegion&quot;&gt;
+    &lt;slot name&#x3D;&quot;addressRegion&quot;&gt;DC&lt;/slot&gt;
+  &lt;/data&gt;
+  &lt;slot name&#x3D;&quot;postalCode&quot; itemprop&#x3D;&quot;postalCode&quot;&gt;20543&lt;/slot&gt;
+  &lt;br&gt;
+  &lt;slot name&#x3D;&quot;addressCountry&quot; itemprop&#x3D;&quot;addressCountry&quot;&gt;United States&lt;/slot&gt;
+&lt;/span&gt;
 &lt;/p&gt;
 </code></pre>
           </details>

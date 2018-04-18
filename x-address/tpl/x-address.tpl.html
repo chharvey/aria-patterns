@@ -1,13 +1,11 @@
 <template>
-  <span itemprop="{{ itemprop }}" itemscope="" itemtype="http://schema.org/PostalAddress">
-    <slot name="streetAddress" itemprop="streetAddress">{{ streetAddress }}</slot>
-    <br/>
-    <slot name="addressLocality" itemprop="addressLocality">{{ addressLocality }}</slot>,
-    <data value="{{ addressRegion }}" itemprop="addressRegion">
-      <slot name="addressRegion">{{ addressRegion }}</slot>
-    </data>
-    <slot name="postalCode" itemprop="postalCode">{{ postalCode }}</slot>
-    <br/>
-    <slot name="addressCountry" itemprop="addressCountry">{{ addressCountry }}</slot>
-  </span>
+  <slot name="streetAddress" itemprop="streetAddress">{{ streetAddress }}</slot>
+  <br/>
+  <slot name="addressLocality" itemprop="addressLocality">{{ addressLocality }}</slot><span>,</span>
+  <data value="{{ addressRegion }}" itemprop="addressRegion">
+    <slot name="addressRegion">{{ addressRegion }}</slot>
+  </data>
+  <slot name="postalCode" itemprop="postalCode">{{ postalCode }}</slot>
+  <br/>
+  <slot name="addressCountry" itemprop="addressCountry">{{ addressCountry }}</slot>
 </template>

@@ -6,9 +6,22 @@
 
 // Hidden
 //
-// The Hidden Helper visually hides an element while keeping it accessible
-// to non-visual media such as screen readers.
-// A [skip link](https://github.com/chharvey/chharvey.github.io/wiki/Accessible-Skip-Links) is a common example.
+// The Hidden Helper visually hides an element.
+// Though the element is hidden from visual media, it is kept
+// in the accessibility tree so that assistive technology such as screen readers
+// can still expose it to users.
+// A [skip link](https://github.com/chharvey/chharvey.github.io/wiki/Accessible-Skip-Links)
+// is a common use case for this pattern.
+//
+// Note: The [`[aria-hidden]` attribute](https://www.w3.org/TR/wai-aria-1.1/#aria-hidden)
+// has the opposite effect:
+// it hides an element from the accessibility tree while keeping it visually exposed.
+// To hide the element from *both* the accessibility tree and visual media, you can use
+// `[class="h-Hidden" aria-hidden="true"]`, or you can use the
+// [`[hidden]` attribute](https://www.w3.org/TR/html52/editing.html#the-hidden-attribute),
+// which is the preferred approach if the element is not
+// <q cite="https://www.w3.org/TR/html52/editing.html#the-hidden-attribute">directly relevant</q>.
+//
 // <header><dl>
 //   <dt>author</dt>  <dd>Chris Harvey</dd>
 //   <dt>updated</dt> <dd><time>2017-02-09</time></dd>
@@ -34,14 +47,3 @@
     inset-inline-start: -999999px;
   }
 }
-
-@media screen  and (min-width: 30em) { .h-Hidden-sK { .h-Hidden; } }
-@media screen  and (min-width: 45em) { .h-Hidden-sM { .h-Hidden; } }
-@media screen  and (min-width: 60em) { .h-Hidden-sG { .h-Hidden; } }
-@media screen  and (min-width: 75em) { .h-Hidden-sT { .h-Hidden; } }
-@media screen  and (min-width: 90em) { .h-Hidden-sP { .h-Hidden; } }
-@media not all and (min-width: 30em) { .h-Hidden-nK { .h-Hidden; } }
-@media not all and (min-width: 45em) { .h-Hidden-nM { .h-Hidden; } }
-@media not all and (min-width: 60em) { .h-Hidden-nG { .h-Hidden; } }
-@media not all and (min-width: 75em) { .h-Hidden-nT { .h-Hidden; } }
-@media not all and (min-width: 90em) { .h-Hidden-nP { .h-Hidden; } }

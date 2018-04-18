@@ -9,10 +9,9 @@
   <meta name="viewport" content="width=device-width">
 
   <link rel="stylesheet" href="kss-assets/kss.css">
-  <link rel="stylesheet" href="https://cdn.rawgit.com/chharvey/xmeter/v6.2.0/css/xmeter.css">
-<link rel="stylesheet" href="../../x-tablist/css/dist/o-Tablist.css">
+  <link rel="stylesheet" href="../../x-hidden/css/dist/h-Hidden.css">
 <link rel="stylesheet" href="../../x-permalink/css/dist/c-Permalink.css">
-<link rel="stylesheet" href="../../x-hidden/css/dist/h-Hidden.css">
+<link rel="stylesheet" href="../../x-tablist/css/dist/o-Tablist.css">
 
 </head>
 <body id="kss-node" class="kss-fullscreen-mode">
@@ -116,9 +115,20 @@
           </p>
 
           <div class="kss-description">
-            <p>The Hidden Helper visually hides an element while keeping it accessible
-to non-visual media such as screen readers.
-A <a href="https://github.com/chharvey/chharvey.github.io/wiki/Accessible-Skip-Links">skip link</a> is a common example.</p>
+            <p>The Hidden Helper visually hides an element.
+Though the element is hidden from visual media, it is kept
+in the accessibility tree so that assistive technology such as screen readers
+can still expose it to users.
+A <a href="https://github.com/chharvey/chharvey.github.io/wiki/Accessible-Skip-Links">skip link</a>
+is a common use case for this pattern.</p>
+<p>Note: The <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-hidden"><code>[aria-hidden]</code> attribute</a>
+has the opposite effect:
+it hides an element from the accessibility tree while keeping it visually exposed.
+To hide the element from <em>both</em> the accessibility tree and visual media, you can use
+<code>[class=&quot;h-Hidden&quot; aria-hidden=&quot;true&quot;]</code>, or you can use the
+<a href="https://www.w3.org/TR/html52/editing.html#the-hidden-attribute"><code>[hidden]</code> attribute</a>,
+which is the preferred approach if the element is not
+<q cite="https://www.w3.org/TR/html52/editing.html#the-hidden-attribute">directly relevant</q>.</p>
 <header><dl>
   <dt>author</dt>  <dd>Chris Harvey</dd>
   <dt>updated</dt> <dd><time>2017-02-09</time></dd>
