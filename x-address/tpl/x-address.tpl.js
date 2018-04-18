@@ -14,21 +14,17 @@ STATE_DATA.push(...[
 /**
  * @summary xAddress renderer.
  * @param {DocumentFragment} frag the template content with which to render
- * @param {sdo.PostalAddress} data a JSON object representing a postal address
- * @param {string=} data.streetAddress The street address.
- * @param {string=} data.addressLocality The locality.
- * @param {string=} data.addressRegion The region.
- * @param {string=} data.postalCode The postal code.
- * @param {string=} data.addressCountry The country.
- * @param {string=} data.$itemprop the value of the `[itemprop]` attribute to write, if any
+ * @param {sdo.PostalAddress} data       http://schema.org/PostalAddress
+ * @param {string=} data.streetAddress   http://schema.org/streetAddress
+ * @param {string=} data.addressLocality http://schema.org/addressLocality
+ * @param {string=} data.addressRegion   http://schema.org/addressRegion
+ * @param {string=} data.postalCode      http://schema.org/postalCode
+ * @param {string=} data.addressCountry  http://schema.org/addressCountry
  * @param {(boolean|string)=} data.$regionName should the region code programmatically expanded to its full name
  *                                             (e.g., expand "VA" to "Virginia")?
  *                                             or enter a string to name the region manually
  */
 function xAddress_renderer(frag, data) {
-  new xjs.HTMLElement(frag.querySelector('[itemtype="http://schema.org/PostalAddress"]'))
-    .attr('itemprop', data.$itemprop || null)
-
   ;[
     'streetAddress',
     'addressLocality',
@@ -68,11 +64,17 @@ function xAddress_renderer(frag, data) {
     frag.querySelector('data[itemprop="addressRegion"]').remove()
   }
 
+  // remove unnecessary comma preceding region
+  if (!data.addressLocality || !data.addressRegion) {
+    frag.querySelector('slot[name="addressLocality"] + span').remove()
+  }
+
+  // remove unnecessary line breaks
   let linebreaks = Array.from(frag.querySelectorAll('br'))
-  if (!data.streetAddress || !data.addressLocality) {
+  if (!data.streetAddress) {
     linebreaks[0].remove()
   }
-  if (!data.addressLocality || !data.addressCountry) {
+  if (!data.addressCountry) {
     linebreaks[1].remove()
   }
 }

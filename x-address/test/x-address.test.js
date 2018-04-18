@@ -9,7 +9,6 @@ const ARIAPatterns = require('../../index.js')
 
 let data = {
   "@type": "PostalAddress",
-  "$itemprop"      : "location",
   "streetAddress"  : "1 First St NE",
   "addressLocality": "Washington",
   "addressRegion"  : "DC",
@@ -18,9 +17,11 @@ let data = {
 }
 
 let output = `
-<p itemscope="" itemtype="http://schema.org/Place">${
-  new xjs.DocumentFragment(ARIAPatterns.xAddress.render(data)).innerHTML()
-}</p>
+<p itemscope="" itemtype="http://schema.org/Place">
+  <span itemprop="location" itemscope="" itemtype="http://schema.org/PostalAddress">${
+    new xjs.DocumentFragment(ARIAPatterns.xAddress.render(data)).innerHTML()
+  }</span>
+</p>
 `
 
 createDir('./x-address/test/out/').then(function (v) {
