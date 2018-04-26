@@ -9,8 +9,9 @@ const clean_css    = require('gulp-clean-css')
 const babel        = require('gulp-babel')
 const sourcemaps   = require('gulp-sourcemaps')
 
-// require('babel-core')       // DO NOT REMOVE … required by `gulp-babel`
-// require('babel-preset-env') // DO NOT REMOVE … required by `gulp-babel`
+// require('babel-core')          // DO NOT REMOVE … required by `gulp-babel`
+// require('babel-preset-env')    // DO NOT REMOVE … required by babel preset configurations
+// require('babel-preset-minify') // DO NOT REMOVE … required by babel preset configurations
 
 const kss          = require('kss')
 const jsdoc        = require('gulp-jsdoc3')
@@ -42,7 +43,7 @@ gulp.task('uglify:js', function () {
   return gulp.src('./x-*/js/src/*.js')
     .pipe(sourcemaps.init())
     .pipe(babel({
-      presets: ['env']
+      presets: ['env', 'minify']
     }))
     .pipe(rename(function (p) {
       p.dirname = path.join(p.dirname, '../dist/')
