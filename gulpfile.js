@@ -12,8 +12,6 @@ const sourcemaps   = require('gulp-sourcemaps')
 // require('babel-core')       // DO NOT REMOVE … required by `gulp-babel`
 // require('babel-preset-env') // DO NOT REMOVE … required by `gulp-babel`
 
-const uglify = require('gulp-uglify-es').default
-
 const kss          = require('kss')
 const jsdoc        = require('gulp-jsdoc3')
 
