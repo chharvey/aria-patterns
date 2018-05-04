@@ -6,9 +6,12 @@ const rename       = require('gulp-rename')
 const less         = require('gulp-less')
 const autoprefixer = require('gulp-autoprefixer')
 const clean_css    = require('gulp-clean-css')
+const babel        = require('gulp-babel')
 const sourcemaps   = require('gulp-sourcemaps')
 
-const uglify = require('gulp-uglify-es').default
+// require('babel-core')          // DO NOT REMOVE … required by `gulp-babel`
+// require('babel-preset-env')    // DO NOT REMOVE … required by babel preset configurations
+// require('babel-preset-minify') // DO NOT REMOVE … required by babel preset configurations
 
 const kss          = require('kss')
 const jsdoc        = require('gulp-jsdoc3')
@@ -39,7 +42,9 @@ gulp.task('lessc:each', function () {
 gulp.task('uglify:js', function () {
   return gulp.src('./x-*/js/src/*.js')
     .pipe(sourcemaps.init())
-    .pipe(uglify())
+    .pipe(babel({
+      presets: ['env', 'minify']
+    }))
     .pipe(rename(function (p) {
       p.dirname = path.join(p.dirname, '../dist/')
     }))
