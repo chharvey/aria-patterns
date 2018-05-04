@@ -8,6 +8,7 @@ document.querySelectorAll('.o-Tablist[role="tablist"]').forEach(function (tablis
    * @constructor
    */
   ;(function constructor() {
+    const REVERSED = this.hasAttribute('data-reversed')
     /**
      * The set of panels.
      * @return {Array<HTMLDetailsElement>}
@@ -37,7 +38,8 @@ document.querySelectorAll('.o-Tablist[role="tablist"]').forEach(function (tablis
 
       summary.hidden = true
 
-      panel.before(tab)
+      if (REVERSED) panel.after(tab)
+      else panel.before(tab)
     }, this)
 
     /**

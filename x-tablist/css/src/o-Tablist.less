@@ -23,9 +23,16 @@
 // specified by the `[aria-orientation]` attribute.
 // This attribute semantically indicates the tablist layout to assistive technology,
 // as well as defines keyboard interaction.
-// If the author chooses to use a vertical layout, however, they are responsible for
+// This attribute can be changed dynamically after load.
+// If the author chooses to use a vertical layout, they are responsible for
 // *visually* styling the tablist in a vertical orientation (specifically, providing a height),
 // as there are no default styles for said layout.
+//
+// In either the horizontal or vertical orientation, a boolean `[data-reversed]` attribute may be specified.
+// If true (i.e., the attribute is present), it indicates that the tabs come *after* the panels
+// in source order and display order.
+// This is useful if you want your tabs below or to the right of the panels.
+// This attribute is **static**, meaning that once the script runs, the DOM of the tablist cannot be changed.
 //
 // A few rules for markup:
 //
@@ -94,6 +101,9 @@
   // appearance: tab; // opinionated
   &[aria-selected="true"] {
     font-weight: bold; // opinionated
+  }
+  .o-Tablist[data-reversed] & {
+    order: 1;
   }
 }
 
