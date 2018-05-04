@@ -94,26 +94,24 @@ document.querySelectorAll('.o-Tablist[role="tablist"]').forEach(function (tablis
           RIGHT: 39,
           DOWN : 40,
         }
-        switch (e.which) {
-          case Keys.SPACE:
-            e.preventDefault()
-            this.select()
-            break;
-          case Keys.DOWN:
-          case Keys.RIGHT:
+        function next() {
             e.preventDefault()
             let next_tab_index = this.parentNode.tabs().indexOf(this) + 1
             this.parentNode.tabs()[
               (next_tab_index < this.parentNode.tabs().length) ? next_tab_index : 0
             ].select()
-            break;
-          case Keys.UP:
-          case Keys.LEFT:
+        }
+        function prev() {
             e.preventDefault()
             let prev_tab_index = this.parentNode.tabs().indexOf(this) - 1
             this.parentNode.tabs()[
               (prev_tab_index >= 0) ? prev_tab_index : this.parentNode.tabs().length - 1
             ].select()
+        }
+        switch (e.which) {
+          case Keys.SPACE:
+            e.preventDefault()
+            this.select()
             break;
           case Keys.HOME:
             e.preventDefault()
@@ -123,6 +121,10 @@ document.querySelectorAll('.o-Tablist[role="tablist"]').forEach(function (tablis
             e.preventDefault()
             this.parentNode.tabs()[this.parentNode.tabs().length - 1].select()
             break;
+          case Keys.RIGHT : if (this.parentNode.getAttribute('aria-orientation') === 'horizontal') { next.call(this) } break;
+          case Keys.LEFT  : if (this.parentNode.getAttribute('aria-orientation') === 'horizontal') { prev.call(this) } break;
+          case Keys.DOWN  : if (this.parentNode.getAttribute('aria-orientation') === 'vertical'  ) { next.call(this) } break;
+          case Keys.UP    : if (this.parentNode.getAttribute('aria-orientation') === 'vertical'  ) { prev.call(this) } break;
         }
       })
 

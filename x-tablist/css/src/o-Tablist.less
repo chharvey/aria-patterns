@@ -15,12 +15,23 @@
 // (or else move the `<script>` to the bottom of the `<body>`).
 //
 // Your markup should include a series of `<details>` elements, each with a single `<summary>` first child.
-// Add the `[open]` attribute to one and only one `<details>` element, representing the panel to be initially opened on load.
+// Add the `[open]` attribute to one `<details>` element, representing the panel to be initially opened on load.
 // The front-end script will transform your source code into the respective panels and tabs as necessary.
 // Without JavaScript enabled, this object will fall back to a set of fully-functional `<details>` expandables.
 //
+// The tablist itself may have a horizontal or vertical orientation,
+// specified by the `[aria-orientation]` attribute.
+// This attribute semantically indicates the tablist layout to assistive technology,
+// as well as defines keyboard interaction.
+// If the author chooses to use a vertical layout, however, they are responsible for
+// *visually* styling the tablist in a vertical orientation (specifically, providing a height),
+// as there are no default styles for said layout.
+//
 // A few rules for markup:
 //
+// - On the tablist container, the `[aria-orientation]` attribute should be specified,
+//   and it should have a value of either `"horizontal"` or `"vertical"` (case sensitive).
+//   If the attribute is not specified, or it has another value, the arrow keys will not work during user interaction.
 // - As required by the [HTML Specification](https://www.w3.org/TR/html52/interactive-elements.html#the-details-element),
 //   each `details` element must contain exactly one `summary` element, followed by optional flow content.
 //   Each `summary` element must contain either phrasing content, or one heading element (`h1`–`h6`).
@@ -33,13 +44,13 @@
 // <footer>See https://codepen.io/chharvey/pen/PEYxpb for more info.</footer>
 // <header><dl>
 //   <dt>author</dt>  <dd>Chris Harvey</dd>
-//   <dt>updated</dt> <dd><time>2018-05-03</time></dd>
+//   <dt>updated</dt> <dd><time>2018-05-04</time></dd>
 // </dl></header>
 //
 // Markup:
 // <!--link rel="stylesheet" href="/node_modules/aria-patterns/x-tablist/css/dist/o-Tablist.css"/-->
 // <!--script src="/node_modules/aria-patterns/x-tablist/js/dist/o-Tablist.js" defer=""></script-->
-// <div class="o-Tablist" role="tablist">
+// <div class="o-Tablist" role="tablist" aria-orientation="horizontal">
 //   <details class="o-Tablist__Panel" role="tabpanel" id="panel1">
 //     <summary class="o-Tablist__Tab" role="tab">Tab 1</summary>
 //     <h1>Panel 1</h1>
@@ -70,6 +81,10 @@
   display: flex;
   flex-wrap: wrap;
   // appearance: tabpanels; // opinionated
+  &[aria-orientation="vertical"] {
+    flex-direction: column;
+    align-content: flex-start;
+  }
 }
 
 .o-Tablist__Tab {
