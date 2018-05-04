@@ -27,12 +27,17 @@ document.querySelectorAll('.o-Tablist[role="tablist"]').forEach(function (tablis
         tab.attributes.setNamedItem(attr)
       })
 
+      // add new attributes
+      tab.id = `tab-for-${panel.id}`
+      tab.setAttribute('aria-controls', panel.id)
+      panel.setAttribute('aria-labelledby', tab.id)
+
       // transfer the children
       tab.append(...summary.childNodes)
 
       summary.hidden = true
 
-      this.insertBefore(tab, panel)
+      panel.before(tab)
     }, this)
 
     /**
@@ -71,10 +76,7 @@ document.querySelectorAll('.o-Tablist[role="tablist"]').forEach(function (tablis
        * @private
        * @type {CustomTabpanel}
        */
-      this._panel = this.nextElementSibling
-
-      this.id = `tab-for-${this._panel.id}`
-      this.setAttribute('aria-controls', this._panel.id)
+      this._panel = this.parentNode.querySelector(`#${this.getAttribute('aria-controls')}`)
 
       this.addEventListener('click', function (e) {
         this.select()
@@ -177,9 +179,7 @@ document.querySelectorAll('.o-Tablist[role="tablist"]').forEach(function (tablis
        * @private
        * @type {CustomTab}
        */
-      this._tab = this.previousElementSibling
-
-      this.setAttribute('aria-labelledby', this._tab.id)
+      this._tab = this.parentNode.querySelector(`#${this.getAttribute('aria-labelledby')}`)
     }).call(panel)
 
 
