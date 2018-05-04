@@ -19,10 +19,21 @@
 // The front-end script will transform your source code into the respective panels and tabs as necessary.
 // Without JavaScript enabled, this object will fall back to a set of fully-functional `<details>` expandables.
 //
+// A few rules for markup:
+//
+// - As required by the [HTML Specification](https://www.w3.org/TR/html52/interactive-elements.html#the-details-element),
+//   each `details` element must contain exactly one `summary` element, followed by optional flow content.
+//   Each `summary` element must contain either phrasing content, or one heading element (`h1`–`h6`).
+// - Each `details` element in the tablist should have the (unique) `[id]` attribute set.
+//   This enables the `[aria-controls]` and `[aria-labelledby]` accessibility features.
+// - The `[open]` attribute should be set on exactly one `details` element in the tablist.
+//   If there are no `details[open]` elements, the first panel will be expanded by default;
+//   if there are more than one, the first `[open]` panel is expanded and all the rest are collapsed.
+//
 // <footer>See https://codepen.io/chharvey/pen/PEYxpb for more info.</footer>
 // <header><dl>
 //   <dt>author</dt>  <dd>Chris Harvey</dd>
-//   <dt>updated</dt> <dd><time>2018-02-07</time></dd>
+//   <dt>updated</dt> <dd><time>2018-05-03</time></dd>
 // </dl></header>
 //
 // Markup:
@@ -73,7 +84,7 @@
 
 .o-Tablist__Panel {
   margin-bottom: 0; // HACK fallback
-  margin-block-end: unset; // unset base `details`
+  margin-block-end: unset; // unset Xmeter base `details`
   flex: 100%;
   // appearance: tabpanel; // opinionated
 }
