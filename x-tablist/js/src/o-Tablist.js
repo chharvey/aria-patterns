@@ -1,6 +1,6 @@
 /**
  * A list of tab-panel pairs, wherein all tabs and at most one panel are exposed to the user.
- * @class
+ * @class CustomTablist
  */
 document.querySelectorAll('.o-Tablist[role="tablist"]').forEach(function (tablist) {
   /**
@@ -18,7 +18,6 @@ document.querySelectorAll('.o-Tablist[role="tablist"]').forEach(function (tablis
      * Move the tabs (<summary>) outside of the panels (<details>), into the tablist.
      */
     this.panels().forEach(function (panel) {
-
       let tab = document.createElement('div')
       let summary = panel.querySelector('summary')
 
@@ -48,24 +47,10 @@ document.querySelectorAll('.o-Tablist[role="tablist"]').forEach(function (tablis
    * Update any children and shadow dom view of this element.
    */
   tablist.updateRendering = function () {
-    // Expand the first panel if this tab list contains all collapsed panels.
-    let no_panels_open = this.panels()[0] && !this.panels().find((el) => el.open)
-    if (no_panels_open) {
-      switchTabs(null, this.tabs()[0])
+    // Expand the first panel if this tab list contains at least one panel and all its panels are collapsed.
+    if (this.panels()[0] && !this.panels().find((el) => el.open)) {
+      this.tabs()[0].select()
     }
-  }
-
-
-  /**
-   * Switch to a new tab.
-   * @static
-   * @param   {?HTMLElement} tab_old the tab currently expanded, or `null` if no tab is expanded (or it doesn’t matter which tab is expanded)
-   * @param   {HTMLElement} tab_new the tab to expand
-   */
-  function switchTabs(tab_old, tab_new) {
-    tab_new.focus()
-    tab_new.panel().open = true
-    tab_new.panel().attributeChangedCallback('open', null, '')
   }
 
 
@@ -73,7 +58,7 @@ document.querySelectorAll('.o-Tablist[role="tablist"]').forEach(function (tablis
   /**
    * A tab in a tab list.
    * @inner
-   * @class
+   * @class CustomTab
    */
   tablist.tabs().forEach(function (tab) {
     /**
@@ -90,12 +75,9 @@ document.querySelectorAll('.o-Tablist[role="tablist"]').forEach(function (tablis
 
       this.id = `tab-for-${this._panel.id}`
       this.setAttribute('aria-controls', this._panel.id)
-      this.tabIndex = 0
 
       this.addEventListener('click', function (e) {
-        if (this.parentNode && this.parentNode.matches('[role="tablist"]')) {
-          switchTabs(null, this)
-        }
+        this.select()
       })
 
       this.addEventListener('keydown', function (e) {
@@ -115,31 +97,31 @@ document.querySelectorAll('.o-Tablist[role="tablist"]').forEach(function (tablis
         switch (e.which) {
           case Keys.SPACE:
             e.preventDefault()
-            switchTabs(null, this)
+            this.select()
             break;
           case Keys.DOWN:
           case Keys.RIGHT:
             e.preventDefault()
-            let next_tab_index = this.parentNode.tabs().findIndex((tab) => tab===this) + 1
-            switchTabs(this, this.parentNode.tabs()[
+            let next_tab_index = this.parentNode.tabs().indexOf(this) + 1
+            this.parentNode.tabs()[
               (next_tab_index < this.parentNode.tabs().length) ? next_tab_index : 0
-            ])
+            ].select()
             break;
           case Keys.UP:
           case Keys.LEFT:
             e.preventDefault()
-            let prev_tab_index = this.parentNode.tabs().findIndex((tab) => tab===this) - 1
-            switchTabs(this, this.parentNode.tabs()[
+            let prev_tab_index = this.parentNode.tabs().indexOf(this) - 1
+            this.parentNode.tabs()[
               (prev_tab_index >= 0) ? prev_tab_index : this.parentNode.tabs().length - 1
-            ])
+            ].select()
             break;
           case Keys.HOME:
             e.preventDefault()
-            switchTabs(this, this.parentNode.tabs()[0])
+            this.parentNode.tabs()[0].select()
             break;
           case Keys.END:
             e.preventDefault()
-            switchTabs(this, this.parentNode.tabs()[this.parentNode.tabs().length - 1])
+            this.parentNode.tabs()[this.parentNode.tabs().length - 1].select()
             break;
         }
       })
@@ -164,6 +146,15 @@ document.querySelectorAll('.o-Tablist[role="tablist"]').forEach(function (tablis
     }
 
 
+    /**
+     * Select this tab.
+     */
+    tab.select = function () {
+      this.focus()
+      this._panel.open = true
+      this._panel.attributeChangedCallback('open', null, '')
+      this.parentNode.updateRendering()
+    }
   })
 
 
@@ -171,7 +162,7 @@ document.querySelectorAll('.o-Tablist[role="tablist"]').forEach(function (tablis
   /**
    * A panel in a tab list.
    * @inner
-   * @class
+   * @class CustomTabpanel
    */
   tablist.panels().forEach(function (panel) {
     /**
@@ -195,10 +186,9 @@ document.querySelectorAll('.o-Tablist[role="tablist"]').forEach(function (tablis
      * @private
      */
     panel._updateRendering = function () {
-      this.hidden = !this.open // hide from screen readers & disabled tab-able items
+      this.setAttribute('aria-hidden', !this.open) // fixes a BUG in which screen readers read collapsed `<details>` panels
+      this._tab.tabIndex = this.open ? 0 : -1
       this._tab.setAttribute('aria-selected', this.open)
-      this._tab.setAttribute('aria-expanded', this.open)
-      this.parentNode.updateRendering()
     }
 
 
@@ -211,17 +201,16 @@ document.querySelectorAll('.o-Tablist[role="tablist"]').forEach(function (tablis
     panel.attributeChangedCallback = function (name, oldValue, newValue) {
       const returned = {
         'open': function (oldValue, newValue) {
+          this._updateRendering()
           if (newValue === '') {
             // If setting the `open` attribute, collapse all panels not === to this one.
             this.parentNode.panels().forEach(function (p) {
               if (p !== this) {
-                p.open = false // HTMLDetailsElement#open is a setter/getter
+                p.open = false // `HTMLDetailsElement#open` is a setter/getter
                 p.attributeChangedCallback('open', null, null)
-                p._updateRendering()
               }
             }, this)
           }
-          this._updateRendering()
         },
         default(oldValue, newValue) {},
       }
