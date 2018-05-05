@@ -1,0 +1,42 @@
+
+/*################################*\
+    p-Address.less
+\*################################*/
+
+
+// Address
+//
+// Markup for a postal address, in the format:
+// ```
+// 1600 Pennsylvania Avenue NW
+// Washington, DC 20006
+// ```
+// Note that this pattern does not use an `<address>` element,
+// as that is specifically reserved for contact information of the authoring person or organization of a website.
+// <footer><p>See the [xAddress rendering function](../api/global.html#xAddress_renderer) for usage.</p></footer>
+// <header><dl>
+//   <dt>author</dt>  <dd>Chris Harvey</dd>
+//   <dt>updated</dt> <dd><time>2018-03-12</time></dd>
+// </dl></header>
+//
+// DOM:
+// <pre>
+// const {xAddress} = require('aria-patterns')
+// document.querySelector('[itemtype="http://schema.org/PostalAddress"]').append(
+//   xAddress.render({
+//     "@type": "PostalAddress",
+//     "streetAddress"  : "1 First St NE",
+//     "addressLocality": "Washington",
+//     "addressRegion"  : "DC",
+//     "postalCode"     : "20543",
+//     "addressCountry" : "United States",
+//     "$regionName"    : true,
+//   })
+// )
+// </pre>
+//
+// Markup: ../../test/out/x-address.test.html
+//
+// Weight: 3
+//
+// Styleguide Principles.Address

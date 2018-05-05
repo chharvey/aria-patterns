@@ -1,0 +1,36 @@
+
+/*################################*\
+    p-PersonFullname.less
+\*################################*/
+
+
+// PersonFullname
+//
+// Markup for a person’s full name in "Px. First M. Last, Sx." format.
+// For example: "Dr. Martin L. King, Jr."
+// <footer><p>See the [xPersonFullname rendering function](../api/global.html#xPersonFullname_renderer) for usage.</p></footer>
+// <header><dl>
+//   <dt>author</dt>  <dd>Chris Harvey</dd>
+//   <dt>updated</dt> <dd><time>2018-03-08</time></dd>
+// </dl></header>
+//
+// DOM:
+// <pre>
+// const {xPersonFullname} = require('aria-patterns')
+// document.querySelector('[itemtype="http://schema.org/Person"] > h1[itemprop="name"]').append(
+//   xPersonFullname.render({
+//     "@type": "Person",
+//     "familyName"     : "King",
+//     "givenName"      : "Martin",
+//     "additionalName" : "Luther",
+//     "honorificPrefix": "Dr.",
+//     "honorificSuffix": "Jr."
+//   })
+// )
+// </pre>
+//
+// Markup: ../../test/out/x-person-fullname.test.html
+//
+// Weight: 2
+//
+// Styleguide Principles.PersonFullname

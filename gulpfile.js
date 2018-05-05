@@ -1,24 +1,29 @@
-const gulp         = require('gulp')
+const fs = require('fs')
+const path = require('path')
 
+const gulp         = require('gulp')
+const rename       = require('gulp-rename')
 const less         = require('gulp-less')
 const autoprefixer = require('gulp-autoprefixer')
 const clean_css    = require('gulp-clean-css')
+const babel        = require('gulp-babel')
 const sourcemaps   = require('gulp-sourcemaps')
 
-const uglify = require('gulp-uglify-es').default
+// require('babel-core')          // DO NOT REMOVE … required by `gulp-babel`
+// require('babel-preset-env')    // DO NOT REMOVE … required by babel preset configurations
+// require('babel-preset-minify') // DO NOT REMOVE … required by babel preset configurations
 
 const kss          = require('kss')
 const jsdoc        = require('gulp-jsdoc3')
 
 
 gulp.task('lessc:each', function () {
-  return gulp.src(['./css/src/*.less', '!./css/src/styleguide.less'])
+  return gulp.src('./x-*/css/src/*.less')
+    .pipe(sourcemaps.init())
     .pipe(less())
     .pipe(autoprefixer({
       grid: true,
     }))
-    .pipe(gulp.dest('./css/dist/'))
-    .pipe(sourcemaps.init())
     .pipe(clean_css({
       level: {
         2: {
@@ -27,28 +32,44 @@ gulp.task('lessc:each', function () {
         },
       },
     }))
+    .pipe(rename(function (p) {
+      p.dirname = path.join(p.dirname, '../dist/')
+    }))
     .pipe(sourcemaps.write('./')) // writes to an external .map file
-    .pipe(gulp.dest('./css/dist/'))
+    .pipe(gulp.dest('./'))
 })
 
 gulp.task('uglify:js', function () {
-  return gulp.src('./js/src/*.js')
+  return gulp.src('./x-*/js/src/*.js')
     .pipe(sourcemaps.init())
-    .pipe(uglify())
+    .pipe(babel({
+      presets: ['env', 'minify']
+    }))
+    .pipe(rename(function (p) {
+      p.dirname = path.join(p.dirname, '../dist/')
+    }))
     .pipe(sourcemaps.write('./')) // writes to an external .map file
-    .pipe(gulp.dest('./js/dist/'))
-})
-
-gulp.task('docs:kss', function () {
-  return kss(require('./config/kss.json'))
+    .pipe(gulp.dest('./'))
 })
 
 // HOW-TO: https://github.com/mlucool/gulp-jsdoc3#usage
 gulp.task('docs:api', function () {
-  return gulp.src(['README.md', './index.js', './tpl/*.tpl.js'], {read: false})
+  return gulp.src(['README.md', './index.js', './x-*/tpl/*.tpl.js', './tpl/*.tpl.js'], {read: false})
     .pipe(jsdoc(require('./config/jsdoc.json')))
 })
 
-gulp.task('docs:all', ['docs:kss', 'docs:api'])
+// HOW-TO: https://github.com/kss-node/kss-node/issues/161#issuecomment-222292620
+gulp.task('docs:kss', ['test'], function () {
+  return kss(require('./config/kss.json'))
+})
+
+gulp.task('docs:all', ['docs:api', 'docs:kss'])
 
 gulp.task('build', ['lessc:each', 'uglify:js', 'docs:all'])
+
+gulp.task('test', async function () {
+  require('./x-directory/test/x-directory.test.js');
+  require('./x-person-fullname/test/x-person-fullname.test.js');
+  require('./x-address/test/x-address.test.js');
+  require('./x-permalink/test/x-permalink.test.js');
+})

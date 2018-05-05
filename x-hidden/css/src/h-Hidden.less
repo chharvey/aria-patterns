@@ -1,0 +1,49 @@
+
+/*################################*\
+    h-Hidden.less
+\*################################*/
+
+
+// Hidden
+//
+// The Hidden Helper visually hides an element.
+// Though the element is hidden from visual media, it is kept
+// in the accessibility tree so that assistive technology such as screen readers
+// can still expose it to users.
+// A [skip link](https://github.com/chharvey/chharvey.github.io/wiki/Accessible-Skip-Links)
+// is a common use case for this pattern.
+//
+// Note: The [`[aria-hidden]` attribute](https://www.w3.org/TR/wai-aria-1.1/#aria-hidden)
+// has the opposite effect:
+// it hides an element from the accessibility tree while keeping it visually exposed.
+// To hide the element from *both* the accessibility tree and visual media, you can use
+// `[class="h-Hidden" aria-hidden="true"]`, or you can use the
+// [`[hidden]` attribute](https://www.w3.org/TR/html52/editing.html#the-hidden-attribute),
+// which is the preferred approach if the element is not
+// <q cite="https://www.w3.org/TR/html52/editing.html#the-hidden-attribute">directly relevant</q>.
+//
+// <header><dl>
+//   <dt>author</dt>  <dd>Chris Harvey</dd>
+//   <dt>updated</dt> <dd><time>2017-02-09</time></dd>
+// </dl></header>
+//
+// Markup:
+// <!--link rel="stylesheet" href="/node_modules/aria-patterns/x-hidden/css/dist/h-Hidden.css"/-->
+// <a class="h-Hidden {{ modifier_class }}" href="#0">skip to main content</a>
+//
+// :focus - On focus, the element returns to static position.
+//
+// Weight: 1
+//
+// Styleguide Helpers.Hidden
+.h-Hidden {
+  &:not(:focus) {
+    display: block; // override elements with `display: contents;`
+    position: absolute;
+  }
+  left: -999999px;
+  @supports (inset-inline-start: 0) {
+    left: 0;
+    inset-inline-start: -999999px;
+  }
+}

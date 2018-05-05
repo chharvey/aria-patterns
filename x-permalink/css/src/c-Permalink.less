@@ -1,0 +1,53 @@
+
+/*################################*\
+    c-Permalink.less
+\*################################*/
+
+
+// The Permalink
+//
+// The Permalink Component is added to the end of a heading of a section of a webpage.
+// It is especially helpful in a documentation system, style guide, or pattern library.
+// This Component is an internal link, and makes sections within a document easy to access.
+//
+// Use with this project’s `.h-Hidden` and
+// [Xmeter’s](https://chharvey.github.io/xmeter/) `.h-Inline` Helpers.
+// <footer><p>See the [xPermalink rendering function](../api/global.html#xPermalink_renderer) for usage.</p></footer>
+// <header><dl>
+//   <dt>author</dt>  <dd>Chris Harvey</dd>
+//   <dt>updated</dt> <dd><time>2017-03-26</time></dd>
+// </dl></header>
+// <footer><p>Read https://github.com/chharvey/chharvey.github.io/wiki/Accessible-Skip-Links#internal-permalinks for more info.</p></footer>
+//
+// DOM:
+// <pre>
+// const {xPermalink} = require('aria-patterns')
+// document.querySelector('#section-title > h1').append(
+//   xPermalink.render({ id: 'section-title' })
+// )
+// </pre>
+//
+// Markup: ../../test/out/x-permalink.test.html
+//
+// Weight: 1
+//
+// Styleguide Components.Permalink
+.c-Permalink {
+  margin-left: 1rem;
+  @supports (margin-inline-start: 1rem) {
+    margin-left: unset;
+    margin-inline-start: 1rem;
+  }
+  font-weight: 100;
+  h1:hover > &,
+  h2:hover > &,
+  h3:hover > &,
+  h4:hover > &,
+  h5:hover > &,
+  h6:hover > & {
+    display: inline;
+    position: static; // HACK fallback for `initial`
+    position: initial; // HACK fallback for `unset`
+    position: unset; // unset `.h-Hidden`
+  }
+}

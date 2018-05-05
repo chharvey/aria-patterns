@@ -1,12 +1,19 @@
 {
   "name": "aria-patterns",
-  "version": "1.0.0-beta",
+  "version": "0.5.0",
   "description": "Common patterns of elements with ARIA attributes.",
   "main": "index.js",
   "scripts": {
     "build": "gulp build",
-    "unbuild": "rm -r docs/{styleguide,api}/ {css,js}/dist/",
-    "test": "node test/index.js"
+    "unbuild:address": "rm -r ./x-address/{css/dist/,test/out/}",
+    "unbuild:directory": "rm -r ./x-directory/{css/dist/,test/out/}",
+    "unbuild:hidden": "rm -r ./x-hidden/css/dist/",
+    "unbuild:permalink": "rm -r ./x-permalink/{css/dist/,test/out/}",
+    "unbuild:person-fullname": "rm -r ./x-person-fullname/{css/dist/,test/out/}",
+    "unbuild:tablist": "rm -r ./x-tablist/{css/dist/,js/dist/}",
+    "unbuild:each": "npm run unbuild:address  &&  npm run unbuild:directory  &&  npm run unbuild:hidden  &&  npm run unbuild:permalink  &&  npm run unbuild:person-fullname  &&  npm run unbuild:tablist",
+    "unbuild": "rm -r ./docs/{styleguide,api}/  &&  npm run unbuild:each",
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
@@ -25,16 +32,22 @@
   },
   "homepage": "https://github.com/chharvey/aria-patterns#readme",
   "devDependencies": {
+    "babel-core": "^6.26.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-minify": "^0.4.0",
     "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^4.1.0",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-babel": "^7.0.1",
     "gulp-clean-css": "^3.9.2",
-    "gulp-jsdoc3": "^1.0.1",
-    "gulp-less": "^3.5.0",
+    "gulp-jsdoc3": "^2.0.0",
+    "gulp-less": "^4.0.0",
+    "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^2.6.4",
-    "gulp-uglify-es": "^1.0.1",
     "kss": "^3.0.0-beta.18"
   },
   "dependencies": {
-    "extrajs-dom": "^4.0.0-alpha.4"
+    "extrajs": "^0.11.0",
+    "extrajs-dom": "^4.1.0",
+    "extrajs-geo": "^0.1.0"
   }
 }
