@@ -80,5 +80,5 @@ function xAddress_renderer(frag, data) {
 }
 
 module.exports = xjs.HTMLTemplateElement
-  .fromFileSync(path.resolve(__dirname, './x-address.tpl.html'))
+  .fromFileSync(path.join(__dirname, './x-address.tpl.html'))
   .setRenderer(xAddress_renderer)

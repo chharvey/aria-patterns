@@ -41,5 +41,5 @@ function xPersonFullname_renderer(frag, data) {
 }
 
 module.exports = xjs.HTMLTemplateElement
-  .fromFileSync(path.resolve(__dirname, './x-person-fullname.tpl.html'))
+  .fromFileSync(path.join(__dirname, './x-person-fullname.tpl.html'))
   .setRenderer(xPersonFullname_renderer)
