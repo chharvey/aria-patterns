@@ -3,6 +3,7 @@ const path = require('path')
 
 const gulp         = require('gulp')
 const rename       = require('gulp-rename')
+const inject       = require('gulp-inject-string')
 const less         = require('gulp-less')
 const autoprefixer = require('gulp-autoprefixer')
 const clean_css    = require('gulp-clean-css')
@@ -15,6 +16,14 @@ const sourcemaps   = require('gulp-sourcemaps')
 
 const kss          = require('kss')
 const jsdoc        = require('gulp-jsdoc3')
+
+const PACKAGE = require('./package.json')
+const META = JSON.stringify({
+  package: `https://www.npmjs.com/package/${PACKAGE.name}`,
+  version: PACKAGE.version,
+  license: PACKAGE.license,
+  built  : new Date().toISOString(),
+}, null, 2)
 
 
 gulp.task('lessc:each', function () {
@@ -35,6 +44,7 @@ gulp.task('lessc:each', function () {
     .pipe(rename(function (p) {
       p.dirname = path.join(p.dirname, '../dist/')
     }))
+    .pipe(inject.prepend(`/* ${META} */`))
     .pipe(sourcemaps.write('./')) // writes to an external .map file
     .pipe(gulp.dest('./'))
 })
@@ -48,6 +58,7 @@ gulp.task('uglify:js', function () {
     .pipe(rename(function (p) {
       p.dirname = path.join(p.dirname, '../dist/')
     }))
+    .pipe(inject.prepend(`/* ${META} */`))
     .pipe(sourcemaps.write('./')) // writes to an external .map file
     .pipe(gulp.dest('./'))
 })
