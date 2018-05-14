@@ -13,6 +13,15 @@ const xjs = require('extrajs-dom')
  * @param {string=} data.honorificSuffix http://schema.org/honorificSuffix
  */
 function xPersonFullname_renderer(frag, data) {
+  /**
+   * @summary References to formatting elements.
+   * @description We want to create these references before removing any elements from the DOM.
+   * @private
+   * @type {!Object}
+   */
+  let formatting = {
+    /** The comma preceding the honorific suffix. */ comma: frag.querySelector('slot[name="familyName"] + span'),
+  }
   ;[
     'familyName',
     'givenName',
@@ -36,7 +45,7 @@ function xPersonFullname_renderer(frag, data) {
 
   // remove unnecessary comma preceding suffix
   if (!data.honorificSuffix) {
-    frag.querySelector('slot[name="familyName"] + span').remove()
+    formatting.comma.remove()
   }
 }
 

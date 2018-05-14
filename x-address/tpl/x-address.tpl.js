@@ -25,6 +25,16 @@ STATE_DATA.push(...[
  *                                             or enter a string to name the region manually
  */
 function xAddress_renderer(frag, data) {
+  /**
+   * @summary References to formatting elements.
+   * @description We want to create these references before removing any elements from the DOM.
+   * @private
+   * @type {!Object}
+   */
+  let formatting = {
+    /** The comma between locality and region. */ comma: frag.querySelector('slot[name="addressLocality"] + span'),
+    /** Line breaks separating lines of address. */ linebreaks: [...frag.querySelectorAll('br')],
+  }
   ;[
     'streetAddress',
     'addressLocality',
@@ -66,16 +76,15 @@ function xAddress_renderer(frag, data) {
 
   // remove unnecessary comma preceding region
   if (!data.addressLocality || !data.addressRegion) {
-    frag.querySelector('slot[name="addressLocality"] + span').remove()
+    formatting.comma.remove()
   }
 
   // remove unnecessary line breaks
-  let linebreaks = Array.from(frag.querySelectorAll('br'))
   if (!data.streetAddress) {
-    linebreaks[0].remove()
+    formatting.linebreaks[0].remove()
   }
   if (!data.addressCountry) {
-    linebreaks[1].remove()
+    formatting.linebreaks[1].remove()
   }
 }
 
