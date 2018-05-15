@@ -24,7 +24,7 @@ class CustomTablist {
     const REVERSED = this._NODE.hasAttribute('data-reversed')
 
     // Check proper DOM structure
-    Array.from(this._NODE.children).forEach(function (child) {
+    ;[...this._NODE.children].forEach(function (child) {
       if (!['DETAILS', 'SCRIPT', 'TEMPLATE'].includes(child.tagName)) {
         throw new TypeError('All children of the tablist must be `<details>` elements or script-supporting elements.');
       }
@@ -36,7 +36,7 @@ class CustomTablist {
       let summary = panel.querySelector('summary')
 
       // transfer the attributes
-      Array.from(summary.attributes).forEach(function (attr) {
+      ;[...summary.attributes].forEach(function (attr) {
         summary.attributes.removeNamedItem(attr.name)
         tab.attributes.setNamedItem(attr)
       })
@@ -61,14 +61,14 @@ class CustomTablist {
      * @final
      * @type {Array<CustomTablist.CustomTab>}
      */
-    this._TABS = Array.from(this._NODE.querySelectorAll('div[role="tab"]')).map((el) => new CustomTablist.CustomTab(el, this))
+    this._TABS = [...this._NODE.querySelectorAll('div[role="tab"]')].map((el) => new CustomTablist.CustomTab(el, this))
     /**
      * @summary The set of panels.
      * @private
      * @final
      * @type {Array<CustomTablist.CustomPanel>}
      */
-    this._PANELS = Array.from(this._NODE.querySelectorAll('details[role="tabpanel"]')).map((el) => new CustomTablist.CustomPanel(el, this))
+    this._PANELS = [...this._NODE.querySelectorAll('details[role="tabpanel"]')].map((el) => new CustomTablist.CustomPanel(el, this))
   }
 
   /**
