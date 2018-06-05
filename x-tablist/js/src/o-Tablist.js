@@ -4,7 +4,8 @@
 class CustomTablist {
   /**
    * @summary Construct a new CustomTablist object.
-   * @param {HTMLElement} node preferrably a `.o-Tablist[role="tablist"][aria-orientation]` element
+   * @param   {HTMLElement} node preferrably a `.o-Tablist[role="tablist"][aria-orientation]` element
+   * @throws  {TypeError} if any child elements of the tablist are not `<details>` or script-supporting elements
    */
   constructor(node) {
     /**
