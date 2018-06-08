@@ -4,7 +4,8 @@
 class CustomTablist {
   /**
    * @summary Construct a new CustomTablist object.
-   * @param {HTMLElement} node preferrably a `.o-Tablist[role="tablist"][aria-orientation]` element
+   * @param   {HTMLElement} node preferrably a `.o-Tablist[role="tablist"][aria-orientation]` element
+   * @throws  {TypeError} if any child elements of the tablist are not `<details>` or script-supporting elements
    */
   constructor(node) {
     /**
@@ -24,19 +25,19 @@ class CustomTablist {
     const REVERSED = this._NODE.hasAttribute('data-reversed')
 
     // Check proper DOM structure
-    Array.from(this._NODE.children).forEach(function (child) {
+    ;[...this._NODE.children].forEach((child) => {
       if (!['DETAILS', 'SCRIPT', 'TEMPLATE'].includes(child.tagName)) {
         throw new TypeError('All children of the tablist must be `<details>` elements or script-supporting elements.');
       }
     })
 
     // Move the tabs (<summary>) outside of the panels (<details>), into the tablist.
-    this._NODE.querySelectorAll('details[role="tabpanel"]').forEach(function (panel) {
+    this._NODE.querySelectorAll('details[role="tabpanel"]').forEach((panel) => {
       let tab = document.createElement('div')
       let summary = panel.querySelector('summary')
 
       // transfer the attributes
-      Array.from(summary.attributes).forEach(function (attr) {
+      ;[...summary.attributes].forEach((attr) => {
         summary.attributes.removeNamedItem(attr.name)
         tab.attributes.setNamedItem(attr)
       })
@@ -53,7 +54,7 @@ class CustomTablist {
 
       if (REVERSED) panel.after(tab)
       else panel.before(tab)
-    }, this)
+    })
 
     /**
      * @summary The set of tabs.
@@ -61,14 +62,14 @@ class CustomTablist {
      * @final
      * @type {Array<CustomTablist.CustomTab>}
      */
-    this._TABS = Array.from(this._NODE.querySelectorAll('div[role="tab"]')).map((el) => new CustomTablist.CustomTab(el, this))
+    this._TABS = [...this._NODE.querySelectorAll('div[role="tab"]')].map((el) => new CustomTablist.CustomTab(el, this))
     /**
      * @summary The set of panels.
      * @private
      * @final
      * @type {Array<CustomTablist.CustomPanel>}
      */
-    this._PANELS = Array.from(this._NODE.querySelectorAll('details[role="tabpanel"]')).map((el) => new CustomTablist.CustomPanel(el, this))
+    this._PANELS = [...this._NODE.querySelectorAll('details[role="tabpanel"]')].map((el) => new CustomTablist.CustomPanel(el, this))
   }
 
   /**
@@ -182,11 +183,11 @@ CustomTablist.CustomTab = class CustomTab {
      */
     this._PARENT = parent
 
-    this._NODE.addEventListener('click', (function (e) {
+    this._NODE.addEventListener('click', (e) => {
       this.activate()
-    }).bind(this))
+    })
 
-    this._NODE.addEventListener('keydown', (function (e) {
+    this._NODE.addEventListener('keydown', (e) => {
       function prev() {
         e.preventDefault()
         let prev_tab_index = this._PARENT.tabs.indexOf(this) - 1
@@ -217,11 +218,11 @@ CustomTablist.CustomTab = class CustomTab {
         case 'ArrowUp'    : if (this._PARENT.orientation === 'vertical'  ) { prev.call(this) } break;
         case 'ArrowDown'  : if (this._PARENT.orientation === 'vertical'  ) { next.call(this) } break;
       }
-    }).bind(this))
+    })
 
       // **CLOSE BUTTONS**
       // if (this.querySelector('button[value="close"]')) {
-      //   this.querySelector('button[value="close"]').addEventListener('click', function (e) {
+      //   this.querySelector('button[value="close"]').addEventListener('click', (e) => {
       //     this._panel.remove()
       //     this.remove()
       //     tablist.updateRendering()
@@ -258,29 +259,29 @@ CustomTablist.CustomTab = class CustomTab {
    */
   attributeChangedCallback(name, oldValue, newValue) {
     const returned = {
-      'tabindex': function (oldValue, newValue) {
+      'tabindex': (oldValue, newValue) => {
         if (newValue === '0') {
-          this._PARENT.tabs.forEach(function (tab) {
+          this._PARENT.tabs.forEach((tab) => {
             if (tab !== this) {
               tab._NODE.tabIndex = -1
               tab.attributeChangedCallback('tabindex', null, '-1')
             }
-          }, this)
+          })
         }
       },
-      'aria-selected': function (oldValue, newValue) {
+      'aria-selected': (oldValue, newValue) => {
         if (newValue === 'true') {
-          this._PARENT.tabs.forEach(function (tab) {
+          this._PARENT.tabs.forEach((tab) => {
             if (tab !== this) {
               tab._NODE.setAttribute('aria-selected', 'false')
               tab.attributeChangedCallback('aria-selected', null, 'false')
             }
-          }, this)
+          })
         }
       },
       default(oldValue, newValue) {},
     }
-    ;(returned[name] || returned.default).call(this, oldValue, newValue)
+    ;(returned[name] || returned.default).call(null, oldValue, newValue)
     this.updateRendering()
   }
 
@@ -349,29 +350,29 @@ CustomTablist.CustomPanel = class CustomPanel {
    */
   attributeChangedCallback(name, oldValue, newValue) {
     const returned = {
-      'open': function (oldValue, newValue) {
+      'open': (oldValue, newValue) => {
         if (newValue === '') {
-          this._PARENT.panels.forEach(function (panel) {
+          this._PARENT.panels.forEach((panel) => {
             if (panel !== this) {
               panel._NODE.open = false
               panel.attributeChangedCallback('open', null, null)
             }
-          }, this)
+          })
         }
       },
-      'aria-hidden': function (oldValue, newValue) {
+      'aria-hidden': (oldValue, newValue) => {
         if (newValue === 'false') {
-          this._PARENT.panels.forEach(function (panel) {
+          this._PARENT.panels.forEach((panel) => {
             if (panel !== this) {
               panel._NODE.setAttribute('aria-hidden', 'true')
               panel.attributeChangedCallback('aria-hidden', null, 'true')
             }
-          }, this)
+          })
         }
       },
       default(oldValue, newValue) {},
     }
-    ;(returned[name] || returned.default).call(this, oldValue, newValue)
+    ;(returned[name] || returned.default).call(null, oldValue, newValue)
     this.updateRendering()
   }
 
@@ -385,12 +386,12 @@ CustomTablist.CustomPanel = class CustomPanel {
 
 
 // **CLOSE BUTTONS**
-// document.querySelector('#update > button').addEventListener('click', function () {
+// document.querySelector('#update > button').addEventListener('click', (e) => {
 //   console.log(document.querySelector('[role="tablist"]').tabs())
 //   document.querySelector('[role="tablist"]').panels()[0].open = false
 // })
 
-document.querySelectorAll('.o-Tablist[role="tablist"]').forEach(function (tl) {
+document.querySelectorAll('.o-Tablist[role="tablist"]').forEach((tl) => {
   tl.tablist = new CustomTablist(tl)
   tl.tablist.updateRendering()
 })
