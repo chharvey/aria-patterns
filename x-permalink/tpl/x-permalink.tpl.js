@@ -9,8 +9,9 @@ const xjs = require('extrajs-dom')
  * @param   {string} data.id the fragment identifier to link to
  * @param   {string=} data.label human-readable text for `[aria-label]`
  * @param   {string=} data.text the textContent of the link
+ * @param   {!Object=} opts additional rendering options
  */
-function xPermalink_renderer(frag, data) {
+function xPermalink_renderer(frag, data, opts = {}) {
   new xjs.HTMLAnchorElement(frag.querySelector('a'))
     .href(`#${data.id}`)
     .attr('aria-label', data.label || 'permalink')

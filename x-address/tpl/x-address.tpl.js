@@ -20,11 +20,13 @@ STATE_DATA.push(...[
  * @param {string=} data.addressRegion   http://schema.org/addressRegion
  * @param {string=} data.postalCode      http://schema.org/postalCode
  * @param {string=} data.addressCountry  http://schema.org/addressCountry
- * @param {(boolean|string)=} data.$regionName should the region code programmatically expanded to its full name
- *                                             (e.g., expand "VA" to "Virginia")?
- *                                             or enter a string to name the region manually
+ * @param {(boolean|string)=} data.$regionName deprecated form of param `opts.regionName`
+ * @param   {!Object=} opts additional rendering options
+ * @param   {(boolean|string)=} opts.regionName should the region code programmatically expanded to its full name
+ *                                              (e.g., expand "VA" to "Virginia")?
+ *                                              or enter a string to name the region manually
  */
-function xAddress_renderer(frag, data) {
+function xAddress_renderer(frag, data, opts = {}) {
   /**
    * @summary References to formatting elements.
    * @description We want to create these references before removing any elements from the DOM.
@@ -51,9 +53,8 @@ function xAddress_renderer(frag, data) {
   // unabbreviate the region name
   if (data.addressRegion) {
     frag.querySelector('data[itemprop="addressRegion"]').value = data.addressRegion
-    if (data.$regionName) {
-      const returned = {
-        'boolean': function () {
+    if (data.$regionName === true || opts.regionName === true) {
+      frag.querySelector('slot[name="addressRegion"]').textContent = (() => {
           let returned;
           try {
             let state = STATE_DATA.find((state) => state.code === data.addressRegion) || null
@@ -64,11 +65,9 @@ function xAddress_renderer(frag, data) {
             returned = e.name
           }
           return returned
-        },
-        'string' : () => data.$regionName,
-        default  : () => null,
-      }
-      frag.querySelector('slot[name="addressRegion"]').textContent = (returned[xjs.Object.typeOf(data.$regionName)] || returned.default).call(null)
+      })()
+    } else if (data.$regionName || opts.regionName) {
+      frag.querySelector('slot[name="addressRegion"]').textContent = data.$regionName || opts.regionName
     }
   } else {
     frag.querySelector('data[itemprop="addressRegion"]').remove()

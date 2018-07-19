@@ -11,8 +11,9 @@ const xjs = require('extrajs-dom')
  * @param {string=} data.additionalName  http://schema.org/additionalName
  * @param {string=} data.honorificPrefix http://schema.org/honorificPrefix
  * @param {string=} data.honorificSuffix http://schema.org/honorificSuffix
+ * @param   {!Object=} opts additional rendering options
  */
-function xPersonFullname_renderer(frag, data) {
+function xPersonFullname_renderer(frag, data, opts = {}) {
   /**
    * @summary References to formatting elements.
    * @description We want to create these references before removing any elements from the DOM.
