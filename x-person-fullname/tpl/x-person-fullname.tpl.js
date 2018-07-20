@@ -18,9 +18,9 @@ function xPersonFullname_renderer(frag, data, opts = {}) {
    * @summary References to formatting elements.
    * @description We want to create these references before removing any elements from the DOM.
    * @private
-   * @type {!Object}
+   * @constant {!Object}
    */
-  let formatting = {
+  const formatting = {
     /** The comma preceding the honorific suffix. */ comma: frag.querySelector('slot[name="familyName"] + span'),
   }
   ;[

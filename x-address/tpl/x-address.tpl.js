@@ -31,9 +31,9 @@ function xAddress_renderer(frag, data, opts = {}) {
    * @summary References to formatting elements.
    * @description We want to create these references before removing any elements from the DOM.
    * @private
-   * @type {!Object}
+   * @constant {!Object}
    */
-  let formatting = {
+  const formatting = {
     /** The comma between locality and region. */ comma: frag.querySelector('slot[name="addressLocality"] + span'),
     /** Line breaks separating lines of address. */ linebreaks: [...frag.querySelectorAll('br')],
   }
