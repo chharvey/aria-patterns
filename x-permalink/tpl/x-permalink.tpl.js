@@ -1,5 +1,3 @@
-const path = require('path')
-
 const xjs = require('extrajs-dom')
 
 /**
@@ -11,13 +9,11 @@ const xjs = require('extrajs-dom')
  * @param   {string=} data.text the textContent of the link
  * @param   {!Object=} opts additional rendering options
  */
-function xPermalink_renderer(frag, data, opts = {}) {
+let xPermalink_renderer/*: RenderingFunction<{ id: string, label?: string, text?: string }, object>*/ = function xPermalink_renderer(frag, data, opts) {
   new xjs.HTMLAnchorElement(frag.querySelector('a'))
     .href(`#${data.id}`)
     .attr('aria-label', data.label || 'permalink')
     .textContent(data.text || '§') // &sect;
 }
 
-module.exports = xjs.HTMLTemplateElement
-  .fromFileSync(path.join(__dirname, './x-permalink.tpl.html'))
-  .setRenderer(xPermalink_renderer)
+module.exports = [xPermalink_renderer]

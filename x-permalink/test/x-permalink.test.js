@@ -4,13 +4,13 @@ const path = require('path')
 const xjs = require('extrajs-dom')
 
 const createDir = require('../../lib/createDir.js')
-const ARIAPatterns = require('../../index.js')
+const {xPermalink} = require('../../index.js')
 
 
 let output = `
 <!--link rel="stylesheet" href="/node_modules/aria-patterns/x-permalink/css/dist/c-Permalink.css"/-->
 <section id="section-title">
-  <h1>Section Title${new xjs.DocumentFragment(ARIAPatterns.xPermalink.render({ id: 'section-title' })).innerHTML()}</h1>
+  <h1>Section Title${new xjs.DocumentFragment(xPermalink.template.render(xPermalink.renderer[0], { id: 'section-title' })).innerHTML()}</h1>
 </section>
 `
 

@@ -1,9 +1,4 @@
-const path = require('path')
-
-const xjs = {
-  ...require('extrajs'),
-  ...require('extrajs-dom'),
-}
+const xjs = require('extrajs-dom')
 
 const STATE_DATA = require('extrajs-geo')
 STATE_DATA.push(...[
@@ -26,7 +21,7 @@ STATE_DATA.push(...[
  *                                              (e.g., expand "VA" to "Virginia")?
  *                                              or enter a string to name the region manually
  */
-function xAddress_renderer(frag, data, opts = {}) {
+let xAddress_renderer/*: RenderingFunction<sdo.PostalAddress, { regionName?: boolean|string }>*/ = function xAddress_renderer(frag, data, opts) {
   /**
    * @summary References to formatting elements.
    * @description We want to create these references before removing any elements from the DOM.
@@ -87,6 +82,4 @@ function xAddress_renderer(frag, data, opts = {}) {
   }
 }
 
-module.exports = xjs.HTMLTemplateElement
-  .fromFileSync(path.join(__dirname, './x-address.tpl.html'))
-  .setRenderer(xAddress_renderer)
+module.exports = [xAddress_renderer]
