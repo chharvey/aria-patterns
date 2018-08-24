@@ -58,7 +58,7 @@ typings/
 .env
 
 # Generated test files
-x-*/test/out/
+test/out/
 
 # Generated build files
 dist/

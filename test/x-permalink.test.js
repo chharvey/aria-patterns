@@ -3,8 +3,8 @@ const path = require('path')
 
 const xjs = require('extrajs-dom')
 
-const createDir = require('../../lib/createDir.js')
-const {xPermalink} = require('../../index.js')
+const createDir = require('../lib/createDir.js')
+const {xPermalink} = require('../index.js')
 
 
 let output = `
@@ -14,6 +14,6 @@ let output = `
 </section>
 `
 
-createDir('./x-permalink/test/out/').then(function (v) {
+createDir('./test/out/').then(function (v) {
   fs.writeFileSync(path.resolve(__dirname, './out/x-permalink.test.html'), output, 'utf8')
-})
+}).catch((e) => {})

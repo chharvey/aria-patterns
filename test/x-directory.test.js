@@ -3,8 +3,8 @@ const path = require('path')
 
 const xjs = require('extrajs-dom')
 
-const createDir = require('../../lib/createDir.js')
-const {xDirectory} = require('../../index.js')
+const createDir = require('../lib/createDir.js')
+const {xDirectory} = require('../index.js')
 
 let data = {
   "@context": "http://schema.org/",
@@ -85,6 +85,6 @@ let output = `
 <header><nav>${new xjs.DocumentFragment(xDirectory.template.render(xDirectory.renderer[0], data)).innerHTML()}</nav></header>
 `
 
-createDir('./x-directory/test/out/').then(function (v) {
+createDir('./test/out/').then(function (v) {
   fs.writeFileSync(path.resolve(__dirname, './out/x-directory.test.html'), output, 'utf8')
-})
+}).catch((e) => {})

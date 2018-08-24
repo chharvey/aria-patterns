@@ -26,10 +26,10 @@ const META = JSON.stringify({
 
 
 gulp.task('test', async function () {
-  require('./x-directory/test/x-directory.test.js');
-  require('./x-person-fullname/test/x-person-fullname.test.js');
-  require('./x-address/test/x-address.test.js');
-  require('./x-permalink/test/x-permalink.test.js');
+  require('./test/x-address.test.js');
+  require('./test/x-directory.test.js');
+  require('./test/x-permalink.test.js');
+  require('./test/x-person-fullname.test.js');
 })
 
 // HOW-TO: https://github.com/mlucool/gulp-jsdoc3#usage
