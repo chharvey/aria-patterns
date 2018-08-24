@@ -2,8 +2,8 @@ const fs = require('fs')
 const path = require('path')
 
 const xjs = require('extrajs-dom')
+const mkdirp = require('make-dir')
 
-const createDir = require('../lib/createDir.js')
 const {xPermalink} = require('../index.js')
 
 
@@ -14,6 +14,6 @@ let output = `
 </section>
 `
 
-createDir('./test/out/').then(function (v) {
-  fs.writeFileSync(path.resolve(__dirname, './out/x-permalink.test.html'), output, 'utf8')
+mkdirp(path.join(__dirname, './out/')).then((pth) => {
+  return util.promisify(fs.writeFile)(path.join(__dirname, './out/x-permalink.test.html'), output, 'utf8')
 }).catch((e) => {})

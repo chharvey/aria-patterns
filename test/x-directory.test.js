@@ -2,8 +2,8 @@ const fs = require('fs')
 const path = require('path')
 
 const xjs = require('extrajs-dom')
+const mkdirp = require('make-dir')
 
-const createDir = require('../lib/createDir.js')
 const {xDirectory} = require('../index.js')
 
 let data = {
@@ -85,6 +85,6 @@ let output = `
 <header><nav>${new xjs.DocumentFragment(xDirectory.template.render(xDirectory.renderer[0], data)).innerHTML()}</nav></header>
 `
 
-createDir('./test/out/').then(function (v) {
-  fs.writeFileSync(path.resolve(__dirname, './out/x-directory.test.html'), output, 'utf8')
+mkdirp(path.join(__dirname, './out/')).then((pth) => {
+  return util.promisify(fs.writeFile)(path.join(__dirname, './out/x-directory.test.html'), output, 'utf8')
 }).catch((e) => {})

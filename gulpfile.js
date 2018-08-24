@@ -5,7 +5,6 @@ const path = require('path')
 // require('babel-preset-env')    // DO NOT REMOVE … required by babel preset configurations
 // require('babel-preset-minify') // DO NOT REMOVE … required by babel preset configurations
 const gulp         = require('gulp')
-const rename       = require('gulp-rename')
 const inject       = require('gulp-inject-string')
 const less         = require('gulp-less')
 const autoprefixer = require('gulp-autoprefixer')
