@@ -16,6 +16,6 @@
     "../../dist/x-tablist/css/o-Tablist.css"
   ],
   "js": [
-    "../../x-tablist/js/dist/o-Tablist.js"
+    "../../dist/x-tablist/js/o-Tablist.js"
   ]
 }

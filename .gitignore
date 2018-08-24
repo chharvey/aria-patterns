@@ -62,7 +62,6 @@ x-*/test/out/
 
 # Generated build files
 dist/
-x-*/js/dist
 
 # Generated documentation & style guides
 docs/api

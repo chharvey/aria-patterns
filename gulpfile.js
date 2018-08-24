@@ -66,17 +66,14 @@ gulp.task('dist-style', async function () {
 })
 
 gulp.task('dist-script', async function () {
-  return gulp.src('./x-*/js/src/*.js')
+  return gulp.src('./src/x-*/js/*.js')
     .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['env', 'minify']
     }))
-    .pipe(rename(function (p) {
-      p.dirname = path.join(p.dirname, '../dist/')
-    }))
     .pipe(inject.prepend(`/* ${META} */`))
     .pipe(sourcemaps.write('./')) // writes to an external .map file
-    .pipe(gulp.dest('./'))
+    .pipe(gulp.dest('./dist/'))
 })
 
 gulp.task('dist', ['dist-style', 'dist-script'])
