@@ -46,7 +46,7 @@ gulp.task('docs-kss', ['test'], async function () {
 gulp.task('docs', ['docs-api', 'docs-kss'])
 
 gulp.task('dist-style', async function () {
-  return gulp.src('./x-*/css/src/*.less')
+  return gulp.src('./src/x-*/css/*.less')
     .pipe(sourcemaps.init())
     .pipe(less())
     .pipe(autoprefixer({
@@ -60,12 +60,9 @@ gulp.task('dist-style', async function () {
         },
       },
     }))
-    .pipe(rename(function (p) {
-      p.dirname = path.join(p.dirname, '../dist/')
-    }))
     .pipe(inject.prepend(`/* ${META} */`))
     .pipe(sourcemaps.write('./')) // writes to an external .map file
-    .pipe(gulp.dest('./'))
+    .pipe(gulp.dest('./dist/'))
 })
 
 gulp.task('dist-script', async function () {

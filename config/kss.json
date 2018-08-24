@@ -1,19 +1,19 @@
 {
   "title": "ARIA Patterns",
   "source": [
-    "./css/src/",
-    "./x-address/css/src/",
-    "./x-directory/css/src/",
-    "./x-hidden/css/src/",
-    "./x-permalink/css/src/",
-    "./x-person-fullname/css/src/",
-    "./x-tablist/css/src/"
+    "./src/css/",
+    "./src/x-address/css/",
+    "./src/x-directory/css/",
+    "./src/x-hidden/css/",
+    "./src/x-permalink/css/",
+    "./src/x-person-fullname/css/",
+    "./src/x-tablist/css/"
   ],
   "destination": "docs/styleguide/",
   "css": [
-    "../../x-hidden/css/dist/h-Hidden.css",
-    "../../x-permalink/css/dist/c-Permalink.css",
-    "../../x-tablist/css/dist/o-Tablist.css"
+    "../../dist/x-hidden/css/h-Hidden.css",
+    "../../dist/x-permalink/css/c-Permalink.css",
+    "../../dist/x-tablist/css/o-Tablist.css"
   ],
   "js": [
     "../../x-tablist/js/dist/o-Tablist.js"
