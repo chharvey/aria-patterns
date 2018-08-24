@@ -4,7 +4,7 @@ const path = require('path')
 const xjs = require('extrajs-dom')
 
 const createDir = require('../../lib/createDir.js')
-const ARIAPatterns = require('../../index.js')
+const {xDirectory} = require('../../index.js')
 
 let data = {
   "@context": "http://schema.org/",
@@ -82,7 +82,7 @@ let data = {
 }
 
 let output = `
-<header><nav>${new xjs.DocumentFragment(ARIAPatterns.xDirectory.render(data)).innerHTML()}</nav></header>
+<header><nav>${new xjs.DocumentFragment(xDirectory.template.render(xDirectory.renderer[0], data)).innerHTML()}</nav></header>
 `
 
 createDir('./x-directory/test/out/').then(function (v) {

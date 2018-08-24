@@ -4,7 +4,7 @@ const path = require('path')
 const xjs = require('extrajs-dom')
 
 const createDir = require('../../lib/createDir.js')
-const ARIAPatterns = require('../../index.js')
+const {xPersonFullname} = require('../../index.js')
 
 
 let data = {
@@ -19,7 +19,7 @@ let data = {
 let output = `
 <article itemscope="" itemtype="http://schema.org/Person">
   <h1 itemprop="name">${
-    new xjs.DocumentFragment(ARIAPatterns.xPersonFullname.render(data)).innerHTML()
+    new xjs.DocumentFragment(xPersonFullname.template.render(xPersonFullname.renderer[0], data)).innerHTML()
   }</h1>
 </article>
 `

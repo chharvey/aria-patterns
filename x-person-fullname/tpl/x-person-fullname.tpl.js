@@ -1,5 +1,3 @@
-const path = require('path')
-
 const xjs = require('extrajs-dom')
 
 /**
@@ -13,7 +11,7 @@ const xjs = require('extrajs-dom')
  * @param {string=} data.honorificSuffix http://schema.org/honorificSuffix
  * @param   {!Object=} opts additional rendering options
  */
-function xPersonFullname_renderer(frag, data, opts = {}) {
+let xPersonFullname_renderer/*: RenderingFunction<sdo.Person, object>*/ = function xPersonFullname_renderer(frag, data, opts) {
   /**
    * @summary References to formatting elements.
    * @description We want to create these references before removing any elements from the DOM.
@@ -50,6 +48,4 @@ function xPersonFullname_renderer(frag, data, opts = {}) {
   }
 }
 
-module.exports = xjs.HTMLTemplateElement
-  .fromFileSync(path.join(__dirname, './x-person-fullname.tpl.html'))
-  .setRenderer(xPersonFullname_renderer)
+module.exports = [xPersonFullname_renderer]
