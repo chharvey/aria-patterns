@@ -57,13 +57,28 @@ typings/
 # dotenv environment variables file
 .env
 
-# Generated test files
-x-*/test/out/
+# parcel-bundler cache (https://parceljs.org/)
+.cache
 
-# Generated build files
-x-*/css/dist
-x-*/js/dist
+# next.js build output
+.next
+
+# nuxt.js build output
+.nuxt
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless
+
+
+# Generated test files
+test/out/
 
 # Generated documentation & style guides
-docs/api
-docs/styleguide
+docs/api/
+docs/styleguide/
+
+# Generated build files
+dist/

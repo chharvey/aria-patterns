@@ -3,8 +3,8 @@ const path = require('path')
 
 const xjs = require('extrajs-dom')
 
-const createDir = require('../../lib/createDir.js')
-const {xPersonFullname} = require('../../index.js')
+const createDir = require('../lib/createDir.js')
+const {xPersonFullname} = require('../index.js')
 
 
 let data = {
@@ -24,6 +24,6 @@ let output = `
 </article>
 `
 
-createDir('./x-person-fullname/test/out/').then(function (v) {
+createDir('./test/out/').then(function (v) {
   fs.writeFileSync(path.resolve(__dirname, './out/x-person-fullname.test.html'), output, 'utf8')
-})
+}).catch((e) => {})

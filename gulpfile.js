@@ -26,15 +26,15 @@ const META = JSON.stringify({
 
 
 gulp.task('test', async function () {
-  require('./x-directory/test/x-directory.test.js');
-  require('./x-person-fullname/test/x-person-fullname.test.js');
-  require('./x-address/test/x-address.test.js');
-  require('./x-permalink/test/x-permalink.test.js');
+  require('./test/x-address.test.js');
+  require('./test/x-directory.test.js');
+  require('./test/x-permalink.test.js');
+  require('./test/x-person-fullname.test.js');
 })
 
 // HOW-TO: https://github.com/mlucool/gulp-jsdoc3#usage
 gulp.task('docs-api', async function () {
-  return gulp.src(['README.md', './index.js', './x-*/tpl/*.tpl.js', './tpl/*.tpl.js'], {read: false})
+  return gulp.src(['README.md', './index.js', './src/x-*/tpl/*.tpl.js'], {read: false})
     .pipe(jsdoc(require('./config/jsdoc.json')))
 })
 
@@ -46,7 +46,7 @@ gulp.task('docs-kss', ['test'], async function () {
 gulp.task('docs', ['docs-api', 'docs-kss'])
 
 gulp.task('dist-style', async function () {
-  return gulp.src('./x-*/css/src/*.less')
+  return gulp.src('./src/x-*/css/*.less')
     .pipe(sourcemaps.init())
     .pipe(less())
     .pipe(autoprefixer({
@@ -60,26 +60,20 @@ gulp.task('dist-style', async function () {
         },
       },
     }))
-    .pipe(rename(function (p) {
-      p.dirname = path.join(p.dirname, '../dist/')
-    }))
     .pipe(inject.prepend(`/* ${META} */`))
     .pipe(sourcemaps.write('./')) // writes to an external .map file
-    .pipe(gulp.dest('./'))
+    .pipe(gulp.dest('./dist/'))
 })
 
 gulp.task('dist-script', async function () {
-  return gulp.src('./x-*/js/src/*.js')
+  return gulp.src('./src/x-*/js/*.js')
     .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['env', 'minify']
     }))
-    .pipe(rename(function (p) {
-      p.dirname = path.join(p.dirname, '../dist/')
-    }))
     .pipe(inject.prepend(`/* ${META} */`))
     .pipe(sourcemaps.write('./')) // writes to an external .map file
-    .pipe(gulp.dest('./'))
+    .pipe(gulp.dest('./dist/'))
 })
 
 gulp.task('dist', ['dist-style', 'dist-script'])
