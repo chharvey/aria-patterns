@@ -14,8 +14,8 @@ const ARIAPatterns = {
    * @type {{template: xjs.HTMLTemplateElement, renderer: RenderingFunction[]}}
    */
   xDirectory: {
-    template: xjs.HTMLTemplateElement.fromFileSync(path.join(__dirname, './x-directory/tpl/x-directory.tpl.html')),
-    renderer: require('./x-directory/tpl/x-directory.tpl.js'),
+    template: xjs.HTMLTemplateElement.fromFileSync(path.join(__dirname, './src/x-directory/tpl/x-directory.tpl.html')),
+    renderer: require('./src/x-directory/tpl/x-directory.tpl.js'),
   },
   /**
    * @summary A person’s name in "Px. First M. Last, Sx." format.
@@ -23,8 +23,8 @@ const ARIAPatterns = {
    * @type {{template: xjs.HTMLTemplateElement, renderer: RenderingFunction[]}}
    */
   xPersonFullname: {
-    template: xjs.HTMLTemplateElement.fromFileSync(path.join(__dirname, './x-person-fullname/tpl/x-person-fullname.tpl.html')),
-    renderer: require('./x-person-fullname/tpl/x-person-fullname.tpl.js'),
+    template: xjs.HTMLTemplateElement.fromFileSync(path.join(__dirname, './src/x-person-fullname/tpl/x-person-fullname.tpl.html')),
+    renderer: require('./src/x-person-fullname/tpl/x-person-fullname.tpl.js'),
   },
   /**
    * @summary A postal address.
@@ -32,8 +32,8 @@ const ARIAPatterns = {
    * @type {{template: xjs.HTMLTemplateElement, renderer: RenderingFunction[]}}
    */
   xAddress: {
-    template: xjs.HTMLTemplateElement.fromFileSync(path.join(__dirname, './x-address/tpl/x-address.tpl.html')),
-    renderer: require('./x-address/tpl/x-address.tpl.js'),
+    template: xjs.HTMLTemplateElement.fromFileSync(path.join(__dirname, './src/x-address/tpl/x-address.tpl.html')),
+    renderer: require('./src/x-address/tpl/x-address.tpl.js'),
   },
   /**
    * @summary A permalink for sections of a webpage.
@@ -41,8 +41,8 @@ const ARIAPatterns = {
    * @type {{template: xjs.HTMLTemplateElement, renderer: RenderingFunction[]}}
    */
   xPermalink: {
-    template: xjs.HTMLTemplateElement.fromFileSync(path.join(__dirname, './x-permalink/tpl/x-permalink.tpl.html')),
-    renderer: require('./x-permalink/tpl/x-permalink.tpl.js'),
+    template: xjs.HTMLTemplateElement.fromFileSync(path.join(__dirname, './src/x-permalink/tpl/x-permalink.tpl.html')),
+    renderer: require('./src/x-permalink/tpl/x-permalink.tpl.js'),
   },
 }
 

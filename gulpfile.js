@@ -34,7 +34,7 @@ gulp.task('test', async function () {
 
 // HOW-TO: https://github.com/mlucool/gulp-jsdoc3#usage
 gulp.task('docs-api', async function () {
-  return gulp.src(['README.md', './index.js', './x-*/tpl/*.tpl.js', './tpl/*.tpl.js'], {read: false})
+  return gulp.src(['README.md', './index.js', './src/x-*/tpl/*.tpl.js'], {read: false})
     .pipe(jsdoc(require('./config/jsdoc.json')))
 })
 
