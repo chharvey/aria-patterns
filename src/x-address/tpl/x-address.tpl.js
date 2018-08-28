@@ -15,7 +15,6 @@ STATE_DATA.push(...[
  * @param {string=} data.addressRegion   http://schema.org/addressRegion
  * @param {string=} data.postalCode      http://schema.org/postalCode
  * @param {string=} data.addressCountry  http://schema.org/addressCountry
- * @param {(boolean|string)=} data.$regionName deprecated form of param `opts.regionName`
  * @param   {!Object=} opts additional rendering options
  * @param   {(boolean|string)=} opts.regionName should the region code programmatically expanded to its full name
  *                                              (e.g., expand "VA" to "Virginia")?
@@ -48,7 +47,7 @@ let xAddress_renderer/*: RenderingFunction<sdo.PostalAddress, { regionName?: boo
   // unabbreviate the region name
   if (data.addressRegion) {
     frag.querySelector('data[itemprop="addressRegion"]').value = data.addressRegion
-    if (data.$regionName === true || opts.regionName === true) {
+    if (opts.regionName === true) {
       frag.querySelector('slot[name="addressRegion"]').textContent = (() => {
           let returned;
           try {
@@ -61,8 +60,8 @@ let xAddress_renderer/*: RenderingFunction<sdo.PostalAddress, { regionName?: boo
           }
           return returned
       })()
-    } else if (data.$regionName || opts.regionName) {
-      frag.querySelector('slot[name="addressRegion"]').textContent = data.$regionName || opts.regionName
+    } else if (opts.regionName) {
+      frag.querySelector('slot[name="addressRegion"]').textContent = opts.regionName
     }
   } else {
     frag.querySelector('data[itemprop="addressRegion"]').remove()
