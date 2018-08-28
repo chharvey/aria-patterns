@@ -29,7 +29,7 @@ function xPersonFullname_renderer(frag, data, opts = {}) {
     'additionalName',
     'honorificPrefix',
     'honorificSuffix',
-  ].forEach(function (nameprop) {
+  ].forEach((nameprop) => {
     let slot = frag.querySelector(`slot[name="${nameprop}"]`)
     if (data[nameprop]) {
       slot.textContent = data[nameprop]
