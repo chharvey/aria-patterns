@@ -24,26 +24,6 @@ const META = JSON.stringify({
 }, null, 2)
 
 
-gulp.task('test', async function () {
-  require('./test/x-address.test.js');
-  require('./test/x-directory.test.js');
-  require('./test/x-permalink.test.js');
-  require('./test/x-person-fullname.test.js');
-})
-
-// HOW-TO: https://github.com/mlucool/gulp-jsdoc3#usage
-gulp.task('docs-api', async function () {
-  return gulp.src(['README.md', './index.js', './src/x-*/tpl/*.tpl.js'], {read: false})
-    .pipe(jsdoc(require('./config/jsdoc.json')))
-})
-
-// HOW-TO: https://github.com/kss-node/kss-node/issues/161#issuecomment-222292620
-gulp.task('docs-kss', ['test'], async function () {
-  return kss(require('./config/kss.json'))
-})
-
-gulp.task('docs', ['docs-api', 'docs-kss'])
-
 gulp.task('dist-style', async function () {
   return gulp.src('./src/x-*/css/*.less')
     .pipe(sourcemaps.init())
@@ -77,4 +57,24 @@ gulp.task('dist-script', async function () {
 
 gulp.task('dist', ['dist-style', 'dist-script'])
 
-gulp.task('build', ['test', 'docs', 'dist'])
+gulp.task('test', async function () {
+  require('./test/x-address.test.js');
+  require('./test/x-directory.test.js');
+  require('./test/x-permalink.test.js');
+  require('./test/x-person-fullname.test.js');
+})
+
+// HOW-TO: https://github.com/mlucool/gulp-jsdoc3#usage
+gulp.task('docs-api', async function () {
+  return gulp.src(['README.md', './index.js', './src/x-*/tpl/*.tpl.js'], {read: false})
+    .pipe(jsdoc(require('./config/jsdoc.json')))
+})
+
+// HOW-TO: https://github.com/kss-node/kss-node/issues/161#issuecomment-222292620
+gulp.task('docs-kss', async function () {
+  return kss(require('./config/kss.json'))
+})
+
+gulp.task('docs', ['docs-api', 'docs-kss'])
+
+gulp.task('build', ['dist', 'test', 'docs'])
