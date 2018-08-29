@@ -58,10 +58,12 @@ gulp.task('dist-script', async function () {
 gulp.task('dist', ['dist-style', 'dist-script'])
 
 gulp.task('test', async function () {
-  require('./test/x-address.test.js');
-  require('./test/x-directory.test.js');
-  require('./test/x-permalink.test.js');
-  require('./test/x-person-fullname.test.js');
+	return Promise.all([
+		require('./test/x-address.test.js')(),
+		require('./test/x-directory.test.js')(),
+		require('./test/x-permalink.test.js')(),
+		require('./test/x-person-fullname.test.js')(),
+	])
 })
 
 // HOW-TO: https://github.com/mlucool/gulp-jsdoc3#usage

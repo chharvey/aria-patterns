@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const util = require('util')
 
 const xjs = require('extrajs-dom')
 const mkdirp = require('make-dir')
@@ -24,6 +25,7 @@ let output = `
 </p>
 `
 
-mkdirp(path.join(__dirname, './out/')).then((pth) => {
+module.exports = async () => {
+  await mkdirp(path.join(__dirname, './out/'));
   return util.promisify(fs.writeFile)(path.join(__dirname, './out/x-address.test.html'), output, 'utf8')
-}).catch((e) => {})
+}
