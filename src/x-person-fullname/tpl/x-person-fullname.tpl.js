@@ -27,7 +27,7 @@ let xPersonFullname_renderer/*: RenderingFunction<sdo.Person, object>*/ = functi
     'additionalName',
     'honorificPrefix',
     'honorificSuffix',
-  ].forEach(function (nameprop) {
+  ].forEach((nameprop) => {
     let slot = frag.querySelector(`slot[name="${nameprop}"]`)
     if (data[nameprop]) {
       slot.textContent = data[nameprop]

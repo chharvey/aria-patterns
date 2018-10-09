@@ -37,7 +37,7 @@ let xAddress_renderer/*: RenderingFunction<sdo.PostalAddress, { regionName?: boo
     'addressRegion',
     'postalCode',
     'addressCountry',
-  ].forEach(function (nameprop) {
+  ].forEach((nameprop) => {
     let slot = frag.querySelector(`slot[name="${nameprop}"]`)
     if (data[nameprop]) {
       slot.textContent = data[nameprop]
@@ -49,16 +49,12 @@ let xAddress_renderer/*: RenderingFunction<sdo.PostalAddress, { regionName?: boo
     frag.querySelector('data[itemprop="addressRegion"]').value = data.addressRegion
     if (opts.regionName === true) {
       frag.querySelector('slot[name="addressRegion"]').textContent = (() => {
-          let returned;
-          try {
             let state = STATE_DATA.find((state) => state.code === data.addressRegion) || null
-            returned = state.name
-          } catch (e) {
-            e = new ReferenceError(`No data found for ${data.addressRegion}.`)
-            console.error(e)
-            returned = e.name
-          }
-          return returned
+				if (state) return state.name
+				else {
+					let err = `No data found for ${data.addressRegion}.`
+					return console.error(err) || err
+				}
       })()
     } else if (opts.regionName) {
       frag.querySelector('slot[name="addressRegion"]').textContent = opts.regionName
