@@ -1,2 +1,2 @@
-.o-Tablist{display:flex;flex-wrap:wrap}.o-Tablist__Tab{order:-1;flex:1;cursor:pointer}.o-Tablist__Tab[aria-selected=true]{font-weight:700}.o-Tablist__Panel{margin-bottom:0;-webkit-margin-after:unset;margin-block-end:unset;flex:100%}
+.o-Tablist{display:flex;flex-wrap:wrap}.o-Tablist[aria-orientation=vertical]{flex-direction:column;align-content:flex-start}.o-Tablist__Tab{order:-1;flex:1;cursor:pointer}.o-Tablist__Tab[aria-selected=true]{font-weight:700}.o-Tablist[data-reversed] .o-Tablist__Tab{order:1}.o-Tablist__Panel{margin-bottom:0;-webkit-margin-after:unset;margin-block-end:unset;flex:100%}
 /*# sourceMappingURL=o-Tablist.css.map */

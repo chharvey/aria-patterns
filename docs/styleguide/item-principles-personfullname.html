@@ -20,7 +20,7 @@
   <header class="kss-header">
     <h1 class="kss-doc-title">ARIA Patterns</h1>
   </header>
-  <nav class="kss-nav">
+  <nav class="kss-nav" aria-label="Style Guide">
     <ul class="kss-nav__menu">
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="./">
@@ -66,7 +66,8 @@
     </ul>
   </nav>
 </div>
-<article role="main" class="kss-main">
+<main class="kss-main" aria-label="Content">
+  <article>
 
     <div id="kssref-principles-personfullname" class="kss-section kss-section--depth-2 is-fullscreen">
 
@@ -86,7 +87,7 @@
           <p class="kss-toolbar">
             <a href="#kssref-principles-personfullname" data-kss-guides="true">
               <span class="kss-toolbar__tooltip">Toggle example guides</span>
-              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 64 64">
+              <svg focusable="false" aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 64 64">
                 <rect class="kss-toolbar__icon-fill" x="5" y="35" width="5" height="9"/>
                 <rect class="kss-toolbar__icon-fill" x="54" y="21" width="5" height="9"/>
                 <rect class="kss-toolbar__icon-fill" x="54" y="35" width="5" height="9"/>
@@ -107,7 +108,7 @@
             </a>
             <a href="#kssref-principles-personfullname" data-kss-markup="true">
               <span class="kss-toolbar__tooltip">Toggle HTML markup</span>
-              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 64 64">
+              <svg focusable="false" aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 64 64">
                 <path class="kss-toolbar__icon-fill" d="M37.555,46.239l6.103,6.103l20.342,-20.342l-20.342,-20.342l-6.103,6.103l14.24,14.239l-14.24,14.239Z"/>
                 <path class="kss-toolbar__icon-fill" d="M26.445,17.761l-6.103,-6.103l-20.342,20.342l20.342,20.342l6.103,-6.103l-14.24,-14.239l14.24,-14.239Z"/>
               </svg>
@@ -117,7 +118,7 @@
           <div class="kss-description">
             <p>Markup for a person’s full name in &quot;Px. First M. Last, Sx.&quot; format.
 For example: &quot;Dr. Martin L. King, Jr.&quot;</p>
-<p><footer><p>See the <a href="../api/global.html#xPersonFullname_renderer">xPersonFullname rendering function</a> for usage.</p></footer></p>
+<footer><p>See the [xPersonFullname rendering function](../api/global.html#xPersonFullname_renderer) for usage.</p></footer>
 <header><dl>
   <dt>author</dt>  <dd>Chris Harvey</dd>
   <dt>updated</dt> <dd><time>2018-03-08</time></dd>
@@ -138,6 +139,7 @@ document.querySelector('[itemtype="http://schema.org/Person"] > h1[itemprop="nam
 )
 </pre>
           </div>
+
 
       </div>
 
@@ -191,6 +193,7 @@ document.querySelector('[itemtype="http://schema.org/Person"] > h1[itemprop="nam
 
     </div>
 </article>
+</main>
 
 <!-- SCRIPTS -->
 <script src="kss-assets/kss.js"></script>

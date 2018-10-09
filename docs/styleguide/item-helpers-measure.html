@@ -20,7 +20,7 @@
   <header class="kss-header">
     <h1 class="kss-doc-title">ARIA Patterns</h1>
   </header>
-  <nav class="kss-nav" aria-label="Style Guide">
+  <nav class="kss-nav">
     <ul class="kss-nav__menu">
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="./">
@@ -34,8 +34,23 @@
         </a>
       </li>
       <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-principles.html">
+          <span class="kss-nav__ref">1</span><span class="kss-nav__name">Principles</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-objects.html">
           <span class="kss-nav__ref">2</span><span class="kss-nav__name">Objects</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-objects.html">
+          <span class="kss-nav__ref">2</span><span class="kss-nav__name">Objects</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-components.html">
+          <span class="kss-nav__ref">3</span><span class="kss-nav__name">Components</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
@@ -49,8 +64,23 @@
         </a>
       </li>
       <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-interfaces.html">
+          <span class="kss-nav__ref">4</span><span class="kss-nav__name">Interfaces</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-helpers.html">
           <span class="kss-nav__ref">5</span><span class="kss-nav__name">Helpers</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-helpers.html">
+          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Helpers</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-atoms.html">
+          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Atoms</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
@@ -63,31 +93,35 @@
           <span class="kss-nav__ref">7</span><span class="kss-nav__name">Hacks</span>
         </a>
       </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-hacks.html">
+          <span class="kss-nav__ref">7</span><span class="kss-nav__name">Hacks</span>
+        </a>
+      </li>
     </ul>
   </nav>
 </div>
-<main class="kss-main" aria-label="Content">
-  <article>
+<article role="main" class="kss-main">
 
-    <div id="kssref-helpers-hidden" class="kss-section kss-section--depth-2 is-fullscreen">
+    <div id="kssref-helpers-measure" class="kss-section kss-section--depth-2 is-fullscreen">
 
       <div class="kss-style">
         <h2 class="kss-title kss-title--level-2">
-          <a class="kss-title__permalink" href="#kssref-helpers-hidden">
+          <a class="kss-title__permalink" href="#kssref-helpers-measure">
             <span class="kss-title__ref">
-              5.1
+              5.5
               <span class="kss-title__permalink-hash">
-                  #Helpers.Hidden
+                  #Helpers.Measure
               </span>
             </span>
-            Hidden
+            Measure
           </a>
         </h2>
 
           <p class="kss-toolbar">
-            <a href="#kssref-helpers-hidden" data-kss-guides="true">
+            <a href="#kssref-helpers-measure" data-kss-guides="true">
               <span class="kss-toolbar__tooltip">Toggle example guides</span>
-              <svg focusable="false" aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 64 64">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 64 64">
                 <rect class="kss-toolbar__icon-fill" x="5" y="35" width="5" height="9"/>
                 <rect class="kss-toolbar__icon-fill" x="54" y="21" width="5" height="9"/>
                 <rect class="kss-toolbar__icon-fill" x="54" y="35" width="5" height="9"/>
@@ -106,9 +140,9 @@
                 <rect class="kss-toolbar__icon-fill" x="20" y="54" width="9" height="5"/>
               </svg>
             </a>
-            <a href="#kssref-helpers-hidden" data-kss-markup="true">
+            <a href="#kssref-helpers-measure" data-kss-markup="true">
               <span class="kss-toolbar__tooltip">Toggle HTML markup</span>
-              <svg focusable="false" aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 64 64">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 64 64">
                 <path class="kss-toolbar__icon-fill" d="M37.555,46.239l6.103,6.103l20.342,-20.342l-20.342,-20.342l-6.103,6.103l14.24,14.239l-14.24,14.239Z"/>
                 <path class="kss-toolbar__icon-fill" d="M26.445,17.761l-6.103,-6.103l-20.342,20.342l20.342,20.342l6.103,-6.103l-14.24,-14.239l14.24,-14.239Z"/>
               </svg>
@@ -116,26 +150,22 @@
           </p>
 
           <div class="kss-description">
-            <p>The Hidden Helper visually hides an element.
-Though the element is hidden from visual media, it is kept
-in the accessibility tree so that assistive technology such as screen readers
-can still expose it to users.
-A <a href="https://github.com/chharvey/chharvey.github.io/wiki/Accessible-Skip-Links">skip link</a>
-is a common use case for this pattern.</p>
-<p>Note: The <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-hidden"><code>[aria-hidden]</code> attribute</a>
-has the opposite effect:
-it hides an element from the accessibility tree while keeping it visually exposed.
-To hide the element from <em>both</em> the accessibility tree and visual media, you can use
-<code>[class=&quot;h-Hidden&quot; aria-hidden=&quot;true&quot;]</code>, or you can use the
-<a href="https://www.w3.org/TR/html52/editing.html#the-hidden-attribute"><code>[hidden]</code> attribute</a>,
-which is the preferred approach if the element is not
-<q cite="https://www.w3.org/TR/html52/editing.html#the-hidden-attribute">directly relevant</q>.</p>
+            <p>The Measure Helper constrains an element’s inline-size
+(width, in horizontal writing modes) to a reasonable line length.</p>
+<p>The default style sets the max-inline-size of the block to 66 characters, but there are
+narrow and wide variants for differing cases.</p>
+<p>The narrow variant is useful in mobile design when the user might want to
+zoom in on text. Reading text with too large a measure on mobile devices requires a lot of
+horizontal scrolling back and forth. Inversely, the wide variant is useful for
+large type when you might not want the text to wrap as often.</p>
+<p>Because the block is capped at a character length,
+this style is responsive to font-size. The bigger the font, the larger the line length
+can be before the text wraps. Try adjusting your browser’s font size to see the effects.</p>
 <header><dl>
   <dt>author</dt>  <dd>Chris Harvey</dd>
-  <dt>updated</dt> <dd><time>2017-02-09</time></dd>
+  <dt>updated</dt> <dd><time>2017-09-18</time></dd>
 </dl></header>
           </div>
-
 
       </div>
 
@@ -149,20 +179,34 @@ which is the preferred approach if the element is not
             </div>
 
           <div class="kss-modifier__example">
-            <!--link rel="stylesheet" href="/node_modules/aria-patterns/x-hidden/css/dist/h-Hidden.css"/-->
-<a class="h-Hidden " href="#0">skip to main content</a>
+            <p class="h-Measure ">If the measure is too short, the reader’s eyes
+have to dart back and forth more often, causing fatigue. If the measure is too long,
+the reader is more likely to lose track of the previous line.</p>
             <div class="kss-modifier__example-footer"></div>
           </div>
 
             <div class="kss-modifier__name kss-style">
-              :focus
+              .h-Measure--narrow
             </div>
             <div class="kss-modifier__description kss-style">
-              On focus, the element returns to static position.
+              narrow variant constrains the size even tighter
             </div>
             <div class="kss-modifier__example">
-              <!--link rel="stylesheet" href="/node_modules/aria-patterns/x-hidden/css/dist/h-Hidden.css"/-->
-<a class="h-Hidden pseudo-class-focus" href="#0">skip to main content</a>
+              <p class="h-Measure h-Measure--narrow">If the measure is too short, the reader’s eyes
+have to dart back and forth more often, causing fatigue. If the measure is too long,
+the reader is more likely to lose track of the previous line.</p>
+              <div class="kss-modifier__example-footer"></div>
+            </div>
+            <div class="kss-modifier__name kss-style">
+              .h-Measure--wide
+            </div>
+            <div class="kss-modifier__description kss-style">
+              wide variant is not as constrained
+            </div>
+            <div class="kss-modifier__example">
+              <p class="h-Measure h-Measure--wide">If the measure is too short, the reader’s eyes
+have to dart back and forth more often, causing fatigue. If the measure is too long,
+the reader is more likely to lose track of the previous line.</p>
               <div class="kss-modifier__example-footer"></div>
             </div>
         </div>
@@ -171,17 +215,17 @@ which is the preferred approach if the element is not
             <summary>
                 Markup
             </summary>
-            <pre class="prettyprint linenums lang-html"><code data-language="html">&lt;!--link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;/node_modules/aria-patterns/x-hidden/css/dist/h-Hidden.css&quot;/--&gt;
-&lt;a class&#x3D;&quot;h-Hidden [modifier class]&quot; href&#x3D;&quot;#0&quot;&gt;skip to main content&lt;/a&gt;</code></pre>
+            <pre class="prettyprint linenums lang-html"><code data-language="html">&lt;p class&#x3D;&quot;h-Measure [modifier class]&quot;&gt;If the measure is too short, the reader’s eyes
+have to dart back and forth more often, causing fatigue. If the measure is too long,
+the reader is more likely to lose track of the previous line.&lt;/p&gt;</code></pre>
           </details>
 
         <div class="kss-source kss-style">
-          Source: <code>h-Hidden.less</code>, line 7
+          Source: <code>_h-Measure.less</code>, line 7
         </div>
 
     </div>
 </article>
-</main>
 
 <!-- SCRIPTS -->
 <script src="kss-assets/kss.js"></script>
