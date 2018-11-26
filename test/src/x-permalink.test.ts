@@ -1,11 +1,12 @@
-const fs = require('fs')
-const path = require('path')
-const util = require('util')
+import * as fs from 'fs'
+import * as path from 'path'
+import * as util from 'util'
 
-const xjs = require('extrajs-dom')
-const mkdirp = require('make-dir')
+import * as mkdirp from 'make-dir'
 
-const {xPermalink} = require('../index.js')
+import * as xjs from 'extrajs-dom'
+
+import {xPermalink} from '../../index'
 
 
 let output = `
@@ -15,6 +16,6 @@ let output = `
 </section>
 `
 
-mkdirp(path.join(__dirname, './out/')).then((pth) => {
+export default mkdirp(path.join(__dirname, './out/')).then((pth) => {
   return util.promisify(fs.writeFile)(path.join(__dirname, './out/x-permalink.test.html'), output, 'utf8')
 }).catch((e) => { console.error(e) })

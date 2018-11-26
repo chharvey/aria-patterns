@@ -77,13 +77,13 @@ gulp.task('test-out', async function () {
 })
 
 gulp.task('test-run', async function () {
-		await Promise.all([
-			require('./test/out/x-address.test.js')         .default,
-			require('./test/out/x-directory.test.js')       .default,
-			require('./test/out/x-permalink.test.js')       .default,
-			require('./test/out/x-person-fullname.test.js') .default,
-		])
-		console.info('All tests ran successfully!')
+	await Promise.all([
+		require('./test/out/x-address.test.js'        ).default,
+		require('./test/out/x-directory.test.js'      ).default,
+		require('./test/out/x-permalink.test.js'      ).default,
+		require('./test/out/x-person-fullname.test.js').default,
+	])
+	console.info('All tests ran successfully!')
 })
 
 gulp.task('test', ['test-out', 'test-run'])
