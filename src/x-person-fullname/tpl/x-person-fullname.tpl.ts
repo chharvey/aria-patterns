@@ -22,7 +22,7 @@ function instructions(frag: DocumentFragment, data: sdo.Person): void {
    * @constant {!Object}
    */
   const formatting = {
-    /** The comma preceding the honorific suffix. */ comma: frag.querySelector('slot[name="familyName"] + span'),
+    /** The comma preceding the honorific suffix. */ comma: frag.querySelector('slot[name="familyName"] + span') !,
   }
   ;[
     'familyName',
@@ -31,7 +31,7 @@ function instructions(frag: DocumentFragment, data: sdo.Person): void {
     'honorificPrefix',
     'honorificSuffix',
   ].forEach((nameprop) => {
-    let slot = frag.querySelector(`slot[name="${nameprop}"]`)
+    let slot = frag.querySelector(`slot[name="${nameprop}"]`) !
     if (data[nameprop]) {
       slot.textContent = data[nameprop]
     } else slot.remove()
@@ -39,10 +39,10 @@ function instructions(frag: DocumentFragment, data: sdo.Person): void {
 
   // abbreviate the middle name
   if (data.additionalName) {
-    frag.querySelector('slot[name="additionalName"]'    ).textContent = `${data.additionalName[0]}.`
-    frag.querySelector('abbr[itemprop="additionalName"]').title       = data.additionalName
+    frag.querySelector('slot[name="additionalName"]'    ) !.textContent = `${data.additionalName[0]}.`
+    ;(frag.querySelector('abbr[itemprop="additionalName"]') as HTMLElement).title       = data.additionalName
   } else {
-    frag.querySelector('abbr[itemprop="additionalName"]').remove()
+    frag.querySelector('abbr[itemprop="additionalName"]') !.remove()
   }
 
   // remove unnecessary comma preceding suffix

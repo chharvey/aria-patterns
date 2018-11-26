@@ -30,12 +30,11 @@ function instructions(frag: DocumentFragment, data: sdo.WebPage, opts: OptsType)
 	// TODO opts.depth integer
   let subpages = (xjs.Object.typeOf(data.hasPart) === 'array' ) ? data.hasPart : [data.hasPart]
   let depth    = (xjs.Object.typeOf(opts.depth)   === 'number') ? opts.depth : Infinity
-  new xjs.HTMLOListElement(frag.querySelector('[role="directory"]')).populate(function (f, d) {
-    f.querySelector('[itemprop="url"]' ).href        = d.url
-    f.querySelector('[itemprop="name"]').textContent = d.name
+  new xjs.HTMLOListElement(frag.querySelector('[role="directory"]') as HTMLOListElement).populate(function (f, d) {
+		;(f.querySelector('[itemprop="url"]' ) as HTMLAnchorElement).href = d.url
+		f.querySelector('[itemprop="name"]') !.textContent = d.name
     if (d.hasPart && depth > 0) {
-      let template = xjs.HTMLTemplateElement.fromFileSync(path.join(__dirname, './x-directory.tpl.html'))
-      f.querySelector('[itemprop="hasPart"]').append(
+      f.querySelector('[itemprop="hasPart"]') !.append(
         xDirectory.process(d, { depth: depth - 1 })
       )
     }

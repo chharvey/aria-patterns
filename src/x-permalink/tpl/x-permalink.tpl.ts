@@ -31,7 +31,7 @@ const template: HTMLTemplateElement = xjs.HTMLTemplateElement
  * @param   data the job data to display
  */
 function instructions(frag: DocumentFragment, data: DataType): void {
-  new xjs.HTMLAnchorElement(frag.querySelector('a'))
+  new xjs.HTMLAnchorElement(frag.querySelector('a') !)
     .href(`#${data.id}`)
     .attr('aria-label', data.label || 'permalink')
     .textContent(data.text || '§') // &sect;

@@ -37,7 +37,7 @@ function instructions(frag: DocumentFragment, data: sdo.PostalAddress, opts: Opt
    * @constant {!Object}
    */
   const formatting = {
-    /** The comma between locality and region. */ comma: frag.querySelector('slot[name="addressLocality"] + span'),
+    /** The comma between locality and region. */ comma: frag.querySelector('slot[name="addressLocality"] + span') !,
     /** Line breaks separating lines of address. */ linebreaks: [...frag.querySelectorAll('br')],
   }
   ;[
@@ -47,7 +47,7 @@ function instructions(frag: DocumentFragment, data: sdo.PostalAddress, opts: Opt
     'postalCode',
     'addressCountry',
   ].forEach((nameprop) => {
-    let slot = frag.querySelector(`slot[name="${nameprop}"]`)
+    let slot = frag.querySelector(`slot[name="${nameprop}"]`) !
     if (data[nameprop]) {
       slot.textContent = data[nameprop]
     } else slot.remove()
@@ -55,9 +55,9 @@ function instructions(frag: DocumentFragment, data: sdo.PostalAddress, opts: Opt
 
   // unabbreviate the region name
   if (data.addressRegion) {
-    frag.querySelector('data[itemprop="addressRegion"]').value = data.addressRegion
+		;(frag.querySelector('data[itemprop="addressRegion"]') as HTMLDataElement).value = data.addressRegion
     if (opts.regionName === true) {
-      frag.querySelector('slot[name="addressRegion"]').textContent = (() => {
+      frag.querySelector('slot[name="addressRegion"]') !.textContent = (() => {
             let state = STATE_DATA.find((state) => state.code === data.addressRegion) || null
 				if (state) return state.name
 				else {
@@ -66,10 +66,10 @@ function instructions(frag: DocumentFragment, data: sdo.PostalAddress, opts: Opt
 				}
       })()
     } else if (opts.regionName) {
-      frag.querySelector('slot[name="addressRegion"]').textContent = opts.regionName
+      frag.querySelector('slot[name="addressRegion"]') !.textContent = opts.regionName
     }
   } else {
-    frag.querySelector('data[itemprop="addressRegion"]').remove()
+    frag.querySelector('data[itemprop="addressRegion"]') !.remove()
   }
 
   // remove unnecessary comma preceding region
