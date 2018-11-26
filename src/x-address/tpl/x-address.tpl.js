@@ -1,13 +1,19 @@
-const xjs = require('extrajs-dom')
+const path = require('path')
 
+const xjs = require('extrajs-dom')
 const STATE_DATA = require('extrajs-geo')
 STATE_DATA.push(...[
   { "code": "DC", "name": "District of Columbia" },
 ])
+const {Processor} = require('template-processor')
 
+
+const template/*: HTMLTemplateElement*/ = xjs.HTMLTemplateElement
+	.fromFileSync(path.join(__dirname, '../../../src/x-address/tpl/x-address.tpl.html')) // NB relative to dist
+	.node
 
 /**
- * @summary xAddress renderer.
+ * A postal address.
  * @param {DocumentFragment} frag the template content with which to render
  * @param {sdo.PostalAddress} data       http://schema.org/PostalAddress
  * @param {string=} data.streetAddress   http://schema.org/streetAddress
@@ -20,7 +26,7 @@ STATE_DATA.push(...[
  *                                              (e.g., expand "VA" to "Virginia")?
  *                                              or enter a string to name the region manually
  */
-let xAddress_renderer/*: RenderingFunction<sdo.PostalAddress, { regionName?: boolean|string }>*/ = function xAddress_renderer(frag, data, opts) {
+function instructions(frag/*: DocumentFragment*/, data/*: sdo.PostalAddress*/, opts/*: { regionName?: boolean|string }*/) {
   /**
    * @summary References to formatting elements.
    * @description We want to create these references before removing any elements from the DOM.
@@ -77,4 +83,4 @@ let xAddress_renderer/*: RenderingFunction<sdo.PostalAddress, { regionName?: boo
   }
 }
 
-module.exports = [xAddress_renderer]
+module.exports = new Processor(template, instructions)

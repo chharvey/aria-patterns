@@ -1,7 +1,14 @@
+const path = require('path')
+
 const xjs = require('extrajs-dom')
+const {Processor} = require('template-processor')
+
+const template/*: HTMLTemplateElement*/ = xjs.HTMLTemplateElement
+	.fromFileSync(path.join(__dirname, '../../../src/x-person-fullname/tpl/x-person-fullname.tpl.html')) // NB relative to dist
+	.node
 
 /**
- * @summary xPersonFullname renderer.
+ * A person’s name in "Px. First M. Last, Sx." format.
  * @param {DocumentFragment} frag the template content with which to render
  * @param {sdo.Person} data              http://schema.org/Person
  * @param {string}  data.givenName       http://schema.org/givenName
@@ -9,9 +16,8 @@ const xjs = require('extrajs-dom')
  * @param {string=} data.additionalName  http://schema.org/additionalName
  * @param {string=} data.honorificPrefix http://schema.org/honorificPrefix
  * @param {string=} data.honorificSuffix http://schema.org/honorificSuffix
- * @param   {!Object=} opts additional rendering options
  */
-let xPersonFullname_renderer/*: RenderingFunction<sdo.Person, object>*/ = function xPersonFullname_renderer(frag, data, opts) {
+function instructions(frag/*: DocumentFragment*/, data/*: sdo.Person*/) {
   /**
    * @summary References to formatting elements.
    * @description We want to create these references before removing any elements from the DOM.
@@ -48,4 +54,4 @@ let xPersonFullname_renderer/*: RenderingFunction<sdo.Person, object>*/ = functi
   }
 }
 
-module.exports = [xPersonFullname_renderer]
+module.exports = new Processor(template, instructions)
