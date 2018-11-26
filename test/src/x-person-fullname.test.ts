@@ -10,8 +10,7 @@ import * as sdo from 'schemaorg-jsd/dist/schemaorg' // TODO use an index file
 import {xPersonFullname} from '../../index'
 
 
-let data = {
-  "@type": "Person",
+let data: sdo.Person = {
   "familyName"     : "King",
   "givenName"      : "Martin",
   "additionalName" : "Luther",
@@ -19,7 +18,7 @@ let data = {
   "honorificSuffix": "Jr."
 }
 
-let output = `
+let output: string = `
 <article itemscope="" itemtype="http://schema.org/Person">
   <h1 itemprop="name">${
     new xjs.DocumentFragment(xPersonFullname.process(data)).innerHTML()
@@ -27,6 +26,6 @@ let output = `
 </article>
 `
 
-export default mkdirp(path.join(__dirname, './out/')).then((pth) => {
+export default mkdirp(path.join(__dirname, './out/')).then((_pth) => {
   return util.promisify(fs.writeFile)(path.join(__dirname, './out/x-person-fullname.test.html'), output, 'utf8')
 }).catch((e) => { console.error(e) })

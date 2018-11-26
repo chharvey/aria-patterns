@@ -10,7 +10,13 @@ import * as sdo from 'schemaorg-jsd/dist/schemaorg' // TODO use an index file
 import {xDirectory} from '../../index'
 
 
-let data = {
+interface WP extends sdo.WebPage {
+	'@type'?: string;
+	'@context'?:string;
+	hasPart?: WP|WP[];
+}
+
+let data: WP = {
   "@context": "http://schema.org/",
   "@type": "WebPage",
   "name": "A 2016 Event",
@@ -85,10 +91,10 @@ let data = {
   ]
 }
 
-let output = `
+let output: string = `
 <header><nav>${new xjs.DocumentFragment(xDirectory.process(data)).innerHTML()}</nav></header>
 `
 
-export default mkdirp(path.join(__dirname, './out/')).then((pth) => {
+export default mkdirp(path.join(__dirname, './out/')).then((_pth) => {
   return util.promisify(fs.writeFile)(path.join(__dirname, './out/x-directory.test.html'), output, 'utf8')
 }).catch((e) => { console.error(e) })

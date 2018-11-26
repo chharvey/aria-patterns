@@ -10,8 +10,7 @@ import * as sdo from 'schemaorg-jsd/dist/schemaorg' // TODO use an index file
 import {xAddress} from '../../index'
 
 
-let data = {
-  "@type": "PostalAddress",
+let data: sdo.PostalAddress = {
   "streetAddress"  : "1 First St NE",
   "addressLocality": "Washington",
   "addressRegion"  : "DC",
@@ -19,7 +18,7 @@ let data = {
   "addressCountry" : "United States",
 }
 
-let output = `
+let output: string = `
 <p itemscope="" itemtype="http://schema.org/Place">
   <span itemprop="location" itemscope="" itemtype="http://schema.org/PostalAddress">${
     new xjs.DocumentFragment(xAddress.process(data)).innerHTML()
@@ -27,6 +26,6 @@ let output = `
 </p>
 `
 
-export default mkdirp(path.join(__dirname, './out/')).then((pth) => {
+export default mkdirp(path.join(__dirname, './out/')).then((_pth) => {
   return util.promisify(fs.writeFile)(path.join(__dirname, './out/x-address.test.html'), output, 'utf8')
 }).catch((e) => { console.error(e) })

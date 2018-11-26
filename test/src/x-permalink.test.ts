@@ -9,13 +9,13 @@ import * as xjs from 'extrajs-dom'
 import {xPermalink} from '../../index'
 
 
-let output = `
+let output: string = `
 <!--link rel="stylesheet" href="/node_modules/aria-patterns/dist/x-permalink/css/c-Permalink.css"/-->
 <section id="section-title">
 	<h1>Section Title${new xjs.DocumentFragment(xPermalink.process({ id: 'section-title' })).innerHTML()}</h1>
 </section>
 `
 
-export default mkdirp(path.join(__dirname, './out/')).then((pth) => {
+export default mkdirp(path.join(__dirname, './out/')).then((_pth) => {
   return util.promisify(fs.writeFile)(path.join(__dirname, './out/x-permalink.test.html'), output, 'utf8')
 }).catch((e) => { console.error(e) })
