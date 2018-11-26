@@ -26,23 +26,24 @@ function instructions(frag: DocumentFragment, data: sdo.Person): void {
 		comma: frag.querySelector('slot[name="familyName"] + span') !,
 	}
 
-  ;[
-    'familyName',
-    'givenName',
-    'additionalName',
-    'honorificPrefix',
-    'honorificSuffix',
-  ].forEach((nameprop) => {
-    let slot = frag.querySelector(`slot[name="${nameprop}"]`) !
-    if (data[nameprop]) {
-      slot.textContent = data[nameprop]
-    } else slot.remove()
-  })
+	new xjs.Element(frag.querySelector('slot[name="familyName"]'     ) !).ifElse(data.familyName      , function () { this.textContent(data.familyName      !) }, function () { this.node.remove() })
+	new xjs.Element(frag.querySelector('slot[name="givenName"]'      ) !).ifElse(data.givenName       , function () { this.textContent(data.givenName       !) }, function () { this.node.remove() })
+	new xjs.Element(frag.querySelector('slot[name="honorificPrefix"]') !).ifElse(data.honorificPrefix , function () { this.textContent(data.honorificPrefix !) }, function () { this.node.remove() })
+	new xjs.Element(frag.querySelector('slot[name="honorificSuffix"]') !).ifElse(data.honorificSuffix , function () { this.textContent(data.honorificSuffix !) }, function () { this.node.remove() })
 
   // abbreviate the middle name
   if (data.additionalName) {
-    frag.querySelector('slot[name="additionalName"]'    ) !.textContent = `${data.additionalName[0]}.`
-    ;(frag.querySelector('abbr[itemprop="additionalName"]') as HTMLElement).title       = data.additionalName
+		let middle_string : string;
+		let middle_initial: string;
+		if (data.additionalName instanceof Array) {
+			middle_string  = data.additionalName.join(' ')
+			middle_initial = data.additionalName.map((n) => `${n[0]}.`).join(' ')
+		} else {
+			middle_string  = data.additionalName
+			middle_initial = `${data.additionalName[0]}.`
+		}
+		; frag.querySelector('slot[name="additionalName"]'    ) !              .textContent = middle_initial
+		;(frag.querySelector('abbr[itemprop="additionalName"]') as HTMLElement).title       = middle_string
   } else {
     frag.querySelector('abbr[itemprop="additionalName"]') !.remove()
   }

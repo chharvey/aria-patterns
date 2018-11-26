@@ -44,18 +44,11 @@ function instructions(frag: DocumentFragment, data: sdo.PostalAddress, opts: Opt
 		linebreaks : [...frag.querySelectorAll('br')],
 	}
 
-  ;[
-    'streetAddress',
-    'addressLocality',
-    'addressRegion',
-    'postalCode',
-    'addressCountry',
-  ].forEach((nameprop) => {
-    let slot = frag.querySelector(`slot[name="${nameprop}"]`) !
-    if (data[nameprop]) {
-      slot.textContent = data[nameprop]
-    } else slot.remove()
-  })
+	new xjs.Element(frag.querySelector('slot[name="streetAddress"]'  ) !).ifElse(data.streetAddress   , function () { this.textContent(data.streetAddress   !) }, function () { this.node.remove() })
+	new xjs.Element(frag.querySelector('slot[name="addressLocality"]') !).ifElse(data.addressLocality , function () { this.textContent(data.addressLocality !) }, function () { this.node.remove() })
+	new xjs.Element(frag.querySelector('slot[name="addressRegion"]'  ) !).ifElse(data.addressRegion   , function () { this.textContent(data.addressRegion   !) }, function () { this.node.remove() })
+	new xjs.Element(frag.querySelector('slot[name="postalCode"]'     ) !).ifElse(data.postalCode      , function () { this.textContent(data.postalCode      !) }, function () { this.node.remove() })
+	new xjs.Element(frag.querySelector('slot[name="addressCountry"]' ) !).ifElse(data.addressCountry  , function () { this.textContent(data.addressCountry  !) }, function () { this.node.remove() })
 
   // unabbreviate the region name
   if (data.addressRegion) {
