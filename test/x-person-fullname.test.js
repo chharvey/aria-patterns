@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const util = require('util')
 
 const xjs = require('extrajs-dom')
 const mkdirp = require('make-dir')
@@ -19,11 +20,11 @@ let data = {
 let output = `
 <article itemscope="" itemtype="http://schema.org/Person">
   <h1 itemprop="name">${
-    new xjs.DocumentFragment(xPersonFullname.template.render(xPersonFullname.renderer[0], data)).innerHTML()
+    new xjs.DocumentFragment(xPersonFullname.process(data)).innerHTML()
   }</h1>
 </article>
 `
 
 mkdirp(path.join(__dirname, './out/')).then((pth) => {
   return util.promisify(fs.writeFile)(path.join(__dirname, './out/x-person-fullname.test.html'), output, 'utf8')
-}).catch((e) => {})
+}).catch((e) => { console.error(e) })
