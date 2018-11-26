@@ -15,15 +15,17 @@ const template: HTMLTemplateElement = xjs.HTMLTemplateElement
  * @param   data http://schema.org/Person
  */
 function instructions(frag: DocumentFragment, data: sdo.Person): void {
-  /**
-   * @summary References to formatting elements.
-   * @description We want to create these references before removing any elements from the DOM.
-   * @private
-   * @constant {!Object}
-   */
-  const formatting = {
-    /** The comma preceding the honorific suffix. */ comma: frag.querySelector('slot[name="familyName"] + span') !,
-  }
+	/**
+	 * References to formatting elements.
+	 *
+	 * We want to create these references before removing any elements from the DOM.
+	 * @private
+	 */
+	const formatting = {
+		/** The comma preceding the honorific suffix. */
+		comma: frag.querySelector('slot[name="familyName"] + span') !,
+	}
+
   ;[
     'familyName',
     'givenName',

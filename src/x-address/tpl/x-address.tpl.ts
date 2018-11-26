@@ -4,7 +4,8 @@ import * as xjs from 'extrajs-dom'
 import {Processor} from 'template-processor'
 import * as sdo from 'schemaorg-jsd/dist/schemaorg' // TODO use an index file
 
-const STATE_DATA = require('extrajs-geo')
+type StateType = { code: string, name: string }
+const STATE_DATA: StateType[] = require('extrajs-geo')
 STATE_DATA.push(...[
   { "code": "DC", "name": "District of Columbia" },
 ])
@@ -30,16 +31,19 @@ const template: HTMLTemplateElement = xjs.HTMLTemplateElement
  * @param   opts additional processing options
  */
 function instructions(frag: DocumentFragment, data: sdo.PostalAddress, opts: OptsType): void {
-  /**
-   * @summary References to formatting elements.
-   * @description We want to create these references before removing any elements from the DOM.
-   * @private
-   * @constant {!Object}
-   */
-  const formatting = {
-    /** The comma between locality and region. */ comma: frag.querySelector('slot[name="addressLocality"] + span') !,
-    /** Line breaks separating lines of address. */ linebreaks: [...frag.querySelectorAll('br')],
-  }
+	/**
+	 * References to formatting elements.
+	 *
+	 * We want to create these references before removing any elements from the DOM.
+	 * @private
+	 */
+	const formatting = {
+		/** The comma between locality and region. */
+		comma: frag.querySelector('slot[name="addressLocality"] + span') !,
+		/** Line breaks separating lines of address. */
+		linebreaks : [...frag.querySelectorAll('br')],
+	}
+
   ;[
     'streetAddress',
     'addressLocality',
@@ -58,12 +62,13 @@ function instructions(frag: DocumentFragment, data: sdo.PostalAddress, opts: Opt
 		;(frag.querySelector('data[itemprop="addressRegion"]') as HTMLDataElement).value = data.addressRegion
     if (opts.regionName === true) {
       frag.querySelector('slot[name="addressRegion"]') !.textContent = (() => {
-            let state = STATE_DATA.find((state) => state.code === data.addressRegion) || null
-				if (state) return state.name
-				else {
-					let err = `No data found for ${data.addressRegion}.`
-					return console.error(err) || err
+				let state: StateType|null = STATE_DATA.find((state) => state.code === data.addressRegion) || null
+				if (state == null) {
+					let err: string = `No data found for ${data.addressRegion}.`
+					console.error(err)
+					return err
 				}
+				return state.name
       })()
     } else if (opts.regionName) {
       frag.querySelector('slot[name="addressRegion"]') !.textContent = opts.regionName
