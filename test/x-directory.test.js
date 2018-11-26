@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const util = require('util')
 
 const xjs = require('extrajs-dom')
 const mkdirp = require('make-dir')
@@ -82,9 +83,9 @@ let data = {
 }
 
 let output = `
-<header><nav>${new xjs.DocumentFragment(xDirectory.template.render(xDirectory.renderer[0], data)).innerHTML()}</nav></header>
+<header><nav>${new xjs.DocumentFragment(xDirectory.process(data)).innerHTML()}</nav></header>
 `
 
 mkdirp(path.join(__dirname, './out/')).then((pth) => {
   return util.promisify(fs.writeFile)(path.join(__dirname, './out/x-directory.test.html'), output, 'utf8')
-}).catch((e) => {})
+}).catch((e) => { console.error(e) })
