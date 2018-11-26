@@ -73,12 +73,12 @@ typings/
 .serverless
 
 
+# Generated build files
+dist/
+
 # Generated test files
 test/out/
 
 # Generated documentation & style guides
 docs/api/
 docs/styleguide/
-
-# Generated build files
-dist/

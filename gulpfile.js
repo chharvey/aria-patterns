@@ -12,7 +12,14 @@ const clean_css    = require('gulp-clean-css')
 const jsdoc        = require('gulp-jsdoc3')
 const babel        = require('gulp-babel')
 const sourcemaps   = require('gulp-sourcemaps')
+const typedoc      = require('gulp-typedoc')
+const typescript   = require('gulp-typescript')
 const kss          = require('kss')
+// require('typedoc')    // DO NOT REMOVE … peerDependency of `gulp-typedoc`
+// require('typescript') // DO NOT REMOVE … peerDependency of `gulp-typescript`
+
+const tsconfig      = require('./tsconfig.json')
+const typedocconfig = require('./config/typedoc.json')
 
 
 const PACKAGE = require('./package.json')
@@ -24,25 +31,11 @@ const META = JSON.stringify({
 }, null, 2)
 
 
-gulp.task('test', async function () {
-  require('./test/x-address.test.js');
-  require('./test/x-directory.test.js');
-  require('./test/x-permalink.test.js');
-  require('./test/x-person-fullname.test.js');
+gulp.task('dist-tpl', async function () {
+	return gulp.src('./src/x-*/tpl/*.tpl.ts')
+		.pipe(typescript(tsconfig.compilerOptions))
+		.pipe(gulp.dest('./dist/'))
 })
-
-// HOW-TO: https://github.com/mlucool/gulp-jsdoc3#usage
-gulp.task('docs-api', async function () {
-  return gulp.src(['README.md', './index.js', './src/x-*/tpl/*.tpl.js'], {read: false})
-    .pipe(jsdoc(require('./config/jsdoc.json')))
-})
-
-// HOW-TO: https://github.com/kss-node/kss-node/issues/161#issuecomment-222292620
-gulp.task('docs-kss', ['test'], async function () {
-  return kss(require('./config/kss.json'))
-})
-
-gulp.task('docs', ['docs-api', 'docs-kss'])
 
 gulp.task('dist-style', async function () {
   return gulp.src('./src/x-*/css/*.less')
@@ -75,6 +68,36 @@ gulp.task('dist-script', async function () {
     .pipe(gulp.dest('./dist/'))
 })
 
-gulp.task('dist', ['dist-style', 'dist-script'])
+gulp.task('dist', ['dist-tpl', 'dist-style', 'dist-script'])
 
-gulp.task('build', ['test', 'docs', 'dist'])
+gulp.task('test-out', async function () {
+	return gulp.src('./test/src/{,*.}test.ts')
+		.pipe(typescript(tsconfig.compilerOptions))
+		.pipe(gulp.dest('./test/out/'))
+})
+
+gulp.task('test-run', async function () {
+		await Promise.all([
+			require('./test/out/x-address.test.js')         .default,
+			require('./test/out/x-directory.test.js')       .default,
+			require('./test/out/x-permalink.test.js')       .default,
+			require('./test/out/x-person-fullname.test.js') .default,
+		])
+		console.info('All tests ran successfully!')
+})
+
+gulp.task('test', ['test-out', 'test-run'])
+
+gulp.task('docs-api', async function () {
+	return gulp.src('./src/x-*/tpl/*.tpl.ts')
+		.pipe(typedoc(typedocconfig))
+})
+
+// HOW-TO: https://github.com/kss-node/kss-node/issues/161#issuecomment-222292620
+gulp.task('docs-kss', ['test-run'], async function () {
+	return kss(require('./config/kss.json'))
+})
+
+gulp.task('docs', ['docs-api', 'docs-kss'])
+
+gulp.task('build', ['dist', 'test', 'docs'])

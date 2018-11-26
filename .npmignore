@@ -1,9 +1,9 @@
 # Output of 'npm pack'
 *.tgz
 
+# Generated test files
+test/out/
+
 # Generated documentation & style guides
 docs/api/
 docs/styleguide/
-
-# Generated build files
-!dist/
