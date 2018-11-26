@@ -10,25 +10,26 @@ STATE_DATA.push(...[
 ])
 
 
-const template/*: HTMLTemplateElement*/ = xjs.HTMLTemplateElement
+interface OptsType {
+	/**
+	 * Should the region code programmatically expanded to its full name?
+	 *
+	 * (e.g., expand "VA" to "Virginia"), or enter a string to name the region manually
+	 */
+	regionName?: boolean|string;
+}
+
+const template: HTMLTemplateElement = xjs.HTMLTemplateElement
 	.fromFileSync(path.join(__dirname, '../../../src/x-address/tpl/x-address.tpl.html')) // NB relative to dist
 	.node
 
 /**
  * A postal address.
- * @param {DocumentFragment} frag the template content with which to render
- * @param {sdo.PostalAddress} data       http://schema.org/PostalAddress
- * @param {string=} data.streetAddress   http://schema.org/streetAddress
- * @param {string=} data.addressLocality http://schema.org/addressLocality
- * @param {string=} data.addressRegion   http://schema.org/addressRegion
- * @param {string=} data.postalCode      http://schema.org/postalCode
- * @param {string=} data.addressCountry  http://schema.org/addressCountry
- * @param   {!Object=} opts additional rendering options
- * @param   {(boolean|string)=} opts.regionName should the region code programmatically expanded to its full name
- *                                              (e.g., expand "VA" to "Virginia")?
- *                                              or enter a string to name the region manually
+ * @param   frag the template to process
+ * @param   data http://schema.org/PostalAddress
+ * @param   opts additional processing options
  */
-function instructions(frag/*: DocumentFragment*/, data/*: sdo.PostalAddress*/, opts/*: { regionName?: boolean|string }*/) {
+function instructions(frag: DocumentFragment, data: sdo.PostalAddress, opts: OptsType): void {
   /**
    * @summary References to formatting elements.
    * @description We want to create these references before removing any elements from the DOM.

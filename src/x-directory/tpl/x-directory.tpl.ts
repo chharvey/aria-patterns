@@ -8,19 +8,26 @@ import * as sdo from 'schemaorg-jsd/dist/schemaorg' // TODO use an index file
 const xjs = { ...xjs1, ...xjs2 }
 
 
-const template/*: HTMLTemplateElement*/ = xjs.HTMLTemplateElement
+interface OptsType {
+	/**
+	 * number of nested directory levels
+	 * @default Infinity
+	 */
+	depth?: number;
+}
+
+const template: HTMLTemplateElement = xjs.HTMLTemplateElement
 	.fromFileSync(path.join(__dirname, '../../../src/x-directory/tpl/x-directory.tpl.html')) // NB relative to dist
 	.node
 
 /**
  * A website directory, in the form of a document outline.
- * @param   {DocumentFragment} frag the template content with which to render
- * @param   {sdo.WebPage} data                              http://schema.org/WebPage
- * @param   {(sdo.WebPage|Array<sdo.WebPage>)} data.hasPart http://schema.org/hasPart
- * @param   {!Object=} opts additional rendering options
- * @param   {integer=} [opts.depth=Infinity] number of nested directory levels
+ * @param   frag the template to process
+ * @param   data http://schema.org/WebPage
+ * @param   opts additional processing options
  */
-function instructions(frag/*: DocumentFragment*/, data/*: sdo.WebPage*/, opts/*: { depth?: integer }*/) {
+function instructions(frag: DocumentFragment, data: sdo.WebPage, opts: OptsType): void {
+	// TODO opts.depth integer
   let subpages = (xjs.Object.typeOf(data.hasPart) === 'array' ) ? data.hasPart : [data.hasPart]
   let depth    = (xjs.Object.typeOf(opts.depth)   === 'number') ? opts.depth : Infinity
   new xjs.HTMLOListElement(frag.querySelector('[role="directory"]')).populate(function (f, d) {

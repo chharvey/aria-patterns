@@ -4,19 +4,33 @@ import * as xjs from 'extrajs-dom'
 import {Processor} from 'template-processor'
 
 
-const template/*: HTMLTemplateElement*/ = xjs.HTMLTemplateElement
+interface DataType {
+	/**
+	 * The fragment identifier to link to.
+	 */
+	id: string;
+	/**
+	 * Human-readable text for `[aria-label]`.
+	 * @default 'permalink'
+	 */
+	label?: string;
+	/**
+	 * The `textContent` of the link.
+	 * @default '§'
+	 */
+	text?: string;
+}
+
+const template: HTMLTemplateElement = xjs.HTMLTemplateElement
 	.fromFileSync(path.join(__dirname, '../../../src/x-permalink/tpl/x-permalink.tpl.html')) // NB relative to dist
 	.node
 
 /**
  * A permalink for sections of a webpage.
- * @param   {DocumentFragment} frag the template content with which to render
- * @param   {!Object} data the job data to display
- * @param   {string} data.id the fragment identifier to link to
- * @param   {string=} data.label human-readable text for `[aria-label]`
- * @param   {string=} data.text the textContent of the link
+ * @param   frag the template to process
+ * @param   data the job data to display
  */
-function instructions(frag/*: DocumentFragment*/, data/*: { id: string, label?: string, text?: string }*/) {
+function instructions(frag: DocumentFragment, data: DataType): void {
   new xjs.HTMLAnchorElement(frag.querySelector('a'))
     .href(`#${data.id}`)
     .attr('aria-label', data.label || 'permalink')
