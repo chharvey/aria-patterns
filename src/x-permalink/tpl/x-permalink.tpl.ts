@@ -1,7 +1,8 @@
-const path = require('path')
+import * as path from 'path'
 
-const xjs = require('extrajs-dom')
-const {Processor} = require('template-processor')
+import * as xjs from 'extrajs-dom'
+import {Processor} from 'template-processor'
+
 
 const template/*: HTMLTemplateElement*/ = xjs.HTMLTemplateElement
 	.fromFileSync(path.join(__dirname, '../../../src/x-permalink/tpl/x-permalink.tpl.html')) // NB relative to dist
@@ -22,4 +23,4 @@ function instructions(frag/*: DocumentFragment*/, data/*: { id: string, label?: 
     .textContent(data.text || '§') // &sect;
 }
 
-module.exports = new Processor(template, instructions)
+export default new Processor(template, instructions)

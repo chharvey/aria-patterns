@@ -1,10 +1,12 @@
-const path = require('path')
+import * as path from 'path'
 
-const xjs = {
-  Object: require('extrajs').Object,
-  ...require('extrajs-dom'),
-}
-const {Processor} = require('template-processor')
+import * as xjs1 from 'extrajs'
+import * as xjs2 from 'extrajs-dom'
+import {Processor} from 'template-processor'
+import * as sdo from 'schemaorg-jsd/dist/schemaorg' // TODO use an index file
+
+const xjs = { ...xjs1, ...xjs2 }
+
 
 const template/*: HTMLTemplateElement*/ = xjs.HTMLTemplateElement
 	.fromFileSync(path.join(__dirname, '../../../src/x-directory/tpl/x-directory.tpl.html')) // NB relative to dist
@@ -35,4 +37,4 @@ function instructions(frag/*: DocumentFragment*/, data/*: sdo.WebPage*/, opts/*:
 
 const xDirectory = new Processor(template, instructions)
 
-module.exports = xDirectory
+export default xDirectory

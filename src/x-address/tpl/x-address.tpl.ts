@@ -1,11 +1,13 @@
-const path = require('path')
+import * as path from 'path'
 
-const xjs = require('extrajs-dom')
+import * as xjs from 'extrajs-dom'
+import {Processor} from 'template-processor'
+import * as sdo from 'schemaorg-jsd/dist/schemaorg' // TODO use an index file
+
 const STATE_DATA = require('extrajs-geo')
 STATE_DATA.push(...[
   { "code": "DC", "name": "District of Columbia" },
 ])
-const {Processor} = require('template-processor')
 
 
 const template/*: HTMLTemplateElement*/ = xjs.HTMLTemplateElement
@@ -83,4 +85,4 @@ function instructions(frag/*: DocumentFragment*/, data/*: sdo.PostalAddress*/, o
   }
 }
 
-module.exports = new Processor(template, instructions)
+export default new Processor(template, instructions)

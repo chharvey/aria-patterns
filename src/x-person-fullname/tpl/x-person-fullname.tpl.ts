@@ -1,7 +1,9 @@
-const path = require('path')
+import * as path from 'path'
 
-const xjs = require('extrajs-dom')
-const {Processor} = require('template-processor')
+import * as xjs from 'extrajs-dom'
+import {Processor} from 'template-processor'
+import * as sdo from 'schemaorg-jsd/dist/schemaorg' // TODO use an index file
+
 
 const template/*: HTMLTemplateElement*/ = xjs.HTMLTemplateElement
 	.fromFileSync(path.join(__dirname, '../../../src/x-person-fullname/tpl/x-person-fullname.tpl.html')) // NB relative to dist
@@ -54,4 +56,4 @@ function instructions(frag/*: DocumentFragment*/, data/*: sdo.Person*/) {
   }
 }
 
-module.exports = new Processor(template, instructions)
+export default new Processor(template, instructions)
