@@ -1,28 +1,44 @@
+import * as xjs from 'extrajs'
+
+
+/**
+ * A possible orientation of a tablist.
+ */
+enum Orientation {
+	HORIZONTAL,
+	VERTICAL,
+}
+
+
 /**
  * A list of tab-panel pairs, wherein all tabs and at most one panel are exposed to the user.
  */
 class CustomTablist {
+	/**
+	 * The element that this object controls.
+	 */
+	private readonly _NODE: HTMLElement;
+	/**
+	 * The set of tabs for this tablist.
+	 */
+	private readonly _TABS: CustomTab[];
+	/**
+	 * The set of panels for this tablist.
+	 */
+	private readonly _PANELS: CustomPanel[];
+
   /**
-   * @summary Construct a new CustomTablist object.
-   * @param   {HTMLElement} node preferrably a `.o-Tablist[role="tablist"][aria-orientation]` element
+   * Construct a new CustomTablist object.
+   * @param   node preferrably a `.o-Tablist[role="tablist"][aria-orientation]` element
    * @throws  {TypeError} if any child elements of the tablist are not `<details>` or script-supporting elements
    */
-  constructor(node) {
-    /**
-     * @summary The element that this object controls.
-     * @private
-     * @final
-     * @type {HTMLElement}
-     */
+  constructor(node: HTMLElement) {
     this._NODE = node
 
     /**
-     * @summary Do the tabs occur after the panels in source?
-     * @private
-     * @final
-     * @type {boolean}
+     * Do the tabs occur after the panels in source?
      */
-    const REVERSED = this._NODE.hasAttribute('data-reversed')
+    const REVERSED: boolean = this._NODE.hasAttribute('data-reversed')
 
     // Check proper DOM structure
     ;[...this._NODE.children].forEach((child) => {
@@ -33,124 +49,113 @@ class CustomTablist {
 
     // Move the tabs (<summary>) outside of the panels (<details>), into the tablist.
     this._NODE.querySelectorAll('details[role="tabpanel"]').forEach((panel) => {
-      let tab = document.createElement('div')
-      let summary = panel.querySelector('summary')
+			let tab     : HTMLDivElement   = document.createElement('div')
+			let summary : HTMLElement|null = panel.querySelector('summary')
 
       // transfer the attributes
+			if (summary !== null) {
       ;[...summary.attributes].forEach((attr) => {
-        summary.attributes.removeNamedItem(attr.name)
+        summary !.attributes.removeNamedItem(attr.name)
         tab.attributes.setNamedItem(attr)
       })
+			}
 
       // add new attributes
       tab.id = `tab-for-${panel.id}`
-      tab.setAttribute('aria-controls', panel.id)
-      panel.setAttribute('aria-labelledby', tab.id)
+      tab  .setAttribute('aria-controls'  , panel.id)
+      panel.setAttribute('aria-labelledby', tab.id  )
 
       // transfer the children
+			// , then hide the summary
+			if (summary !== null) {
       tab.append(...summary.childNodes)
-
       summary.hidden = true
+			}
 
       if (REVERSED) panel.after(tab)
-      else panel.before(tab)
+      else          panel.before(tab)
     })
 
-    /**
-     * @summary The set of tabs.
-     * @private
-     * @final
-     * @type {Array<CustomTablist.CustomTab>}
-     */
-    this._TABS = [...this._NODE.querySelectorAll('div[role="tab"]')].map((el) => new CustomTablist.CustomTab(el, this))
-    /**
-     * @summary The set of panels.
-     * @private
-     * @final
-     * @type {Array<CustomTablist.CustomPanel>}
-     */
-    this._PANELS = [...this._NODE.querySelectorAll('details[role="tabpanel"]')].map((el) => new CustomTablist.CustomPanel(el, this))
+		this._TABS   = [...this._NODE.querySelectorAll('div[role="tab"]'         )].map((el) => new CustomTab  (el as HTMLDivElement    , this))
+		this._PANELS = [...this._NODE.querySelectorAll('details[role="tabpanel"]')].map((el) => new CustomPanel(el as HTMLDetailsElement, this))
   }
 
   /**
-   * @summary The set of tabs.
-   * @type {Array<CustomTablist.CustomPanel>}
+   * Get this tablist’s tabs.
    */
-  get tabs() {
+  get tabs(): CustomTab[] {
     return this._TABS
   }
 
   /**
-   * @summary The set of panels.
-   * @type {Array<CustomTablist.CustomTab>}
+   * Get this tablist’s panels.
    */
-  get panels() {
+  get panels(): CustomPanel[] {
     return this._PANELS
   }
 
-  /**
-   * @summary The orientation, horizontal or vertical, of this tablist.
-   * @type {string}
-   */
-  get orientation() {
-    return this._NODE.getAttribute('aria-orientation')
-  }
+	/**
+	 * Get the orientation of this tablist.
+	 */
+	get orientation(): Orientation {
+		return xjs.Object.switch<Orientation>(this._NODE.getAttribute('aria-orientation') || 'default', {
+			'horizontal': () => Orientation.HORIZONTAL,
+			'vertical'  : () => Orientation.VERTICAL,
+			'default'   : () => { throw new ReferenceError('No orientation was found for this tablist.') },
+		})()
+	}
 
-  /**
-   * @summary Set the orientation of this tablist.
-   * @param {string=} dir either `'horizontal'` or `'vertical'`
-   */
-  set orientation(dir) {
-    if (!['horizontal', 'vertical'].includes(dir)) {
-      throw new RangeError('Orientation must be `horizontal` or `vertical`.')
-    }
-    this._NODE.setAttribute('aria-orientation', dir)
-  }
+	/**
+	 * Set the orientation of this tablist.
+	 * @param   dir the orientation to set
+	 */
+	set orientation(dir: Orientation) {
+		this._NODE.setAttribute('aria-orientation', Orientation[dir].toLowerCase())
+	}
 
   // /**
-  //  * @summary Whether tabs occur after or before the panels.
-  //  * @type {boolean}
+  //  * Get whether tabs occur after or before the panels.
   //  */
-  // get reversed() {
+  // get reversed(): boolean {
   //   return this._reversed
   // }
 
   // /**
-  //  * @summary Set whether tabs occur after or before panels in source.
-  //  * @param {boolean} rev should this tablist tab order be reversed?
+  //  * Set whether tabs occur after or before panels in source.
+  //  * @param   rev should this tablist tab order be reversed?
   //  */
-  // set reversed(rev) {
+  // set reversed(rev: boolean) {
   //   this._reversed = rev
   // }
 
-  /**
-   * @summary Change the orientation of this tablist.
-   */
-  flip() {
-    let map = {
-      horizontal: 'vertical',
-      vertical: 'horizontal',
-      default : 'horizontal',
-    }
-    this.orientation = map[this.orientation] || map.default
-  }
+	/**
+	 * Change the orientation of this tablist.
+	 */
+	flip(): void {
+		this.orientation = xjs.Object.switch<Orientation>(`${this.orientation}`, {
+			[Orientation.HORIZONTAL]: () => Orientation.VERTICAL,
+			[Orientation.VERTICAL  ]: () => Orientation.HORIZONTAL,
+			'default'               : () => Orientation.HORIZONTAL,
+		})()
+	}
 
   // /**
-  //  * @summary Change the orientation of this tablist.
+  //  * Change the orientation of this tablist.
   //  */
-  // reverse() {
+  // reverse(): void {
   //   this.reversed = !this.reversed
   // }
 
   /**
-   * @summary Update any children and shadow dom view of this element.
-   * @description This function should be called upon construction and every time the element’s attributes are changed.
+   * Update any children and shadow dom view of this element.
+   *
+   * This function should be called upon construction and every time the element’s attributes are changed.
    */
   updateRendering() {
     // If all panels are collapsed, select the first tab,
     // else select the tab of the initially open panel.
     if (this.panels.length) {
-      let open_panel_index = this.panels.findIndex((panel) => panel.open)
+      let open_panel_index: number = this.panels.findIndex((panel) => panel.open)
       this.tabs[Math.max(0, open_panel_index)].select()
     }
   }
@@ -158,48 +163,43 @@ class CustomTablist {
 
 /**
  * A tab in a tab list.
- * @inner
  */
-CustomTablist.CustomTab = class CustomTab {
-  /**
-   * @summary Construct a new CustomTab object.
-   * @param {HTMLElement} node preferrably a `.o-Tablist__Tab[role="tab"]` element
-   * @param {CustomTablist} parent the containing tablist object
-   */
-  constructor(node, parent) {
-    /**
-     * @summary The element that this object controls.
-     * @private
-     * @final
-     * @type {HTMLElement}
-     */
-    this._NODE = node
+class CustomTab {
+	/**
+	 * The element that this object controls.
+	 */
+	private readonly _NODE: HTMLDivElement;
+	/**
+	 * The containing tablist of this tab.
+	 */
+	private readonly _PARENT: CustomTablist;
 
-    /**
-     * @summary The containing tablist of this tab.
-     * @private
-     * @final
-     * @type {CustomTablist}
-     */
+  /**
+   * Construct a new CustomTab object.
+   * @param   node preferrably a `.o-Tablist__Tab[role="tab"]` element
+   * @param   parent the containing tablist object
+   */
+  constructor(node: HTMLDivElement, parent: CustomTablist) {
+    this._NODE   = node
     this._PARENT = parent
 
-    this._NODE.addEventListener('click', (e) => {
+    this._NODE.addEventListener('click', (_e) => {
       this.activate()
     })
 
     this._NODE.addEventListener('keydown', (e) => {
-      function prev() {
-        e.preventDefault()
-        let prev_tab_index = this._PARENT.tabs.indexOf(this) - 1
-        let select_tab_index = (prev_tab_index >= 0) ? prev_tab_index : this._PARENT.tabs.length - 1
-        this._PARENT.tabs[select_tab_index].activate()
-      }
-      function next() {
-        e.preventDefault()
-        let next_tab_index = this._PARENT.tabs.indexOf(this) + 1
-        let select_tab_index = (next_tab_index < this._PARENT.tabs.length) ? next_tab_index : 0
-        this._PARENT.tabs[select_tab_index].activate()
-      }
+			function prev(this: CustomTab) {
+			  e.preventDefault()
+			  let prev_tab_index   : number = this._PARENT.tabs.indexOf(this) - 1
+			  let select_tab_index : number = (prev_tab_index >= 0) ? prev_tab_index : this._PARENT.tabs.length - 1
+			  this._PARENT.tabs[select_tab_index].activate()
+			}
+			function next(this: CustomTab) {
+			  e.preventDefault()
+			  let next_tab_index   : number = this._PARENT.tabs.indexOf(this) + 1
+			  let select_tab_index : number = (next_tab_index < this._PARENT.tabs.length) ? next_tab_index : 0
+			  this._PARENT.tabs[select_tab_index].activate()
+			}
       switch (e.code) {
         case 'Space':
           e.preventDefault()
@@ -213,10 +213,10 @@ CustomTablist.CustomTab = class CustomTab {
           e.preventDefault()
           this._PARENT.tabs[this._PARENT.tabs.length - 1].activate()
           break;
-        case 'ArrowLeft'  : if (this._PARENT.orientation === 'horizontal') { prev.call(this) } break;
-        case 'ArrowRight' : if (this._PARENT.orientation === 'horizontal') { next.call(this) } break;
-        case 'ArrowUp'    : if (this._PARENT.orientation === 'vertical'  ) { prev.call(this) } break;
-        case 'ArrowDown'  : if (this._PARENT.orientation === 'vertical'  ) { next.call(this) } break;
+				case 'ArrowLeft'  : if (this._PARENT.orientation === Orientation.HORIZONTAL) { prev.call(this) } break;
+				case 'ArrowRight' : if (this._PARENT.orientation === Orientation.HORIZONTAL) { next.call(this) } break;
+				case 'ArrowUp'    : if (this._PARENT.orientation === Orientation.VERTICAL  ) { prev.call(this) } break;
+				case 'ArrowDown'  : if (this._PARENT.orientation === Orientation.VERTICAL  ) { next.call(this) } break;
       }
     })
 
@@ -231,9 +231,9 @@ CustomTablist.CustomTab = class CustomTab {
   }
 
   /**
-   * @summary Select this tab.
+   * Select this tab.
    */
-  select() {
+  select(): void {
     this._NODE.tabIndex = 0
     this.attributeChangedCallback('tabindex', null, '0')
 
@@ -244,22 +244,22 @@ CustomTablist.CustomTab = class CustomTab {
   }
 
   /**
-   * @summary Select and focus this tab.
+   * Select and focus this tab.
    */
-  activate() {
+  activate(): void {
     this.select()
     this._NODE.focus()
   }
 
   /**
    * @override HTMLElement#attributeChangedCallback
-   * @param   {string} name the local name of the attriute changed
-   * @param   {string} oldValue the attribute’s old value, or `null` if it had none
-   * @param   {string} newValue the new value to which to set the attribute, or `null` if it is removed
+   * @param   name the local name of the attriute changed
+   * @param   oldValue the attribute’s old value, or `null` if it had none
+   * @param   newValue the new value to which to set the attribute, or `null` if it is removed
    */
-  attributeChangedCallback(name, oldValue, newValue) {
-    const returned = {
-      'tabindex': (oldValue, newValue) => {
+  attributeChangedCallback(name: string, oldValue: string|null, newValue: string|null): void {
+		xjs.Object.switch<void>(name, {
+      'tabindex': (_oldValue: string|null, newValue: string|null) => {
         if (newValue === '0') {
           this._PARENT.tabs.forEach((tab) => {
             if (tab !== this) {
@@ -269,7 +269,7 @@ CustomTablist.CustomTab = class CustomTab {
           })
         }
       },
-      'aria-selected': (oldValue, newValue) => {
+      'aria-selected': (_oldValue: string|null, newValue: string|null) => {
         if (newValue === 'true') {
           this._PARENT.tabs.forEach((tab) => {
             if (tab !== this) {
@@ -279,15 +279,15 @@ CustomTablist.CustomTab = class CustomTab {
           })
         }
       },
-      default(oldValue, newValue) {},
-    }
-    ;(returned[name] || returned.default).call(null, oldValue, newValue)
+      default() {},
+		})(oldValue, newValue)
     this.updateRendering()
   }
 
   /**
-   * @summary Update any children and shadow dom view of this element.
-   * @description This function should be called upon construction and every time the element’s attributes are changed.
+   * Update any children and shadow dom view of this element.
+   *
+   * This function should be called upon construction and every time the element’s attributes are changed.
    */
   updateRendering() {
   }
@@ -296,45 +296,41 @@ CustomTablist.CustomTab = class CustomTab {
 
 /**
  * A panel in a tab list.
- * @inner
  */
-CustomTablist.CustomPanel = class CustomPanel {
-  /**
-   * @summary Construct a new CustomPanel object.
-   * @param {HTMLElement} node preferrably a `.o-Tablist__Panel[role="tabpanel"]` element
-   * @param {CustomTablist} parent the containing tablist object
-   */
-  constructor(node, parent) {
-    /**
-     * @summary The element that this object controls.
-     * @private
-     * @final
-     * @type {HTMLElement}
-     */
-    this._NODE = node
+class CustomPanel {
+	/**
+	 * The element that this object controls.
+	 */
+	private readonly _NODE: HTMLDetailsElement;
+	/**
+	 * The containing tablist of this panel.
+	 */
+	private readonly _PARENT: CustomTablist;
 
-    /**
-     * @summary The containing tablist of this tab.
-     * @private
-     * @final
-     * @type {CustomTablist}
-     */
+  /**
+   * Construct a new CustomPanel object.
+   * @param   node preferrably a `.o-Tablist__Panel[role="tabpanel"]` element
+   * @param   parent the containing tablist object
+   */
+  constructor(node: HTMLDetailsElement, parent: CustomTablist) {
+    this._NODE   = node
     this._PARENT = parent
   }
 
   /**
-   * @summary Is this panel open?
-   * @returns {boolean} does the panel have the `[open]` attribute?
+   * Is this panel open?
+   * @returns does the panel have the `[open]` attribute?
    */
-  get open() {
+  get open(): boolean {
     return this._NODE.open
   }
 
   /**
-   * @summary Expand this panel.
-   * @description Should only be called when its corresponding tab is selected.
+   * Expand this panel.
+   *
+   * Should only be called when its corresponding tab is selected.
    */
-  expand() {
+  expand(): void {
     this._NODE.open = true
     this.attributeChangedCallback('open', null, '')
 
@@ -348,9 +344,9 @@ CustomTablist.CustomPanel = class CustomPanel {
    * @param   {string} oldValue the attribute’s old value, or `null` if it had none
    * @param   {string} newValue the new value to which to set the attribute, or `null` if it is removed
    */
-  attributeChangedCallback(name, oldValue, newValue) {
-    const returned = {
-      'open': (oldValue, newValue) => {
+  attributeChangedCallback(name: string, oldValue: string|null, newValue: string|null): void {
+		xjs.Object.switch<void>(name, {
+      'open': (_oldValue: string|null, newValue: string|null) => {
         if (newValue === '') {
           this._PARENT.panels.forEach((panel) => {
             if (panel !== this) {
@@ -360,7 +356,7 @@ CustomTablist.CustomPanel = class CustomPanel {
           })
         }
       },
-      'aria-hidden': (oldValue, newValue) => {
+      'aria-hidden': (_oldValue: string|null, newValue: string|null) => {
         if (newValue === 'false') {
           this._PARENT.panels.forEach((panel) => {
             if (panel !== this) {
@@ -370,15 +366,15 @@ CustomTablist.CustomPanel = class CustomPanel {
           })
         }
       },
-      default(oldValue, newValue) {},
-    }
-    ;(returned[name] || returned.default).call(null, oldValue, newValue)
+      default() {},
+		})(oldValue, newValue)
     this.updateRendering()
   }
 
   /**
-   * @summary Update any children and shadow dom view of this element.
-   * @description This function should be called upon construction and every time the element’s attributes are changed.
+   * Update any children and shadow dom view of this element.
+   *
+   * This function should be called upon construction and every time the element’s attributes are changed.
    */
   updateRendering() {
   }
@@ -391,7 +387,9 @@ CustomTablist.CustomPanel = class CustomPanel {
 //   document.querySelector('[role="tablist"]').panels()[0].open = false
 // })
 
+
+// run the program
 document.querySelectorAll('.o-Tablist[role="tablist"]').forEach((tl) => {
-  tl.tablist = new CustomTablist(tl)
-  tl.tablist.updateRendering()
+	;(tl as any).tablist = new CustomTablist(tl as HTMLElement)
+	;(tl as any).tablist.updateRendering()
 })
