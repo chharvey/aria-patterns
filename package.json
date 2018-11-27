@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp build",
+    "prepublishOnly": "npm run build",
     "unbuild:address": "rm -r ./x-address/{css/dist/,test/out/}",
     "unbuild:directory": "rm -r ./x-directory/{css/dist/,test/out/}",
     "unbuild:hidden": "rm -r ./x-hidden/css/dist/",
