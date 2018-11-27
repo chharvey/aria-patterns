@@ -27,7 +27,7 @@ const META = JSON.stringify({
   version: PACKAGE.version,
   license: PACKAGE.license,
   built  : new Date().toISOString(),
-}, null, 2)
+}, null, '\t')
 
 
 gulp.task('dist-tpl', async function () {
@@ -57,8 +57,9 @@ gulp.task('dist-style', async function () {
 })
 
 gulp.task('dist-script', async function () {
-  return gulp.src('./src/x-*/js/*.js')
+  return gulp.src('./src/x-*/js/*.ts')
     .pipe(sourcemaps.init())
+    .pipe(typescript(tsconfig.compilerOptions))
     .pipe(babel({
       presets: ['env', 'minify']
     }))
@@ -88,7 +89,7 @@ gulp.task('test-run', async function () {
 gulp.task('test', ['test-out', 'test-run'])
 
 gulp.task('docs-api', async function () {
-	return gulp.src('./src/*/tpl/*.tpl.ts')
+	return gulp.src('./src/x-*/tpl/*.tpl.ts')
 		.pipe(typedoc(typedocconfig))
 })
 
