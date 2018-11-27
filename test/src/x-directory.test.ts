@@ -1,13 +1,22 @@
-const fs = require('fs')
-const path = require('path')
-const util = require('util')
+import * as fs from 'fs'
+import * as path from 'path'
+import * as util from 'util'
 
-const xjs = require('extrajs-dom')
-const mkdirp = require('make-dir')
+import * as mkdirp from 'make-dir'
 
-const {xDirectory} = require('../index.js')
+import * as xjs from 'extrajs-dom'
+import * as sdo from 'schemaorg-jsd/dist/schemaorg' // TODO use an index file
 
-let data = {
+import {xDirectory} from '../../index'
+
+
+interface WP extends sdo.WebPage {
+	'@type'?: string;
+	'@context'?:string;
+	hasPart?: WP|WP[];
+}
+
+let data: WP = {
   "@context": "http://schema.org/",
   "@type": "WebPage",
   "name": "A 2016 Event",
@@ -82,10 +91,10 @@ let data = {
   ]
 }
 
-let output = `
+let output: string = `
 <header><nav>${new xjs.DocumentFragment(xDirectory.process(data)).innerHTML()}</nav></header>
 `
 
-mkdirp(path.join(__dirname, './out/')).then((pth) => {
-  return util.promisify(fs.writeFile)(path.join(__dirname, './out/x-directory.test.html'), output, 'utf8')
-}).catch((e) => { console.error(e) })
+export default mkdirp(path.join(__dirname, '../docs/')).then((_pth) =>
+	util.promisify(fs.writeFile)(path.join(__dirname, '../docs/x-directory.test.html'), output, 'utf8')
+)
