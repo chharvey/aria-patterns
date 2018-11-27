@@ -1,11 +1,9 @@
 import * as path from 'path'
 
-import * as xjs1 from 'extrajs'
-import * as xjs2 from 'extrajs-dom'
+import * as xjs from 'extrajs-dom'
 import {Processor} from 'template-processor'
 import * as sdo from 'schemaorg-jsd/dist/schemaorg' // TODO use an index file
 
-const xjs = { ...xjs1, ...xjs2 }
 
 interface XDirectoryOptsType {
 	/**

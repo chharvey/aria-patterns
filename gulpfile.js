@@ -89,7 +89,7 @@ gulp.task('test-run', async function () {
 gulp.task('test', ['test-out', 'test-run'])
 
 gulp.task('docs-api', async function () {
-	return gulp.src('./src/x-*/tpl/*.tpl.ts')
+	return gulp.src('./src/*/tpl/*.tpl.ts')
 		.pipe(typedoc(typedocconfig))
 })
 
