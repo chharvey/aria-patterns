@@ -1,6 +1,6 @@
 
 /*################################*\
-    p-Address.less
+		i-Address.less
 \*################################*/
 
 
@@ -13,17 +13,18 @@
 // ```
 // Note that this pattern does not use an `<address>` element,
 // as that is specifically reserved for contact information of the authoring person or organization of a website.
-// <footer><p>See the [xAddress rendering function](../api/global.html#xAddress_renderer) for usage.</p></footer>
+//
+// See the [xAddress Processor](../api/globals.html#xaddress) for usage.
 // <header><dl>
 //   <dt>author</dt>  <dd>Chris Harvey</dd>
-//   <dt>updated</dt> <dd><time>2018-03-12</time></dd>
+//   <dt>updated</dt> <dd><time>2018-11-26</time></dd>
 // </dl></header>
 //
 // DOM:
 // <pre>
-// const {xAddress} = require('aria-patterns')
+// import {xAddress} from 'aria-patterns'
 // document.querySelector('[itemtype="http://schema.org/PostalAddress"]').append(
-//   xAddress.render({
+//   xAddress.process({
 //     "@type": "PostalAddress",
 //     "streetAddress"  : "1 First St NE",
 //     "addressLocality": "Washington",
@@ -39,4 +40,4 @@
 //
 // Weight: 3
 //
-// Styleguide Principles.Address
+// Styleguide Interfaces.Address
