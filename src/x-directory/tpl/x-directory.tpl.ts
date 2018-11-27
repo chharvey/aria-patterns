@@ -1,5 +1,6 @@
 import * as path from 'path'
 
+import {NaNError} from 'extrajs'
 import * as xjs from 'extrajs-dom'
 import {Processor} from 'template-processor'
 import * as sdo from 'schemaorg-jsd/dist/schemaorg' // TODO use an index file
@@ -18,6 +19,7 @@ const template: HTMLTemplateElement = xjs.HTMLTemplateElement
 	.node
 
 function instructions(frag: DocumentFragment, data: sdo.WebPage, opts: XDirectoryOptsType): void {
+	if (Number.isNaN(opts.depth !)) throw new NaNError()
 	let subpages : sdo.CreativeWork[] = (data.hasPart instanceof Array) ? data.hasPart : (data.hasPart) ? [data.hasPart] : []
 	let depth    : number = (typeof opts.depth === 'number') ? Math.round(opts.depth) : Infinity
   new xjs.HTMLOListElement(frag.querySelector('[role="directory"]') as HTMLOListElement).populate(function (f, d) {
