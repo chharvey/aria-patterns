@@ -1,4 +1,16 @@
-import * as xjs from 'extrajs'
+interface SwitchFn<T> extends Function {
+	(this: any, ...args: any[]): T;
+	call(this_arg: any, ...args: any[]): T;
+}
+function xjs_Object_switch<T>(key: string, dictionary: { [index: string]: SwitchFn<T> }): SwitchFn<T> {
+	let returned = dictionary[key]
+	if (!returned) {
+		console.warn(`Key '${key}' cannot be found. Using key 'default'…`)
+		returned = dictionary['default']
+		if (!returned) throw new ReferenceError(`No default key found.`)
+	}
+	return returned
+}
 
 
 /**
@@ -98,7 +110,7 @@ class CustomTablist {
 	 * Get the orientation of this tablist.
 	 */
 	get orientation(): Orientation {
-		return xjs.Object.switch<Orientation>(this._NODE.getAttribute('aria-orientation') || 'default', {
+		return xjs_Object_switch<Orientation>(this._NODE.getAttribute('aria-orientation') || 'default', {
 			'horizontal': () => Orientation.HORIZONTAL,
 			'vertical'  : () => Orientation.VERTICAL,
 			'default'   : () => { throw new ReferenceError('No orientation was found for this tablist.') },
@@ -132,7 +144,7 @@ class CustomTablist {
 	 * Change the orientation of this tablist.
 	 */
 	flip(): void {
-		this.orientation = xjs.Object.switch<Orientation>(`${this.orientation}`, {
+		this.orientation = xjs_Object_switch<Orientation>(`${this.orientation}`, {
 			[Orientation.HORIZONTAL]: () => Orientation.VERTICAL,
 			[Orientation.VERTICAL  ]: () => Orientation.HORIZONTAL,
 			'default'               : () => Orientation.HORIZONTAL,
@@ -258,7 +270,7 @@ class CustomTab {
    * @param   newValue the new value to which to set the attribute, or `null` if it is removed
    */
   attributeChangedCallback(name: string, oldValue: string|null, newValue: string|null): void {
-		xjs.Object.switch<void>(name, {
+		xjs_Object_switch<void>(name, {
       'tabindex': (_oldValue: string|null, newValue: string|null) => {
         if (newValue === '0') {
           this._PARENT.tabs.forEach((tab) => {
@@ -345,7 +357,7 @@ class CustomPanel {
    * @param   {string} newValue the new value to which to set the attribute, or `null` if it is removed
    */
   attributeChangedCallback(name: string, oldValue: string|null, newValue: string|null): void {
-		xjs.Object.switch<void>(name, {
+		xjs_Object_switch<void>(name, {
       'open': (_oldValue: string|null, newValue: string|null) => {
         if (newValue === '') {
           this._PARENT.panels.forEach((panel) => {
