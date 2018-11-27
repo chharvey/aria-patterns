@@ -21,10 +21,10 @@ function instructions(frag: DocumentFragment, data: sdo.Person): void {
 		comma: frag.querySelector('slot[name="familyName"] + span') !,
 	}
 
-	new xjs.Element(frag.querySelector('slot[name="familyName"]'     ) !).ifElse(data.familyName      , function () { this.textContent(data.familyName      !) }, function () { this.node.remove() })
-	new xjs.Element(frag.querySelector('slot[name="givenName"]'      ) !).ifElse(data.givenName       , function () { this.textContent(data.givenName       !) }, function () { this.node.remove() })
-	new xjs.Element(frag.querySelector('slot[name="honorificPrefix"]') !).ifElse(data.honorificPrefix , function () { this.textContent(data.honorificPrefix !) }, function () { this.node.remove() })
-	new xjs.Element(frag.querySelector('slot[name="honorificSuffix"]') !).ifElse(data.honorificSuffix , function () { this.textContent(data.honorificSuffix !) }, function () { this.node.remove() })
+	new xjs.Element(frag.querySelector('slot[name="familyName"]'     ) !).exe(function () { (data.familyName     ) ? this.textContent(data.familyName     ) : this.node.remove() })
+	new xjs.Element(frag.querySelector('slot[name="givenName"]'      ) !).exe(function () { (data.givenName      ) ? this.textContent(data.givenName      ) : this.node.remove() })
+	new xjs.Element(frag.querySelector('slot[name="honorificPrefix"]') !).exe(function () { (data.honorificPrefix) ? this.textContent(data.honorificPrefix) : this.node.remove() })
+	new xjs.Element(frag.querySelector('slot[name="honorificSuffix"]') !).exe(function () { (data.honorificSuffix) ? this.textContent(data.honorificSuffix) : this.node.remove() })
 
   // abbreviate the middle name
   if (data.additionalName) {

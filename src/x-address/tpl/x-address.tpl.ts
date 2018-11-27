@@ -38,11 +38,11 @@ function instructions(frag: DocumentFragment, data: sdo.PostalAddress, opts: XAd
 		linebreaks : [...frag.querySelectorAll('br')],
 	}
 
-	new xjs.Element(frag.querySelector('slot[name="streetAddress"]'  ) !).ifElse(data.streetAddress   , function () { this.textContent(data.streetAddress   !) }, function () { this.node.remove() })
-	new xjs.Element(frag.querySelector('slot[name="addressLocality"]') !).ifElse(data.addressLocality , function () { this.textContent(data.addressLocality !) }, function () { this.node.remove() })
-	new xjs.Element(frag.querySelector('slot[name="addressRegion"]'  ) !).ifElse(data.addressRegion   , function () { this.textContent(data.addressRegion   !) }, function () { this.node.remove() })
-	new xjs.Element(frag.querySelector('slot[name="postalCode"]'     ) !).ifElse(data.postalCode      , function () { this.textContent(data.postalCode      !) }, function () { this.node.remove() })
-	new xjs.Element(frag.querySelector('slot[name="addressCountry"]' ) !).ifElse(data.addressCountry  , function () { this.textContent(data.addressCountry  !) }, function () { this.node.remove() })
+	new xjs.Element(frag.querySelector('slot[name="streetAddress"]'  ) !).exe(function () { (data.streetAddress  ) ? this.textContent(data.streetAddress  ) : this.node.remove() })
+	new xjs.Element(frag.querySelector('slot[name="addressLocality"]') !).exe(function () { (data.addressLocality) ? this.textContent(data.addressLocality) : this.node.remove() })
+	new xjs.Element(frag.querySelector('slot[name="addressRegion"]'  ) !).exe(function () { (data.addressRegion  ) ? this.textContent(data.addressRegion  ) : this.node.remove() })
+	new xjs.Element(frag.querySelector('slot[name="postalCode"]'     ) !).exe(function () { (data.postalCode     ) ? this.textContent(data.postalCode     ) : this.node.remove() })
+	new xjs.Element(frag.querySelector('slot[name="addressCountry"]' ) !).exe(function () { (data.addressCountry ) ? this.textContent(data.addressCountry ) : this.node.remove() })
 
   // unabbreviate the region name
   if (data.addressRegion) {
