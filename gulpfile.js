@@ -71,7 +71,7 @@ gulp.task('dist-script', async function () {
 gulp.task('dist', ['dist-tpl', 'dist-style', 'dist-script'])
 
 gulp.task('test-out', async function () {
-	return gulp.src('./test/src/{,*.}test.ts')
+	return gulp.src('./test/src/*.test.ts')
 		.pipe(typescript(tsconfig.compilerOptions))
 		.pipe(gulp.dest('./test/out/'))
 })

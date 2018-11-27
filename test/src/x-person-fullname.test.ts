@@ -26,6 +26,6 @@ let output: string = `
 </article>
 `
 
-export default mkdirp(path.join(__dirname, './out/')).then((_pth) => {
-  return util.promisify(fs.writeFile)(path.join(__dirname, './out/x-person-fullname.test.html'), output, 'utf8')
-}).catch((e) => { console.error(e) })
+export default mkdirp(path.join(__dirname, '../docs/')).then((_pth) =>
+	util.promisify(fs.writeFile)(path.join(__dirname, '../docs/x-person-fullname.test.html'), output, 'utf8')
+)

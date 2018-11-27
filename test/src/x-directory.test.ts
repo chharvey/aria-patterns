@@ -95,6 +95,6 @@ let output: string = `
 <header><nav>${new xjs.DocumentFragment(xDirectory.process(data)).innerHTML()}</nav></header>
 `
 
-export default mkdirp(path.join(__dirname, './out/')).then((_pth) => {
-  return util.promisify(fs.writeFile)(path.join(__dirname, './out/x-directory.test.html'), output, 'utf8')
-}).catch((e) => { console.error(e) })
+export default mkdirp(path.join(__dirname, '../docs/')).then((_pth) =>
+	util.promisify(fs.writeFile)(path.join(__dirname, '../docs/x-directory.test.html'), output, 'utf8')
+)

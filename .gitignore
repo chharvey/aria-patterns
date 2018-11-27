@@ -78,6 +78,7 @@ dist/
 
 # Generated test files
 test/out/
+test/docs/
 
 # Generated documentation & style guides
 docs/api/
