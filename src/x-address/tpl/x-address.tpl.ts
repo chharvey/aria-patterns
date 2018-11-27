@@ -11,7 +11,7 @@ STATE_DATA.push(...[
 ])
 
 
-interface OptsType {
+interface XAddressOptsType {
 	/**
 	 * Should the region code programmatically expanded to its full name?
 	 *
@@ -24,13 +24,7 @@ const template: HTMLTemplateElement = xjs.HTMLTemplateElement
 	.fromFileSync(path.join(__dirname, '../../../src/x-address/tpl/x-address.tpl.html')) // NB relative to dist
 	.node
 
-/**
- * A postal address.
- * @param   frag the template to process
- * @param   data http://schema.org/PostalAddress
- * @param   opts additional processing options
- */
-function instructions(frag: DocumentFragment, data: sdo.PostalAddress, opts: OptsType): void {
+function instructions(frag: DocumentFragment, data: sdo.PostalAddress, opts: XAddressOptsType): void {
 	/**
 	 * References to formatting elements.
 	 *
@@ -84,4 +78,12 @@ function instructions(frag: DocumentFragment, data: sdo.PostalAddress, opts: Opt
   }
 }
 
-export default new Processor(template, instructions)
+/**
+ * Template for processing a postal address, in the format:
+ * ```
+ * 1600 Pennsylvania Avenue NW
+ * Washington, DC 20006
+ * ```
+ */
+const xAddress: Processor<sdo.PostalAddress, XAddressOptsType> = new Processor(template, instructions)
+export default xAddress

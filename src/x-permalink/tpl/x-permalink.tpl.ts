@@ -4,7 +4,7 @@ import * as xjs from 'extrajs-dom'
 import {Processor} from 'template-processor'
 
 
-interface DataType {
+interface XPermalinkDataType {
 	/**
 	 * The fragment identifier to link to.
 	 */
@@ -25,16 +25,15 @@ const template: HTMLTemplateElement = xjs.HTMLTemplateElement
 	.fromFileSync(path.join(__dirname, '../../../src/x-permalink/tpl/x-permalink.tpl.html')) // NB relative to dist
 	.node
 
-/**
- * A permalink for sections of a webpage.
- * @param   frag the template to process
- * @param   data the job data to display
- */
-function instructions(frag: DocumentFragment, data: DataType): void {
+function instructions(frag: DocumentFragment, data: XPermalinkDataType): void {
   new xjs.HTMLAnchorElement(frag.querySelector('a') !)
     .href(`#${data.id}`)
     .attr('aria-label', data.label || 'permalink')
     .textContent(data.text || '§') // &sect;
 }
 
-export default new Processor(template, instructions)
+/**
+ * A permalink for a section of a webpage.
+ */
+const xPermalink: Processor<XPermalinkDataType, object> = new Processor(template, instructions)
+export default xPermalink

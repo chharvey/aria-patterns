@@ -9,11 +9,6 @@ const template: HTMLTemplateElement = xjs.HTMLTemplateElement
 	.fromFileSync(path.join(__dirname, '../../../src/x-person-fullname/tpl/x-person-fullname.tpl.html')) // NB relative to dist
 	.node
 
-/**
- * A person’s name in "Px. First M. Last, Sx." format.
- * @param   frag the template to process
- * @param   data http://schema.org/Person
- */
 function instructions(frag: DocumentFragment, data: sdo.Person): void {
 	/**
 	 * References to formatting elements.
@@ -54,4 +49,8 @@ function instructions(frag: DocumentFragment, data: sdo.Person): void {
   }
 }
 
-export default new Processor(template, instructions)
+/**
+ * A person’s name in "Px. First M. Last, Sx." format.
+ */
+const xPersonFullname: Processor<sdo.Person, object> = new Processor(template, instructions)
+export default xPersonFullname

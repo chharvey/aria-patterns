@@ -1,6 +1,6 @@
 
 /*################################*\
-    p-Directory.less
+		i-Directory.less
 \*################################*/
 
 
@@ -10,15 +10,16 @@
 // It is also commonly known as a “sitemap”.
 // This principle does not have any styles, but it provides the
 // semantic and accessible structure necessary to convey a sitemap.
-// <footer><p>See the [xDirectory rendering function](../api/global.html#xDirectory_renderer) for usage.</p></footer>
+//
+// See the [xDirectory Processor](../api/globals.html#xdirectory) for usage.
 // <header><dl>
 //   <dt>author</dt>  <dd>Chris Harvey</dd>
-//   <dt>updated</dt> <dd><time>2018-03-08</time></dd>
+//   <dt>updated</dt> <dd><time>2018-11-26</time></dd>
 // </dl></header>
 //
 // DOM:
 // <pre>
-// const {xDirectory} = require('aria-patterns')
+// import {xDirectory} from 'aria-patterns'
 // let data = {
 //   "@type": "WebPage",
 //   "name": "A 2016 Event",
@@ -52,7 +53,7 @@
 //   ]
 // }
 // document.querySelector('header > nav').append(
-//   xDirectory.render(data)
+//   xDirectory.process(data)
 // )
 // </pre>
 //
@@ -60,4 +61,4 @@
 //
 // Weight: 1
 //
-// Styleguide Principles.Directory
+// Styleguide Interfaces.Directory
