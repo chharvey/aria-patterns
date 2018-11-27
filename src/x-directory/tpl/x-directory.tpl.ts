@@ -28,7 +28,7 @@ const template: HTMLTemplateElement = xjs.HTMLTemplateElement
  */
 function instructions(frag: DocumentFragment, data: sdo.WebPage, opts: OptsType): void {
 	let subpages : sdo.CreativeWork[] = (data.hasPart instanceof Array) ? data.hasPart : (data.hasPart) ? [data.hasPart] : []
-	let depth    : number = (typeof opts.depth === 'number') ? (xjs.Number.assertType(opts.depth, 'integer'), opts.depth) : Infinity
+	let depth    : number = (typeof opts.depth === 'number') ? Math.round(opts.depth) : Infinity
   new xjs.HTMLOListElement(frag.querySelector('[role="directory"]') as HTMLOListElement).populate(function (f, d) {
 		;(f.querySelector('[itemprop="url"]' ) as HTMLAnchorElement).href        = d.url  || '#0'
 		; f.querySelector('[itemprop="name"]') !                    .textContent = d.name || d.toString()
