@@ -6,14 +6,6 @@
   "scripts": {
     "build": "gulp build",
     "prepublishOnly": "npm run build",
-    "unbuild:address": "rm -r ./x-address/{css/dist/,test/out/}",
-    "unbuild:directory": "rm -r ./x-directory/{css/dist/,test/out/}",
-    "unbuild:hidden": "rm -r ./x-hidden/css/dist/",
-    "unbuild:permalink": "rm -r ./x-permalink/{css/dist/,test/out/}",
-    "unbuild:person-fullname": "rm -r ./x-person-fullname/{css/dist/,test/out/}",
-    "unbuild:tablist": "rm -r ./x-tablist/{css/dist/,js/dist/}",
-    "unbuild:each": "npm run unbuild:address  &&  npm run unbuild:directory  &&  npm run unbuild:hidden  &&  npm run unbuild:permalink  &&  npm run unbuild:person-fullname  &&  npm run unbuild:tablist",
-    "unbuild": "rm -r ./docs/{styleguide,api}/  &&  npm run unbuild:each",
     "test": "gulp test"
   },
   "repository": {
