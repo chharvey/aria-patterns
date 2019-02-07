@@ -1,8 +1,6 @@
-interface SwitchFn<T> extends Function {
-	(this: any, ...args: any[]): T;
-	call(this_arg: any, ...args: any[]): T;
-}
-function xjs_Object_switch<T>(key: string, dictionary: { [index: string]: SwitchFn<T> }): SwitchFn<T> {
+import { Object as xjs_Object_import } from 'extrajs'
+
+const xjs_Object_switch: typeof xjs_Object_import.switch = function (key, dictionary) {
 	let returned = dictionary[key]
 	if (!returned) {
 		console.warn(`Key '${key}' cannot be found. Using key 'default'…`)

@@ -1,8 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 
-// require('babel-core')          // DO NOT REMOVE … required by `gulp-babel`
-// require('babel-preset-env')    // DO NOT REMOVE … required by babel preset configurations
+// require('@babel/core')         // DO NOT REMOVE … required by `gulp-babel`
+// require('@babel/preset-env')   // DO NOT REMOVE … required by babel preset configurations
 // require('babel-preset-minify') // DO NOT REMOVE … required by babel preset configurations
 const gulp         = require('gulp')
 const inject       = require('gulp-inject-string')
@@ -30,13 +30,13 @@ const META = JSON.stringify({
 }, null, '\t')
 
 
-gulp.task('dist-tpl', async function () {
+function dist_tpl() {
 	return gulp.src('./src/x-*/tpl/*.tpl.ts')
 		.pipe(typescript(tsconfig.compilerOptions))
 		.pipe(gulp.dest('./dist/'))
-})
+}
 
-gulp.task('dist-style', async function () {
+function dist_style() {
   return gulp.src('./src/x-*/css/*.less')
     .pipe(sourcemaps.init())
     .pipe(less())
@@ -54,29 +54,32 @@ gulp.task('dist-style', async function () {
     .pipe(inject.prepend(`/* ${META} */`))
     .pipe(sourcemaps.write('./')) // writes to an external .map file
     .pipe(gulp.dest('./dist/'))
-})
+}
 
-gulp.task('dist-script', async function () {
+function dist_script() {
   return gulp.src('./src/x-*/js/*.ts')
     .pipe(sourcemaps.init())
     .pipe(typescript(tsconfig.compilerOptions))
     .pipe(babel({
-      presets: ['env', 'minify']
+			presets: [
+				'@babel/preset-env',
+				'minify',
+			]
     }))
     .pipe(inject.prepend(`/* ${META} */`))
     .pipe(sourcemaps.write('./')) // writes to an external .map file
     .pipe(gulp.dest('./dist/'))
-})
+}
 
-gulp.task('dist', ['dist-tpl', 'dist-style', 'dist-script'])
+const dist = gulp.parallel(dist_tpl, dist_style, dist_script)
 
-gulp.task('test-out', async function () {
+function test_out() {
 	return gulp.src('./test/src/*.test.ts')
 		.pipe(typescript(tsconfig.compilerOptions))
 		.pipe(gulp.dest('./test/out/'))
-})
+}
 
-gulp.task('test-run', async function () {
+async function test_run() {
 	await Promise.all([
 		require('./test/out/x-address.test.js'        ).default,
 		require('./test/out/x-directory.test.js'      ).default,
@@ -84,20 +87,34 @@ gulp.task('test-run', async function () {
 		require('./test/out/x-person-fullname.test.js').default,
 	])
 	console.info('All tests ran successfully!')
-})
+}
 
-gulp.task('test', ['test-out', 'test-run'])
+const test = gulp.series(test_out, test_run)
 
-gulp.task('docs-api', async function () {
+function docs_api() {
 	return gulp.src('./src/x-*/tpl/*.tpl.ts')
 		.pipe(typedoc(typedocconfig))
-})
+}
 
 // HOW-TO: https://github.com/kss-node/kss-node/issues/161#issuecomment-222292620
-gulp.task('docs-kss', ['test-run'], async function () {
+const docs_kss = gulp.series(test_run, async function docs_kss0() {
 	return kss(require('./config/kss.json'))
 })
 
-gulp.task('docs', ['docs-api', 'docs-kss'])
+const docs = gulp.parallel(docs_api, docs_kss)
 
-gulp.task('build', ['dist', 'test', 'docs'])
+const build = gulp.parallel(dist, test, docs)
+
+module.exports = {
+	dist,
+	dist_tpl,
+	dist_style,
+	dist_script,
+	test_out,
+	test_run,
+	test,
+	docs_api,
+	docs_kss,
+	docs,
+	build,
+}
