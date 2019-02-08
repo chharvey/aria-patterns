@@ -14,6 +14,7 @@ const sourcemaps   = require('gulp-sourcemaps')
 const typedoc      = require('gulp-typedoc')
 const typescript   = require('gulp-typescript')
 const kss          = require('kss')
+const mkdirp       = require('make-dir')
 // require('typedoc')    // DO NOT REMOVE … peerDependency of `gulp-typedoc`
 // require('typescript') // DO NOT REMOVE … peerDependency of `gulp-typescript`
 
@@ -80,12 +81,17 @@ function test_out() {
 }
 
 async function test_run() {
+	await mkdirp(path.join(__dirname, './test/docs/'))
 	await Promise.all([
-		require('./test/out/x-address.test.js'        ).default,
-		require('./test/out/x-directory.test.js'      ).default,
-		require('./test/out/x-permalink.test.js'      ).default,
-		require('./test/out/x-person-fullname.test.js').default,
-	])
+		'address',
+		'directory',
+		'permalink',
+		'person-fullname',
+	].map(async (compname) => util.promisify(fs.writeFile)(
+		path.join(__dirname, `./test/docs/x-${compname}.test.html`),
+		require(`./test/out/x-${compname}.test.js`).default,
+		'utf8'
+	)))
 	console.info('All tests ran successfully!')
 }
 

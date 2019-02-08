@@ -1,9 +1,3 @@
-import * as fs from 'fs'
-import * as path from 'path'
-import * as util from 'util'
-
-import * as mkdirp from 'make-dir'
-
 import * as xjs from 'extrajs-dom'
 import * as sdo from 'schemaorg-jsd/dist/schemaorg' // TODO use an index file
 
@@ -91,10 +85,6 @@ let data: WP = {
   ]
 }
 
-let output: string = `
+export default `
 <header><nav>${new xjs.DocumentFragment(xDirectory.process(data)).innerHTML()}</nav></header>
 `
-
-export default mkdirp(path.join(__dirname, '../docs/')).then((_pth) =>
-	util.promisify(fs.writeFile)(path.join(__dirname, '../docs/x-directory.test.html'), output, 'utf8')
-)
