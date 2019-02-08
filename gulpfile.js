@@ -97,13 +97,23 @@ function docs_api() {
 }
 
 // HOW-TO: https://github.com/kss-node/kss-node/issues/161#issuecomment-222292620
-const docs_kss = gulp.series(test_run, async function docs_kss0() {
+async function docs_kss() {
 	return kss(require('./config/kss.json'))
-})
+}
 
-const docs = gulp.parallel(docs_api, docs_kss)
+const docs = gulp.parallel(docs_api, gulp.series(test_run, docs_kss))
 
-const build = gulp.parallel(dist, test, docs)
+const build = gulp.parallel(
+	gulp.series(
+		gulp.parallel(
+			dist,
+			test_out
+		),
+		test_run,
+		docs_kss,
+	),
+	docs_api
+)
 
 module.exports = {
 	dist,
