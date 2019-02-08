@@ -1,7 +1,7 @@
 import * as path from 'path'
 
 import * as xjs from 'extrajs-dom'
-import {Processor} from 'template-processor'
+import { Processor } from 'template-processor'
 
 
 interface XPermalinkDataType {
@@ -35,5 +35,5 @@ function instructions(frag: DocumentFragment, data: XPermalinkDataType): void {
 /**
  * A permalink for a section of a webpage.
  */
-const xPermalink: Processor<XPermalinkDataType, object> = new Processor(template, instructions)
+const xPermalink: Processor<XPermalinkDataType> = new Processor(template, instructions)
 export default xPermalink

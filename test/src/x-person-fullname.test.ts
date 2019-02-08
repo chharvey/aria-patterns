@@ -1,7 +1,7 @@
 import * as xjs from 'extrajs-dom'
-import * as sdo from 'schemaorg-jsd/dist/schemaorg' // TODO use an index file
+import * as sdo from 'schemaorg-jsd'
 
-import {xPersonFullname} from '../../index'
+import { xPersonFullname } from '../../index'
 
 
 let data: sdo.Person = {

@@ -1,8 +1,8 @@
 import * as path from 'path'
 
 import * as xjs from 'extrajs-dom'
-import {Processor} from 'template-processor'
-import * as sdo from 'schemaorg-jsd/dist/schemaorg' // TODO use an index file
+import { Processor } from 'template-processor'
+import * as sdo from 'schemaorg-jsd'
 
 
 const template: HTMLTemplateElement = xjs.HTMLTemplateElement
@@ -52,5 +52,5 @@ function instructions(frag: DocumentFragment, data: sdo.Person): void {
 /**
  * A person’s name in "Px. First M. Last, Sx." format.
  */
-const xPersonFullname: Processor<sdo.Person, object> = new Processor(template, instructions)
+const xPersonFullname: Processor<sdo.Person> = new Processor(template, instructions)
 export default xPersonFullname

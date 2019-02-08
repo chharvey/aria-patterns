@@ -1,6 +1,6 @@
 import * as xjs from 'extrajs-dom'
 
-import {xPermalink} from '../../index'
+import { xPermalink } from '../../index'
 
 
 export default `

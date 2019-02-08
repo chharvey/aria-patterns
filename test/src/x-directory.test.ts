@@ -1,7 +1,7 @@
 import * as xjs from 'extrajs-dom'
-import * as sdo from 'schemaorg-jsd/dist/schemaorg' // TODO use an index file
+import * as sdo from 'schemaorg-jsd'
 
-import {xDirectory} from '../../index'
+import { xDirectory } from '../../index'
 
 
 interface WP extends sdo.WebPage {

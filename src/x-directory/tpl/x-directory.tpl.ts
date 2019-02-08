@@ -1,9 +1,9 @@
 import * as path from 'path'
 
-import {NaNError} from 'extrajs'
+import { NaNError } from 'extrajs'
 import * as xjs from 'extrajs-dom'
-import {Processor} from 'template-processor'
-import * as sdo from 'schemaorg-jsd/dist/schemaorg' // TODO use an index file
+import { Processor } from 'template-processor'
+import * as sdo from 'schemaorg-jsd'
 
 
 interface XDirectoryOptsType {
