@@ -36,19 +36,18 @@
     "gulp-less": "^4.0.0",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-typedoc": "^2.2.0",
-    "gulp-typescript": "^5.0.0-alpha.3",
+    "gulp-typescript": "^5.0.1",
     "kss": "^3.0.0-beta.22",
     "make-dir": "^2.0.0",
     "typedoc": "^0.14.2",
     "typescript": "~3.3.3"
   },
   "dependencies": {
-    "@types/make-dir": "^1.0.3",
-    "@types/node": "^10.12.10",
-    "extrajs": "^0.17.0",
-    "extrajs-dom": "^5.0.0-alpha.3",
+    "@types/node": "^11.11.3",
+    "extrajs": "^0.18.1",
+    "extrajs-dom": "^5.1.0",
     "extrajs-geo": "^0.1.0",
-    "schemaorg-jsd": "^0.14.0",
+    "schemaorg-jsd": "^0.15.0",
     "template-processor": "^1.0.1"
   }
 }
