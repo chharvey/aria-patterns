@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const util = require('util')
 
 // require('@babel/core')         // DO NOT REMOVE … required by `gulp-babel`
 // require('@babel/preset-env')   // DO NOT REMOVE … required by babel preset configurations
@@ -19,7 +20,6 @@ const mkdirp       = require('make-dir')
 // require('typescript') // DO NOT REMOVE … peerDependency of `gulp-typescript`
 
 const tsconfig      = require('./tsconfig.json')
-const typedocconfig = require('./config/typedoc.json')
 
 
 const PACKAGE = require('./package.json')
@@ -99,7 +99,7 @@ const test = gulp.series(test_out, test_run)
 
 function docs_api() {
 	return gulp.src('./src/x-*/tpl/*.tpl.ts')
-		.pipe(typedoc(typedocconfig))
+		.pipe(typedoc(tsconfig.typedocOptions))
 }
 
 // HOW-TO: https://github.com/kss-node/kss-node/issues/161#issuecomment-222292620
