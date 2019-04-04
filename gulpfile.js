@@ -68,6 +68,7 @@ function dist_script() {
 			]
     }))
     .pipe(inject.prepend(`/* ${META} */`))
+		.pipe(inject.after(`"use strict";`, `var exports = {};`)) // HACK: workround for commonjs in the browser
     .pipe(sourcemaps.write('./')) // writes to an external .map file
     .pipe(gulp.dest('./dist/'))
 }
