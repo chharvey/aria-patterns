@@ -40,7 +40,8 @@
     "kss": "^3.0.0-beta.22",
     "make-dir": "^2.0.0",
     "typedoc": "^0.14.2",
-    "typescript": "~3.3.3"
+    "typescript": "~3.3.3",
+    "xmeter": "^7.2.0-beta.1"
   },
   "dependencies": {
     "@types/node": "^11.11.3",
