@@ -2,6 +2,7 @@
 /*################################*\
     o-Tablist.less
 \*################################*/
+@import (reference) url('../../../node_modules/xmeter/css/src/_-mb.less');
 
 
 // The Tablist Object
@@ -108,8 +109,7 @@
 }
 
 .o-Tablist__Panel {
-  margin-bottom: 0; // HACK fallback
-  margin-block-end: unset; // unset Xmeter base `details`
+	.-mb-0;
   flex: 100%;
   // appearance: tabpanel; // opinionated
 }
