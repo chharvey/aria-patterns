@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const util = require('util')
 
 // require('@babel/core')         // DO NOT REMOVE … required by `gulp-babel`
 // require('@babel/preset-env')   // DO NOT REMOVE … required by babel preset configurations
@@ -14,11 +15,11 @@ const sourcemaps   = require('gulp-sourcemaps')
 const typedoc      = require('gulp-typedoc')
 const typescript   = require('gulp-typescript')
 const kss          = require('kss')
+const mkdirp       = require('make-dir')
 // require('typedoc')    // DO NOT REMOVE … peerDependency of `gulp-typedoc`
 // require('typescript') // DO NOT REMOVE … peerDependency of `gulp-typescript`
 
 const tsconfig      = require('./tsconfig.json')
-const typedocconfig = require('./config/typedoc.json')
 
 
 const PACKAGE = require('./package.json')
@@ -67,6 +68,7 @@ function dist_script() {
 			]
     }))
     .pipe(inject.prepend(`/* ${META} */`))
+		.pipe(inject.after(`"use strict";`, `var exports = {};`)) // HACK: workround for commonjs in the browser
     .pipe(sourcemaps.write('./')) // writes to an external .map file
     .pipe(gulp.dest('./dist/'))
 }
@@ -80,12 +82,17 @@ function test_out() {
 }
 
 async function test_run() {
+	await mkdirp(path.join(__dirname, './test/docs/'))
 	await Promise.all([
-		require('./test/out/x-address.test.js'        ).default,
-		require('./test/out/x-directory.test.js'      ).default,
-		require('./test/out/x-permalink.test.js'      ).default,
-		require('./test/out/x-person-fullname.test.js').default,
-	])
+		'address',
+		'directory',
+		'permalink',
+		'person-fullname',
+	].map(async (compname) => util.promisify(fs.writeFile)(
+		path.join(__dirname, `./test/docs/x-${compname}.test.html`),
+		require(`./test/out/x-${compname}.test.js`).default,
+		'utf8'
+	)))
 	console.info('All tests ran successfully!')
 }
 
@@ -93,17 +100,27 @@ const test = gulp.series(test_out, test_run)
 
 function docs_api() {
 	return gulp.src('./src/x-*/tpl/*.tpl.ts')
-		.pipe(typedoc(typedocconfig))
+		.pipe(typedoc(tsconfig.typedocOptions))
 }
 
 // HOW-TO: https://github.com/kss-node/kss-node/issues/161#issuecomment-222292620
-const docs_kss = gulp.series(test_run, async function docs_kss0() {
+async function docs_kss() {
 	return kss(require('./config/kss.json'))
-})
+}
 
-const docs = gulp.parallel(docs_api, docs_kss)
+const docs = gulp.parallel(docs_api, gulp.series(test_run, docs_kss))
 
-const build = gulp.parallel(dist, test, docs)
+const build = gulp.parallel(
+	gulp.series(
+		gulp.parallel(
+			dist,
+			test_out
+		),
+		test_run,
+		docs_kss,
+	),
+	docs_api
+)
 
 module.exports = {
 	dist,

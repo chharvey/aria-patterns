@@ -29,26 +29,26 @@
     "@babel/preset-env": "^7.3.1",
     "babel-preset-minify": "^0.5.0",
     "gulp": "^4.0.0",
-    "gulp-autoprefixer": "^6.0.0",
+    "gulp-autoprefixer": "^7.0.0",
     "gulp-babel": "^8.0.0",
-    "gulp-clean-css": "^4.0.0",
+    "gulp-clean-css": "^4.2.0",
     "gulp-inject-string": "^1.1.1",
     "gulp-less": "^4.0.0",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-typedoc": "^2.2.0",
-    "gulp-typescript": "^5.0.0-alpha.3",
+    "gulp-typescript": "^5.0.1",
     "kss": "^3.0.0-beta.22",
     "make-dir": "^2.0.0",
-    "typedoc": "^0.14.2",
-    "typescript": "~3.3.3"
+    "typedoc": "^0.15.0",
+    "typescript": "~3.4.0",
+    "xmeter": "^7.2.0-beta.1"
   },
   "dependencies": {
-    "@types/make-dir": "^1.0.3",
-    "@types/node": "^10.12.10",
-    "extrajs": "^0.17.0",
-    "extrajs-dom": "^5.0.0-alpha.3",
+    "@types/node": "^12.7.3",
+    "extrajs": "^0.19.0",
+    "extrajs-dom": "^5.1.0",
     "extrajs-geo": "^0.1.0",
-    "schemaorg-jsd": "^0.14.0",
+    "schemaorg-jsd": "^0.15.0",
     "template-processor": "^1.0.1"
   }
 }

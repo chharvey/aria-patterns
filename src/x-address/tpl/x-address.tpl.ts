@@ -1,8 +1,8 @@
 import * as path from 'path'
 
 import * as xjs from 'extrajs-dom'
-import {Processor} from 'template-processor'
-import * as sdo from 'schemaorg-jsd/dist/schemaorg' // TODO use an index file
+import { Processor } from 'template-processor'
+import * as sdo from 'schemaorg-jsd'
 
 type StateType = { code: string, name: string }
 const STATE_DATA: StateType[] = require('extrajs-geo')

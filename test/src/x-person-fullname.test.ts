@@ -1,13 +1,7 @@
-import * as fs from 'fs'
-import * as path from 'path'
-import * as util from 'util'
-
-import * as mkdirp from 'make-dir'
-
 import * as xjs from 'extrajs-dom'
-import * as sdo from 'schemaorg-jsd/dist/schemaorg' // TODO use an index file
+import * as sdo from 'schemaorg-jsd'
 
-import {xPersonFullname} from '../../index'
+import { xPersonFullname } from '../../index'
 
 
 let data: sdo.Person = {
@@ -18,14 +12,10 @@ let data: sdo.Person = {
   "honorificSuffix": "Jr."
 }
 
-let output: string = `
+export default  `
 <article itemscope="" itemtype="http://schema.org/Person">
   <h1 itemprop="name">${
     new xjs.DocumentFragment(xPersonFullname.process(data)).innerHTML()
   }</h1>
 </article>
 `
-
-export default mkdirp(path.join(__dirname, '../docs/')).then((_pth) =>
-	util.promisify(fs.writeFile)(path.join(__dirname, '../docs/x-person-fullname.test.html'), output, 'utf8')
-)
