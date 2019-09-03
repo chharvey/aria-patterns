@@ -31,7 +31,7 @@
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^6.0.0",
     "gulp-babel": "^8.0.0",
-    "gulp-clean-css": "^4.0.0",
+    "gulp-clean-css": "^4.2.0",
     "gulp-inject-string": "^1.1.1",
     "gulp-less": "^4.0.0",
     "gulp-sourcemaps": "^2.6.4",
@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@types/node": "^11.11.3",
-    "extrajs": "^0.18.1",
+    "extrajs": "^0.19.0",
     "extrajs-dom": "^5.1.0",
     "extrajs-geo": "^0.1.0",
     "schemaorg-jsd": "^0.15.0",
