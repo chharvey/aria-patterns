@@ -1,16 +1,3 @@
-import { Object as xjs_Object_import } from 'extrajs'
-
-const xjs_Object_switch: typeof xjs_Object_import.switch = function (key, dictionary) {
-	let returned = dictionary[key]
-	if (!returned) {
-		console.warn(`Key '${key}' cannot be found. Using key 'default'…`)
-		returned = dictionary['default']
-		if (!returned) throw new ReferenceError(`No default key found.`)
-	}
-	return returned
-}
-
-
 /**
  * A possible orientation of a tablist.
  */
@@ -108,11 +95,12 @@ class CustomTablist {
 	 * Get the orientation of this tablist.
 	 */
 	get orientation(): Orientation {
-		return xjs_Object_switch<Orientation>(this._NODE.getAttribute('aria-orientation') || 'default', {
-			'horizontal': () => Orientation.HORIZONTAL,
-			'vertical'  : () => Orientation.VERTICAL,
-			'default'   : () => { throw new ReferenceError('No orientation was found for this tablist.') },
-		})()
+		const returned = new Map<string, Orientation>([
+			['horizontal', Orientation.HORIZONTAL],
+			['vertical'  , Orientation.VERTICAL],
+		]).get(this._NODE.getAttribute('aria-orientation') || '') || null
+		if (returned === null) throw new ReferenceError('No orientation was found for this tablist.')
+		return returned
 	}
 
 	/**
@@ -142,11 +130,10 @@ class CustomTablist {
 	 * Change the orientation of this tablist.
 	 */
 	flip(): void {
-		this.orientation = xjs_Object_switch<Orientation>(`${this.orientation}`, {
-			[Orientation.HORIZONTAL]: () => Orientation.VERTICAL,
-			[Orientation.VERTICAL  ]: () => Orientation.HORIZONTAL,
-			'default'               : () => Orientation.HORIZONTAL,
-		})()
+		this.orientation = new Map<Orientation, Orientation>([
+			[Orientation.HORIZONTAL, Orientation.VERTICAL  ],
+			[Orientation.VERTICAL  , Orientation.HORIZONTAL],
+		]).get(this.orientation) || Orientation.HORIZONTAL
 	}
 
   // /**
@@ -268,8 +255,8 @@ class CustomTab {
    * @param   newValue the new value to which to set the attribute, or `null` if it is removed
    */
   attributeChangedCallback(name: string, oldValue: string|null, newValue: string|null): void {
-		xjs_Object_switch<void>(name, {
-      'tabindex': (_oldValue: string|null, newValue: string|null) => {
+		;(new Map<string, (_oldValue: string|null, newValue: string|null) => void>([
+			['tabindex', (_oldValue: string|null, newValue: string|null) => {
         if (newValue === '0') {
           this._PARENT.tabs.forEach((tab) => {
             if (tab !== this) {
@@ -278,8 +265,8 @@ class CustomTab {
             }
           })
         }
-      },
-      'aria-selected': (_oldValue: string|null, newValue: string|null) => {
+			}],
+			['aria-selected', (_oldValue: string|null, newValue: string|null) => {
         if (newValue === 'true') {
           this._PARENT.tabs.forEach((tab) => {
             if (tab !== this) {
@@ -288,9 +275,8 @@ class CustomTab {
             }
           })
         }
-      },
-      default() {},
-		})(oldValue, newValue)
+			}],
+		]).get(name) || (() => {}))(oldValue, newValue)
     this.updateRendering()
   }
 
@@ -355,8 +341,8 @@ class CustomPanel {
    * @param   {string} newValue the new value to which to set the attribute, or `null` if it is removed
    */
   attributeChangedCallback(name: string, oldValue: string|null, newValue: string|null): void {
-		xjs_Object_switch<void>(name, {
-      'open': (_oldValue: string|null, newValue: string|null) => {
+		;(new Map<string, (_oldValue: string|null, newValue: string|null) => void>([
+			['open', (_oldValue: string|null, newValue: string|null) => {
         if (newValue === '') {
           this._PARENT.panels.forEach((panel) => {
             if (panel !== this) {
@@ -365,8 +351,8 @@ class CustomPanel {
             }
           })
         }
-      },
-      'aria-hidden': (_oldValue: string|null, newValue: string|null) => {
+			}],
+			['aria-hidden', (_oldValue: string|null, newValue: string|null) => {
         if (newValue === 'false') {
           this._PARENT.panels.forEach((panel) => {
             if (panel !== this) {
@@ -375,9 +361,8 @@ class CustomPanel {
             }
           })
         }
-      },
-      default() {},
-		})(oldValue, newValue)
+			}],
+		]).get(name) || (() => {}))(oldValue, newValue)
     this.updateRendering()
   }
 
