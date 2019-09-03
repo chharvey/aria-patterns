@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const util = require('util')
 
 // require('@babel/core')         // DO NOT REMOVE … required by `gulp-babel`
 // require('@babel/preset-env')   // DO NOT REMOVE … required by babel preset configurations
@@ -19,7 +20,7 @@ const mkdirp       = require('make-dir')
 // require('typescript') // DO NOT REMOVE … peerDependency of `gulp-typescript`
 
 const tsconfig      = require('./tsconfig.json')
-const typedocconfig = require('./config/typedoc.json')
+const typedocconfig = tsconfig.typedocOptions
 
 
 const PACKAGE = require('./package.json')
