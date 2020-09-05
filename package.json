@@ -1,6 +1,6 @@
 {
   "name": "aria-patterns",
-  "version": "2.0.0-alpha.1",
+  "version": "2.0.0-beta.0",
   "description": "Common patterns of elements with ARIA attributes.",
   "main": "index.js",
   "scripts": {
